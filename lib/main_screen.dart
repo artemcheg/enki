@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
               preferredSize: Size(screenSize.width, 1000),
-              child: PrefSizeAppBar(
+              child: SizeWidget.isPhoneScreen(context)?SmallAppBar(opacity: _opacity):PrefSizeAppBar(
                 opacity: _opacity,
               )),
       body: SingleChildScrollView(

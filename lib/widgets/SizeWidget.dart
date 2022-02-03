@@ -12,6 +12,10 @@ class SizeWidget extends StatelessWidget {
       this.smallScreen})
       : super(key: key);
 
+  static bool isPhoneScreen(BuildContext context){
+    return MediaQuery.of(context).size.width < 700;
+  }
+
   static bool isSmallScreen(BuildContext context) {
     return MediaQuery.of(context).size.width < 800;
   }
