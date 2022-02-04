@@ -49,13 +49,11 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
           scaleEnabled: false,
           child: ScaleTransition(
             scale: _animation,
-            child: Expanded(
-              child: Container(
-                height: screenSize.height,
-                width: double.infinity,
-                decoration: const BoxDecoration(image: DecorationImage(
-                    image: AssetImage('assets/main_image.jpg'), fit:BoxFit.cover)),
-              ),
+            child: Container(
+              height: screenSize.height,
+              width: screenSize.width,
+              decoration: const BoxDecoration(image: DecorationImage(
+                  image: AssetImage('assets/main_image.jpg'), fit:BoxFit.cover)),
             ),
           ),
         ),
