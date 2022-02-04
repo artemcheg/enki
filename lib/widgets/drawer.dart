@@ -15,8 +15,7 @@ class _MyDrawerState extends State<MyDrawer> {
 
   @override
   Widget build(BuildContext context) {
-    // var screenSize = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: SizeWidget.isPhoneScreen(context)?700:700,
       child: Drawer(
           backgroundColor: Colors.blueGrey.shade900,

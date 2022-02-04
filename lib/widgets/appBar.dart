@@ -1,8 +1,7 @@
-import 'dart:ui';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'SizeWidget.dart';
 
 class PrefSizeAppBar extends StatefulWidget {
@@ -25,276 +24,317 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
     var styleOff =
         TextStyle(color: Colors.white, fontSize: screenSize.width * 0.012);
 
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: InkWell(
-                          onTap: () {},
-                          child: Image.asset(
-                            'assets/logo.png',
-                            width: sizeParam(screenSize.width, 0.1, 100),
-                            height: sizeParam(screenSize.width, 0.03, 50),
-                            color: Colors.amberAccent,
-                          )),
-                    ),
-                    SizedBox(width: screenSize.width * 0.01),
-                    const VerticalDivider(
-                      width: 1,
-                      thickness: 1,
-                      indent: 10,
-                      endIndent: 7,
-                      color: Colors.white54,
-                    ),
-                    SizedBox(width: screenSize.width * 0.01),
-                    Text(
-                      'Крымская\nстроительная\nкомпания',
-                      style: TextStyle(
-                          color: Colors.white54,
-                          fontSize: sizeParam(screenSize.width, 0.008, 10)),
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IntrinsicHeight(
+                  child: Row(
                     children: [
-                      Icon(
-                        Icons.phone,
-                        color: Colors.amberAccent,
-                        size: sizeParam(screenSize.width, 0.01, 20),
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: InkWell(
+                            onTap: () {},
+                            child: Image.asset(
+                              'assets/logo.png',
+                              width: sizeParam(screenSize.width, 0.1, 100),
+                              height: sizeParam(screenSize.width, 0.03, 50),
+                              color: Colors.amberAccent,
+                            )),
                       ),
-                      const SizedBox(
-                        width: 5,
+                      SizedBox(width: screenSize.width * 0.01),
+                      const VerticalDivider(
+                        width: 1,
+                        thickness: 1,
+                        indent: 10,
+                        endIndent: 7,
+                        color: Colors.white54,
                       ),
-                      InkWell(
+                      SizedBox(width: screenSize.width * 0.01),
+                      Text(
+                        'Крымская\nстроительная\nкомпания',
+                        style: TextStyle(
+                            color: Colors.white54,
+                            fontSize: sizeParam(screenSize.width, 0.008, 10)),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.amberAccent,
+                          size: sizeParam(screenSize.width, 0.01, 20),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
                           onHover: (value) {
                             setState(() {
                               _isHovering[4] = value;
                             });
                           },
                           onTap: () {},
-                          child: richTextSelectable('+7 (978) 723 12 40',
-                              _isHovering[4], screenSize.width))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.mail_rounded,
-                        size: sizeParam(screenSize.width, 0.01, 20),
-                        color: Colors.amberAccent,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
+                          child: SelectableText.rich(
+                            TextSpan(
+                                text: '+7 (978) 723 12 40',
+                                style: TextStyle(
+                                    color: _isHovering[4]
+                                        ? const Color(0XFF52B060)
+                                        : Colors.white,
+                                    fontSize:
+                                        sizeParam(screenSize.width, 0.008, 10)),
+                                mouseCursor: SystemMouseCursors.click,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    launch('tel:+79787231240',
+                                        webOnlyWindowName: '_self');
+                                  }),
+                            toolbarOptions: const ToolbarOptions(
+                                copy: true, selectAll: true),
+                            cursorColor: Colors.red,
+                            showCursor: true,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: screenSize.width * 0.0015,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.mail_rounded,
+                          size: sizeParam(screenSize.width, 0.01, 20),
+                          color: Colors.amberAccent,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        InkWell(
                           onHover: (value) {
                             setState(() {
                               _isHovering[5] = value;
                             });
                           },
                           onTap: () {},
-                          child: richTextSelectable('info@enki-crimea.com',
-                              _isHovering[5], screenSize.width))
-                    ],
-                  )
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.phone_forwarded,
-                    color: Colors.amberAccent,
-                    size: sizeParam(screenSize.width, 0.01, 20),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Нужна консультация?',
-                        style: TextStyle(
-                            color: Colors.white54,
-                            fontSize: sizeParam(screenSize.width, 0.008, 10)),
-                      ),
-                      Text('Мы перезвоним!',
+                          child: SelectableText.rich(
+                            TextSpan(
+                                text: 'info@enki-crimea.com',
+                                style: TextStyle(
+                                    color: _isHovering[5]
+                                        ? const Color(0XFF52B060)
+                                        : Colors.white,
+                                    fontSize:
+                                        sizeParam(screenSize.width, 0.008, 10)),
+                                mouseCursor: SystemMouseCursors.click,
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () async {
+                                    launch(
+                                      'mailto:info@enki-crimea.com',
+                                    );
+                                  }),
+                            toolbarOptions: const ToolbarOptions(
+                                copy: true, selectAll: true),
+                            cursorColor: Colors.red,
+                            showCursor: true,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.phone_forwarded,
+                      color: Colors.amberAccent,
+                      size: sizeParam(screenSize.width, 0.01, 20),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Нужна консультация?',
                           style: TextStyle(
                               color: Colors.white54,
-                              fontSize:
-                                  sizeParam(screenSize.width, 0.008, 10))),
+                              fontSize: sizeParam(screenSize.width, 0.008, 10)),
+                        ),
+                        Text('Мы перезвоним!',
+                            style: TextStyle(
+                                color: Colors.white54,
+                                fontSize:
+                                    sizeParam(screenSize.width, 0.008, 10))),
+                        InkWell(
+                          onHover: (value) {
+                            setState(() {
+                              _isHovering[6] = value;
+                            });
+                          },
+                          onTap: () {},
+                          child: Column(
+                            children: [
+                              Text('Заказать обратный звонок',
+                                  style: TextStyle(
+                                      color: const Color(0XFF52B060),
+                                      fontSize: sizeParam(
+                                          screenSize.width, 0.008, 10))),
+                              AnimatedContainer(
+                                color: Colors.red,
+                                duration: const Duration(
+                                  milliseconds: 100,
+                                ),
+                                child: SizedBox(
+                                  height: 2,
+                                  width: screenSize.width * 0.1,
+                                ),
+                                width: _isHovering[6]
+                                    ? screenSize.width * 0.03
+                                    : screenSize.width * 0.1,
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: screenSize.height * 0.05,
+            ),
+            SizeWidget.isSmallScreen(context)
+                ? const SizedBox.shrink()
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
                       InkWell(
                         onHover: (value) {
                           setState(() {
-                            _isHovering[6] = value;
+                            _isHovering[0] = value;
                           });
                         },
                         onTap: () {},
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('Заказать обратный звонок',
-                                style: TextStyle(
-                                    color: const Color(0XFF52B060),
-                                    fontSize: sizeParam(
-                                        screenSize.width, 0.008, 10))),
-                            AnimatedContainer(
-                              color: Colors.red,
-                              duration: Duration(
-                                milliseconds: 100,
-                              ),
-                              child: SizedBox(
-                                height: 2,
-                                width: screenSize.width * 0.1,
-                              ),
-                              width: _isHovering[6]
-                                  ? screenSize.width * 0.03
-                                  : screenSize.width * 0.1,
-                            )
+                            Text('ГЛАВНАЯ',
+                                style: _isHovering[0] ? styleOn : styleOff),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            selected(_isHovering[0])
                           ],
                         ),
-                      )
+                      ),
+                      // SizedBox(
+                      //   width: screenSize.width / 20,
+                      // ),
+                      InkWell(
+                        onHover: (value) {
+                          setState(() {
+                            _isHovering[1] = value;
+                          });
+                        },
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'УСЛУГИ',
+                              style: _isHovering[1] ? styleOn : styleOff,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            selected(_isHovering[1])
+                          ],
+                        ),
+                      ),
+                      // SizedBox(
+                      //   width: screenSize.width / 20,
+                      // ),
+                      InkWell(
+                        onHover: (value) {
+                          setState(() {
+                            _isHovering[2] = value;
+                          });
+                        },
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'НАШИ ПРОЕКТЫ',
+                              style: _isHovering[2] ? styleOn : styleOff,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            selected(_isHovering[2])
+                          ],
+                        ),
+                      ),
+                      // SizedBox(width: screenSize.width/20,),
+                      InkWell(
+                        onHover: (value) {
+                          setState(() {
+                            _isHovering[3] = value;
+                          });
+                        },
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'КОНТАКТЫ',
+                              style: _isHovering[3] ? styleOn : styleOff,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            selected(_isHovering[3])
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+            SizeWidget.isSmallScreen(context)
+                ? Row(
+                    children: [
+                      const Text(
+                        'МЕНЮ',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      IconButton(
+                        onPressed: () => Scaffold.of(context).openDrawer(),
+                        icon: const Icon(Icons.view_headline_sharp),
+                        color: Colors.white,
+                      ),
                     ],
                   )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: screenSize.height * 0.05,
-          ),
-          SizeWidget.isSmallScreen(context)
-              ? const SizedBox.shrink()
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[0] = value;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('ГЛАВНАЯ',
-                              style: _isHovering[0] ? styleOn : styleOff),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          selected(_isHovering[0])
-                        ],
-                      ),
-                    ),
-                    // SizedBox(
-                    //   width: screenSize.width / 20,
-                    // ),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[1] = value;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'УСЛУГИ',
-                            style: _isHovering[1] ? styleOn : styleOff,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          selected(_isHovering[1])
-                        ],
-                      ),
-                    ),
-                    // SizedBox(
-                    //   width: screenSize.width / 20,
-                    // ),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[2] = value;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'НАШИ ПРОЕКТЫ',
-                            style: _isHovering[2] ? styleOn : styleOff,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          selected(_isHovering[2])
-                        ],
-                      ),
-                    ),
-                    // SizedBox(width: screenSize.width/20,),
-                    InkWell(
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[3] = value;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            'КОНТАКТЫ',
-                            style: _isHovering[3] ? styleOn : styleOff,
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          selected(_isHovering[3])
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-          SizeWidget.isSmallScreen(context)
-              ? Row(
-                  children: [
-                    const Text(
-                      'МЕНЮ',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    IconButton(
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                      icon: const Icon(Icons.view_headline_sharp),
-                      color: Colors.white,
-                    ),
-                  ],
-                )
-              : const SizedBox.shrink(),
-        ],
+                : const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
@@ -315,179 +355,184 @@ class _SmallAppBarState extends State<SmallAppBar> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Column(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: const Icon(Icons.view_headline_sharp),
-              color: Colors.white,
-            ),
-            Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: Image.asset(
-                  'assets/logo.png',
-                  color: Colors.amberAccent,
-                  width: 200,
-                  height: 100,
-                )),
-            const SizedBox.shrink(),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Icon(
-              Icons.phone,
-              color: Colors.amberAccent,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            InkWell(
-              onHover: (value) {
-                setState(() {
-                  _isHovering[0] = value;
-                });
-              },
-              onTap: () {},
-              child: SelectableText.rich(
-                TextSpan(
-                    text: "+7 (978) 723 12 40",
-                    style: TextStyle(
-                      color: _isHovering[0]
-                          ? const Color(0XFF52B060)
-                          : Colors.white,
-                    ),
-                    mouseCursor: SystemMouseCursors.click,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        print('CLICK');
-                      }),
-                toolbarOptions:
-                    const ToolbarOptions(copy: true, selectAll: true),
-                cursorColor: Colors.red,
-                showCursor: true,
+    return SafeArea(
+      child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(Icons.view_headline_sharp),
+                color: Colors.white,
               ),
-            ),
-            const SizedBox(
-              width: 70,
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Icon(
-              Icons.mail_rounded,
-              color: Colors.amberAccent,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            InkWell(
-              onHover: (value) {
-                setState(() {
-                  _isHovering[1] = value;
-                });
-              },
-              onTap: () {},
-              child: SelectableText.rich(
-                TextSpan(
-                    text: "info@enki-crimea.com",
-                    style: TextStyle(
-                      color: _isHovering[1]
-                          ? const Color(0XFF52B060)
-                          : Colors.white,
-                    ),
-                    mouseCursor: SystemMouseCursors.click,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        print('CLICK');
-                      }),
-                toolbarOptions:
-                    const ToolbarOptions(copy: true, selectAll: true),
-                cursorColor: Colors.red,
-                showCursor: true,
+              Container(
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    color: Colors.amberAccent,
+                    width: 200,
+                    height: 100,
+                  )),
+              const SizedBox.shrink(),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Icon(
+                Icons.phone,
+                color: Colors.amberAccent,
               ),
-            ),
-            const SizedBox(
-              width: 50,
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            const Icon(
-              Icons.phone_forwarded,
-              color: Colors.amberAccent,
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Нужна консультация?',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+              const SizedBox(
+                width: 5,
+              ),
+              InkWell(
+                onHover: (value) {
+                  setState(() {
+                    _isHovering[0] = value;
+                  });
+                },
+                onTap: () {},
+                child: SelectableText.rich(
+                  TextSpan(
+                      text: "+7 (978) 723 12 40",
+                      style: TextStyle(
+                        color: _isHovering[0]
+                            ? const Color(0XFF52B060)
+                            : Colors.white,
+                      ),
+                      mouseCursor: SystemMouseCursors.click,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          launch('tel:+79787231240',
+                              webOnlyWindowName: '_self');
+                        }),
+                  toolbarOptions:
+                      const ToolbarOptions(copy: true, selectAll: true),
+                  cursorColor: Colors.red,
+                  showCursor: true,
                 ),
-                const Text('Мы перезвоним!',
+              ),
+              const SizedBox(
+                width: 70,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Icon(
+                Icons.mail_rounded,
+                color: Colors.amberAccent,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              InkWell(
+                onHover: (value) {
+                  setState(() {
+                    _isHovering[1] = value;
+                  });
+                },
+                onTap: () {},
+                child: SelectableText.rich(
+                  TextSpan(
+                      text: "info@enki-crimea.com",
+                      style: TextStyle(
+                        color: _isHovering[1]
+                            ? const Color(0XFF52B060)
+                            : Colors.white,
+                      ),
+                      mouseCursor: SystemMouseCursors.click,
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          launch(
+                            'mailto:info@enki-crimea.com',
+                          );
+                        }),
+                  toolbarOptions:
+                      const ToolbarOptions(copy: true, selectAll: true),
+                  cursorColor: Colors.red,
+                  showCursor: true,
+                ),
+              ),
+              const SizedBox(
+                width: 50,
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Icon(
+                Icons.phone_forwarded,
+                color: Colors.amberAccent,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Нужна консультация?',
                     style: TextStyle(
                       color: Colors.white,
-                    )),
-                InkWell(
-                  onHover: (value) {
-                    setState(() {
-                      _isHovering[2] = value;
-                    });
-                  },
-                  onTap: () {},
-                  child: Column(
-                    children: [
-                      const Text('Заказать обратный звонок',
-                          style: TextStyle(
-                              color: Color(0XFF52B060),
-                              )),
-                      AnimatedContainer(
-                        color: Colors.red,
-                        duration: const Duration(
-                          milliseconds: 100,
-                        ),
-                        child: SizedBox(
-                          height: 2,
-                          width: screenSize.width * 0.2,
-                        ),
-                        width: _isHovering[2]
-                            ? screenSize.width * 0.1
-                            : screenSize.width * 0.25,
-                      )
-                    ],
+                    ),
                   ),
-                )
-              ],
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-          ],
-        )
-      ],
+                  const Text('Мы перезвоним!',
+                      style: TextStyle(
+                        color: Colors.white,
+                      )),
+                  InkWell(
+                    onHover: (value) {
+                      setState(() {
+                        _isHovering[2] = value;
+                      });
+                    },
+                    onTap: () {},
+                    child: Column(
+                      children: [
+                        const Text('Заказать обратный звонок',
+                            style: TextStyle(
+                              color: Color(0XFF52B060),
+                            )),
+                        AnimatedContainer(
+                          color: Colors.red,
+                          duration: const Duration(
+                            milliseconds: 100,
+                          ),
+                          child: SizedBox(
+                            height: 2,
+                            width: screenSize.width * 0.2,
+                          ),
+                          width: _isHovering[2]
+                              ? screenSize.width * 0.1
+                              : screenSize.width * 0.25,
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -520,10 +565,7 @@ richTextSelectable(String text, bool isHovering, double screenSize) =>
               color: isHovering ? const Color(0XFF52B060) : Colors.white,
               fontSize: sizeParam(screenSize, 0.008, 10)),
           mouseCursor: SystemMouseCursors.click,
-          recognizer: TapGestureRecognizer()
-            ..onTap = () {
-              print('CLICK');
-            }),
+          recognizer: TapGestureRecognizer()..onTap = () {}),
       toolbarOptions: const ToolbarOptions(copy: true, selectAll: true),
       cursorColor: Colors.red,
       showCursor: true,
