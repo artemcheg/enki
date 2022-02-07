@@ -16,7 +16,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: SizeWidget.isPhoneScreen(context)?700:700,
+      width: SizeWidget.isSmallScreen(context)?700:700,
       child: Drawer(
           backgroundColor: Colors.blueGrey.shade900,
           child: Column(

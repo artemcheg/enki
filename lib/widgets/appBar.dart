@@ -154,7 +154,6 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                     ],
                   )
                 ],
-
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -366,23 +365,12 @@ class _SmallAppBarState extends State<SmallAppBar> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Row(
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 4),
-                      child: Text(
-                        'МЕНЮ',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    IconButton(
+                padding: const EdgeInsets.only(left: 10),
+                  child: IconButton(
                       onPressed: () => Scaffold.of(context).openDrawer(),
                       icon: const Icon(Icons.view_headline_sharp),
                       color: Colors.white,
                     ),
-                  ],
-                ),
               ),
 
               Container(

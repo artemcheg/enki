@@ -44,7 +44,7 @@ class _MainScreenState extends State<MainScreen> {
             children: [
               const MainImage(),
               GridView.count(
-                childAspectRatio: SizeWidget.isPhoneScreen(context)
+                childAspectRatio: SizeWidget.isSmallScreen(context)
                     ? screenSize.width / screenSize.height / 0.5
                     : screenSize.width / screenSize.height,
                 physics: const NeverScrollableScrollPhysics(),
@@ -79,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               Container(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Flex(
                     direction: Axis.vertical,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class _MainScreenState extends State<MainScreen> {
                       Text(
                         StringRes.aboutShort,
                         style: TextStyle(
-                            fontSize:sizeParam(screenSize.width, 0.015, 25), fontStyle: FontStyle.italic),
+                            fontSize:SizeWidget.isSmallScreen(context)?15:sizeParam(screenSize.width, 0.015, 25), fontStyle: FontStyle.italic),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
@@ -107,6 +107,7 @@ class _MainScreenState extends State<MainScreen> {
                               Text(
                                 'ПОДРОБНЕЕ О КОМПАНИИ',
                                 style: TextStyle(
+                                  fontSize: SizeWidget.isSmallScreen(context)?10:15,
                                     color: _isHovering[0]
                                         ? const Color(0XFF52B060)
                                         : Colors.black),
@@ -134,8 +135,8 @@ class _MainScreenState extends State<MainScreen> {
                           height: 2,
                         ),
                         width: _isHovering[0]
-                            ? 25
-                            : 240,
+                            ? SizeWidget.isSmallScreen(context)?15:25
+                            : SizeWidget.isSmallScreen(context)?180:250,
                       )
                     ],
                   ))
