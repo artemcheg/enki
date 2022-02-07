@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../animation/text_anim.dart';
 import 'SizeWidget.dart';
 import 'appBar.dart';
 
@@ -38,11 +38,8 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery
-        .of(context)
-        .size;
+    var screenSize = MediaQuery.of(context).size;
     return Stack(
-      alignment: Alignment.topCenter,
       children: [
         InteractiveViewer(
           panEnabled: false,
@@ -52,14 +49,13 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
             child: Container(
               height: screenSize.height,
               width: screenSize.width,
-              decoration: const BoxDecoration(image: DecorationImage(
-                  image: AssetImage('assets/main_image.jpg'), fit:BoxFit.cover)),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/house.jpg'),
+                      fit: BoxFit.cover)),
             ),
           ),
         ),
-
-
-
         Container(
             width: screenSize.width,
             height: screenSize.height / 3,
@@ -68,9 +64,26 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
               'assets/logo1.png',
               color: Colors.black.withOpacity(0.3),
             )),
-        SizeWidget.isPhoneScreen(context)?const SmallAppBar(opacity: 0):const PrefSizeAppBar(
-          opacity: 0,
-        ),
+        SizeWidget.isPhoneScreen(context)
+            ? const SmallAppBar(opacity: 0)
+            : const PrefSizeAppBar(
+                opacity: 0,
+              ),
+        Padding(
+          padding: EdgeInsets.only(
+              left: screenSize.width * 0.04, top: screenSize.height * 0.7),
+          child: TextAnimation(
+              animTime: const Duration(seconds: 2),
+              offset: 2,
+              curve: Curves.ease,
+              child: Text(
+                'Проектирование, строительство, ремонт и\nдизайн интерьера.',
+                style: TextStyle(
+                    fontSize: sizeParam(screenSize.width, 0.025, 30),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              )),
+        )
       ],
     );
   }

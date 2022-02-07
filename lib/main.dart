@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
+      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity,fontFamily: 'Comfortaa'),
     );
   }
 }

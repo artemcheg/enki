@@ -42,3 +42,11 @@ class SizeWidget extends StatelessWidget {
     });
   }
 }
+
+sizeParam(double screenWidth, double index, int normSize) {
+  if (screenWidth * index < normSize) {
+    return normSize;
+  } else {
+    return screenWidth * index;
+  }
+}
