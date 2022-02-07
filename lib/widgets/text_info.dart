@@ -22,7 +22,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
 
 
     return Container(
-      decoration: BoxDecoration(color: Colors.blue.withOpacity(0.01),border: widget.border),
+      decoration: BoxDecoration(color: Colors.blueGrey.shade100.withOpacity(0.1),border: widget.border),
       height: SizeWidget.isPhoneScreen(context)?screenSize.height*0.05:screenSize.height * 0.25,
       alignment: Alignment.center,
       child: RichText(

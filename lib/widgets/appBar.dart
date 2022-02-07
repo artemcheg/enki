@@ -154,6 +154,7 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                     ],
                   )
                 ],
+
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -320,9 +321,12 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
           SizeWidget.isSmallScreen(context)
               ? Row(
                   children: [
-                    const Text(
-                      'МЕНЮ',
-                      style: TextStyle(color: Colors.white),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 4),
+                      child: Text(
+                        'МЕНЮ',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     IconButton(
                       onPressed: () => Scaffold.of(context).openDrawer(),
@@ -365,9 +369,12 @@ class _SmallAppBarState extends State<SmallAppBar> {
                 padding: EdgeInsets.only(left: 10),
                 child: Row(
                   children: [
-                    const Text(
-                      'МЕНЮ',
-                      style: TextStyle(color: Colors.white),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 4),
+                      child: Text(
+                        'МЕНЮ',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                     IconButton(
                       onPressed: () => Scaffold.of(context).openDrawer(),
