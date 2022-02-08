@@ -1,0 +1,1 @@
+enum Direct { vertical, horizontal }

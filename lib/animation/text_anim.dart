@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-enum Direct { vertical, horizontal }
+import 'direction.dart';
 
 class TextAnimation extends StatefulWidget {
   final Widget child;
@@ -19,7 +19,7 @@ class TextAnimation extends StatefulWidget {
       this.direct = Direct.vertical,
       this.durationStart = const Duration(seconds: 0),
       this.animTime = const Duration(milliseconds: 800),
-      Key? key})
+      Key? key,})
       : super(key: key);
 
   @override
@@ -54,6 +54,7 @@ class _TextAnimationState extends State<TextAnimation>
     Timer(widget.durationStart, () {
       _controller.forward();
     });
+
   }
 
   @override
