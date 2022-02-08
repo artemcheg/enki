@@ -86,7 +86,7 @@ class _BottomBarState extends State<BottomBar> {
                             isHovering: _isHovering[0],
                             text: StringRes.phone,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
-                            what: 'tel:',
+                            what: 'tel:${StringRes.phone}',
                           )
                         ],
                       ),
@@ -104,7 +104,7 @@ class _BottomBarState extends State<BottomBar> {
                             isHovering: _isHovering[1],
                             text: StringRes.mail,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
-                            what: 'mailto:',
+                            what: 'mailto:${StringRes.mail}',
                           )
                         ],
                       ),
