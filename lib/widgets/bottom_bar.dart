@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:web_site/widgets/rich_text.dart';
 
 import '../resources/string_res.dart';
 import 'SizeWidget.dart';
@@ -11,8 +13,10 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
+  final _isHovering = [false, false, false];
+
   textStyle(screenWidth) => TextStyle(
-      color: Colors.white, fontSize: sizeParam(screenWidth, 0.007, 8));
+      color: Colors.white, fontSize: sizeParam(screenWidth, 0.008, 8));
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +27,13 @@ class _BottomBarState extends State<BottomBar> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Flex(
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              direction: SizeWidget.isPhoneScreen(context)
+                  ? Axis.vertical
+                  : Axis.horizontal,
               children: [
                 Column(
                   children: [
@@ -49,15 +56,133 @@ class _BottomBarState extends State<BottomBar> {
                     )
                   ],
                 ),
-                Column(
-                  children: [
-                    Text(
-                      'Контакты:',
-                      style: textStyle(screenSize.width),
-                    ),
-
-                  ],
+                const Padding(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Divider(
+                    height: 1,
+                    color: Colors.white54,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Контакты:',
+                        style: textStyle(screenSize.width),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.phone,
+                            color: Colors.white,
+                          ),
+                          MyRichText(
+                            isHovering: _isHovering[0],
+                            text: StringRes.phone,
+                            sizeParam: sizeParam(screenSize.width, 0.007, 10),
+                            what: 'tel:',
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.mail_rounded,
+                            color: Colors.white,
+                          ),
+                          MyRichText(
+                            isHovering: _isHovering[1],
+                            text: StringRes.mail,
+                            sizeParam: sizeParam(screenSize.width, 0.007, 10),
+                            what: 'mailto:',
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 1,
+                  color: Colors.white54,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Адрес:',
+                        style: textStyle(screenSize.width),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.location_on,
+                            color: Colors.white,
+                          ),
+                          MyRichText(
+                            isHovering: _isHovering[2],
+                            text: StringRes.address,
+                            sizeParam: sizeParam(screenSize.width, 0.007, 10),
+                            what:
+                                'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
+                            webOnlyWindowName: '_blank',
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 )
+              ],
+            ),
+          ),
+          const Divider(
+            height: 1,
+            color: Colors.white54,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Row(
+              children: [
+                Text(
+                  'Мы в социальных сетях:',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: sizeParam(screenSize.width, 0.009, 10)),
+                ),
+                InkWell(
+                    onTap: () async {
+                      launch(
+                        'https://www.instagram.com/enki.crimea/',
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/social/insta.png',
+                      scale: SizeWidget.isPhoneScreen(context)?50:40,
+                    )),
+                InkWell(
+                    onTap: () async {
+                      launch(
+                        'https://vk.com/enki.crimea',
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/social/vk.png',
+                      scale: SizeWidget.isPhoneScreen(context)?50:40,
+                    )),
               ],
             ),
           )

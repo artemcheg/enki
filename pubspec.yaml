@@ -64,6 +64,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/social/
 
   fonts:
     - family: Comfortaa
