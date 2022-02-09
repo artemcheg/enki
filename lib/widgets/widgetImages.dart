@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:web_site/animation/scaleTransition.dart';
+import 'package:web_site/widgets/small_changes.dart';
 import '../animation/text_anim.dart';
 import 'SizeWidget.dart';
 import 'appBar.dart';
@@ -10,32 +12,8 @@ class MainImage extends StatefulWidget {
   _MainImageState createState() => _MainImageState();
 }
 
-class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  late final Animation<double> _animation;
-  var squareScaleA = 0.5;
-
-  @override
-  void initState() {
-    _controller = AnimationController(
-      duration: const Duration(seconds: 15),
-      vsync: this,
-    );
-
-    _animation = Tween<double>(begin: 1.3, end: 1).animate(_controller);
-
-    _controller.forward();
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+class _MainImageState extends State<MainImage> {
+  ImageProvider backImage = const AssetImage('assets/house.jpg');
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -44,14 +22,13 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
         InteractiveViewer(
           panEnabled: false,
           scaleEnabled: false,
-          child: ScaleTransition(
-            scale: _animation,
+          child: ScaleAnimation(
             child: Container(
               height: screenSize.height,
               width: screenSize.width,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/house.jpg'),
+                      image: backImage,
                       fit: BoxFit.cover)),
             ),
           ),
@@ -79,9 +56,11 @@ class _MainImageState extends State<MainImage> with TickerProviderStateMixin {
               child: Text(
                 'Проектирование, строительство, ремонт и\nдизайн интерьера.',
                 style: TextStyle(
-                    fontSize: sizeParam(screenSize.width, 0.025, 30),
+                    fontSize: screenSize.height < 350
+                        ? 15
+                        : sizeParam(screenSize.width, 0.025, 30),
                     fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                    color: Colors.white,shadows: shadowList),
               )),
         )
       ],

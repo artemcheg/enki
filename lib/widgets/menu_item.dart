@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_site/widgets/small_changes.dart';
 
 class MenuItem extends StatefulWidget {
   bool isHovering;
@@ -14,10 +15,10 @@ class _MenuItemState extends State<MenuItem> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     var styleOn = TextStyle(
-        color: const Color(0XFF52B060), fontSize: screenSize.width * 0.014);
+        color: const Color(0XFF52B060), fontSize: screenSize.width * 0.014,shadows: shadowList);
     var styleOff =
 
-    TextStyle(color: Colors.white, fontSize: screenSize.width * 0.014);
+    TextStyle(color: Colors.white, fontSize: screenSize.width * 0.014,shadows: shadowList);
 
     return InkWell(
       onHover: (value) {

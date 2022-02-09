@@ -5,6 +5,7 @@ import 'package:web_site/resources/string_res.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
 import 'package:web_site/widgets/bottom_bar.dart';
 import 'package:web_site/widgets/drawer.dart';
+import 'package:web_site/widgets/interactive.dart';
 import 'package:web_site/widgets/text_info.dart';
 import 'package:web_site/widgets/widgetImages.dart';
 
@@ -30,11 +31,11 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        drawer: SizeWidget.isSmallScreen(context) ? const MyDrawer() : null,
-        extendBodyBehindAppBar: true,
-        body: SingleChildScrollView(
+    return Scaffold(
+      drawer: SizeWidget.isSmallScreen(context) ? const MyDrawer() : null,
+      extendBodyBehindAppBar: true,
+      body: SafeArea(
+        child: SingleChildScrollView(
             key: parentKey,
             controller: _scrollController,
             physics: const ClampingScrollPhysics(),
@@ -53,7 +54,8 @@ class _MainScreenState extends State<MainScreen> {
                       text1: '999+',
                       text2: 'Проектов реализовано',
                       border: Border(
-                          right: BorderSide(color: Colors.black.withOpacity(0.1)),
+                          right:
+                              BorderSide(color: Colors.black.withOpacity(0.1)),
                           bottom:
                               BorderSide(color: Colors.black.withOpacity(0.1))),
                       scrollController: _scrollController,
@@ -63,7 +65,8 @@ class _MainScreenState extends State<MainScreen> {
                       text1: '999+',
                       text2: 'Проектов реализовано',
                       border: Border(
-                          right: BorderSide(color: Colors.black.withOpacity(0.1)),
+                          right:
+                              BorderSide(color: Colors.black.withOpacity(0.1)),
                           bottom:
                               BorderSide(color: Colors.black.withOpacity(0.1))),
                       scrollController: _scrollController,
@@ -74,7 +77,8 @@ class _MainScreenState extends State<MainScreen> {
                       text1: '10 лет',
                       text2: 'Безупречного опыта',
                       border: Border(
-                          right: BorderSide(color: Colors.black.withOpacity(0.1)),
+                          right:
+                              BorderSide(color: Colors.black.withOpacity(0.1)),
                           bottom:
                               BorderSide(color: Colors.black.withOpacity(0.1))),
                       scrollController: _scrollController,
@@ -132,8 +136,8 @@ class _MainScreenState extends State<MainScreen> {
                                             : Colors.black),
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 4, left: 5),
+                                    padding: const EdgeInsets.only(
+                                        bottom: 4, left: 5),
                                     child: Icon(
                                       Icons.arrow_forward,
                                       color: _isHovering[0]
@@ -145,25 +149,12 @@ class _MainScreenState extends State<MainScreen> {
                               ),
                             ),
                           ),
-                          AnimatedContainer(
-                            color: const Color(0XFF52B060),
-                            duration: const Duration(
-                              milliseconds: 100,
-                            ),
-                            child: const SizedBox(
-                              height: 2,
-                            ),
-                            width: _isHovering[0]
-                                ? SizeWidget.isSmallScreen(context)
-                                    ? 15
-                                    : 25
-                                : SizeWidget.isSmallScreen(context)
-                                    ? 180
-                                    : 250,
-                          )
+
                         ],
                       )),
                 ),
+                const InterActiveWidget(),
+                // getMap(screenSize.height/2,screenSize.width/2),
                 const BottomBar(),
               ],
             )),

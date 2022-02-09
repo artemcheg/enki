@@ -62,7 +62,7 @@ class _ScrollAnimationState extends State<ScrollAnimation>
         .animate(CurvedAnimation(parent: _controller, curve: widget.curve));
   }
 
-  static const enterAnimationMinHeight = -500;
+  static const enterAnimationMinHeight = 20;
 
   _updateAnimatedBoxEnterAnimation() {
     if (_controller.status != AnimationStatus.dismissed) {

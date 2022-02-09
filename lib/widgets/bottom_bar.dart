@@ -56,15 +56,9 @@ class _BottomBarState extends State<BottomBar> {
                     )
                   ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5),
-                  child: Divider(
-                    height: 1,
-                    color: Colors.white54,
-                  ),
-                ),
+
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.only(top: 15),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -111,10 +105,7 @@ class _BottomBarState extends State<BottomBar> {
                     ],
                   ),
                 ),
-                const Divider(
-                  height: 1,
-                  color: Colors.white54,
-                ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Column(

@@ -33,6 +33,10 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
     return Container(
       decoration: BoxDecoration(
           color: Colors.blueGrey.shade100.withOpacity(0.1),
+          image: const DecorationImage(
+              image: AssetImage('assets/arrow.png'),
+              alignment: Alignment.bottomCenter,
+              matchTextDirection: true),
           border: widget.border),
       height: SizeWidget.isSmallScreen(context)
           ? screenSize.height * 0.1
@@ -41,7 +45,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
       alignment: Alignment.center,
       child: ScrollAnimation(
         durationStart: widget.durationStart,
-        animTime: Duration(seconds: 2),
+        animTime: const Duration(seconds: 2),
         curve: Curves.decelerate,
         parentKey: widget.parentKey,
         scrollController: widget.scrollController,
@@ -53,7 +57,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
                     color: Colors.black,
                     fontSize: SizeWidget.isSmallScreen(context)
                         ? 20
-                        : sizeParam(screenSize.width, 0.03, 20)),
+                        : sizeParam(screenSize.width, 0.02, 20)),
                 children: [
                   TextSpan(
                       text: '\n${widget.text2}',

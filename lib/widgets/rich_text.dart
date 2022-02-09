@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:web_site/widgets/small_changes.dart';
 
 class MyRichText extends StatefulWidget {
   bool isHovering;
@@ -37,7 +38,8 @@ class _MyRichTextState extends State<MyRichText> {
             style: TextStyle(
                 color:
                     widget.isHovering ? const Color(0XFF52B060) : Colors.white,
-                fontSize: widget.sizeParam),
+                fontSize: widget.sizeParam,
+            shadows: shadowList),
             mouseCursor: SystemMouseCursors.click,
             recognizer: TapGestureRecognizer()
               ..onTap = () async {

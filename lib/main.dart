@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(const AssetImage('assets/house.jpg'), context);
     return  MaterialApp(
       home: const MainScreen(),
       debugShowCheckedModeBanner: false,
