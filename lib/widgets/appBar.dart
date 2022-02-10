@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:web_site/resources/string_res.dart';
 import 'package:web_site/widgets/menu_item.dart';
 import 'package:web_site/widgets/rich_text.dart';
-import 'package:web_site/widgets/small_changes.dart';
 import 'SizeWidget.dart';
 
 class PrefSizeAppBar extends StatefulWidget {
-  final double opacity;
 
-  const PrefSizeAppBar({Key? key, required this.opacity}) : super(key: key);
+  final Color colorDrawer;
+  final Color colorText;
+  final List<Shadow>? shadow;
+  final Color dividerColor;
+
+  const PrefSizeAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow, this.dividerColor=Colors.black54}) : super(key: key);
 
   @override
   _PrefSizeAppBarState createState() => _PrefSizeAppBarState();
@@ -35,7 +38,10 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                     Container(
                       margin: const EdgeInsets.only(bottom: 10),
                       child: InkWell(
-                          onTap: () {},
+                          hoverColor: Colors.grey.withOpacity(0),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/');
+                          },
                           child: Image.asset(
                             'assets/logo.png',
                             width: sizeParam(screenSize.width, 0.1, 100),
@@ -44,17 +50,20 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                           )),
                     ),
                     SizedBox(width: screenSize.width * 0.008),
-                    const VerticalDivider(
+                    VerticalDivider(
                       width: 1,
                       thickness: 1,
                       indent: 10,
                       endIndent: 7,
-                      color: Colors.white54,
+                      color: widget.dividerColor,
                     ),
                     SizedBox(width: screenSize.width * 0.008),
-                    const Text(
+                     Text(
                       'Крымская\nстроительная\nкомпания',
-                      style: TextStyle(color: Colors.white54, fontSize: 14,shadows: shadowList),
+                      style: TextStyle(
+                          color: widget.colorText,
+                          fontSize: 14,
+                          shadows: widget.shadow),
                     ),
                   ],
                 ),
@@ -74,6 +83,7 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                         width: 5,
                       ),
                       MyRichText(
+                        colorText: widget.colorText,
                         isHovering: _isHovering[4],
                         text: StringRes.phone,
                         sizeParam: 14,
@@ -95,6 +105,7 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                         width: 5,
                       ),
                       MyRichText(
+                        colorText: widget.colorText,
                         isHovering: _isHovering[5],
                         text: StringRes.mail,
                         sizeParam: 14,
@@ -120,14 +131,20 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                       Text(
                         'Нужна консультация?',
-                        style: TextStyle(color: Colors.white, fontSize: 14,shadows: shadowList),
+                        style: TextStyle(
+                            color: widget.colorText,
+                            fontSize: 14,
+                            shadows: widget.shadow),
                       ),
-                      const Text('Мы перезвоним!',
-                          style:
-                              TextStyle(color: Colors.white, fontSize: 14,shadows: shadowList)),
+                       Text('Мы перезвоним!',
+                          style: TextStyle(
+                              color: widget.colorText,
+                              fontSize: 14,
+                              shadows: widget.shadow)),
                       InkWell(
+                        hoverColor: Colors.grey.withOpacity(0),
                         onHover: (value) {
                           setState(() {
                             _isHovering[6] = value;
@@ -138,7 +155,9 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                           children: [
                             const Text('Заказать обратный звонок',
                                 style: TextStyle(
-                                    color: Color(0XFF52B060), fontSize: 14,shadows: shadowList)),
+                                  color: Color(0XFF52B060),
+                                  fontSize: 14,
+                                )),
                             AnimatedContainer(
                               color: Colors.red,
                               duration: const Duration(
@@ -167,26 +186,86 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    MenuItem(isHovering: _isHovering[0], text: 'ГЛАВНАЯ'),
-                    MenuItem(isHovering: _isHovering[1], text: 'УСЛУГИ'),
-                    MenuItem(isHovering: _isHovering[2], text: 'НАШИ ПРОЕКТЫ'),
-                    MenuItem(isHovering: _isHovering[3], text: 'КОНТАКТЫ'),
+                    InkWell(
+                        hoverColor: Colors.grey.withOpacity(0),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/');
+                        },
+                        onHover: (value) {
+                          setState(() {
+                            _isHovering[0] = value;
+                          });
+                        },
+                        child: MenuItem(
+                          colorText: widget.colorText,
+                          isHovering: _isHovering[0],
+                          text: 'ГЛАВНАЯ',
+                        )),
+                    InkWell(
+                      hoverColor: Colors.grey.withOpacity(0),
+                      onTap: () {},
+                      onHover: (value) {
+                        setState(() {
+                          _isHovering[1] = value;
+                        });
+                      },
+                      child: MenuItem(
+                       colorText: widget.colorText,
+                        isHovering: _isHovering[1],
+                        text: 'УСЛУГИ',
+                      ),
+                    ),
+                    InkWell(
+                      hoverColor: Colors.grey.withOpacity(0),
+                      onTap: () {},
+                      onHover: (value) {
+                        setState(() {
+                          _isHovering[2] = value;
+                        });
+                      },
+                      child: MenuItem(
+                        colorText: widget.colorText,
+                        isHovering: _isHovering[2],
+                        text: 'НАШИ ПРОЕКТЫ',
+                      ),
+                    ),
+                    InkWell(
+                      hoverColor: Colors.grey.withOpacity(0),
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/contacts',
+                        );
+                      },
+                      onHover: (value) {
+                        setState(() {
+                          _isHovering[3] = value;
+                        });
+                      },
+                      child: MenuItem(
+                        colorText: widget.colorText,
+                        isHovering: _isHovering[3],
+                        text: 'КОНТАКТЫ',
+                      ),
+                    )
                   ],
                 ),
           SizeWidget.isSmallScreen(context)
               ? Row(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 4),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 4),
                       child: Text(
                         'МЕНЮ',
-                        style: TextStyle(color: Colors.white,shadows: shadowList),
+                        style:
+                            TextStyle(color: widget.colorDrawer, shadows: widget.shadow),
                       ),
                     ),
                     IconButton(
+                      hoverColor: Colors.white.withOpacity(0),
                       onPressed: () => Scaffold.of(context).openDrawer(),
                       icon: const Icon(Icons.view_headline_sharp),
-                      color: Colors.white,
+                      color: widget.colorDrawer,
                     ),
                   ],
                 )
@@ -198,9 +277,10 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
 }
 
 class SmallAppBar extends StatefulWidget {
-  final double opacity;
-
-  const SmallAppBar({Key? key, required this.opacity}) : super(key: key);
+  final Color colorDrawer;
+  final Color colorText;
+  final List<Shadow>? shadow;
+  const SmallAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow}) : super(key: key);
 
   @override
   _SmallAppBarState createState() => _SmallAppBarState();
@@ -222,9 +302,10 @@ class _SmallAppBarState extends State<SmallAppBar> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: IconButton(
+                hoverColor: Colors.white.withOpacity(0),
                 onPressed: () => Scaffold.of(context).openDrawer(),
                 icon: const Icon(Icons.view_headline_sharp),
-                color: Colors.white,
+                color: widget.colorDrawer,
               ),
             ),
             Container(
@@ -241,10 +322,12 @@ class _SmallAppBarState extends State<SmallAppBar> {
 
         Flex(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction:screenSize.height<360?Axis.horizontal:Axis.vertical,
+          direction: screenSize.height < 360 ? Axis.horizontal : Axis.vertical,
           children: [
             Flex(
-              direction: screenSize.width<690?Axis.vertical:Axis.horizontal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              direction:
+                  SizeWidget.isSmallScreen(context) ? Axis.vertical : Axis.horizontal,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -257,6 +340,8 @@ class _SmallAppBarState extends State<SmallAppBar> {
                       width: 5,
                     ),
                     MyRichText(
+                      shadow: widget.shadow,
+                      colorText: widget.colorText,
                       isHovering: _isHovering[0],
                       text: StringRes.phone,
                       sizeParam: 13,
@@ -267,7 +352,6 @@ class _SmallAppBarState extends State<SmallAppBar> {
                     ),
                   ],
                 ),
-
                 const SizedBox(
                   height: 20,
                 ),
@@ -282,6 +366,8 @@ class _SmallAppBarState extends State<SmallAppBar> {
                       width: 5,
                     ),
                     MyRichText(
+                      shadow: widget.shadow,
+                      colorText: widget.colorText,
                       isHovering: _isHovering[1],
                       text: StringRes.mail,
                       sizeParam: 13,
@@ -294,7 +380,6 @@ class _SmallAppBarState extends State<SmallAppBar> {
                 ),
               ],
             ),
-
             const SizedBox(
               height: 20,
             ),
@@ -313,21 +398,22 @@ class _SmallAppBarState extends State<SmallAppBar> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Text(
+                     Text(
                       'Нужна консультация?',
                       style: TextStyle(
-                        fontSize: 13,
-                        color: Colors.white,
-                          shadows: shadowList
-                      ),
+                          fontSize: 13,
+                          color: widget.colorText,
+                          shadows: widget.shadow),
                     ),
-                     const Text('Мы перезвоним!',
+                    Text('Мы перезвоним!',
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.white,
-                            shadows: shadowList,
+                          color: widget.colorText,
+                          shadows: widget.shadow,
                         )),
                     InkWell(
+                      hoverColor: Colors.transparent,
+                      splashColor: Colors.transparent,
                       onHover: (value) {
                         setState(() {
                           _isHovering[2] = value;
@@ -336,11 +422,10 @@ class _SmallAppBarState extends State<SmallAppBar> {
                       onTap: () {},
                       child: Column(
                         children: [
-                           const Text('Заказать обратный звонок',
+                          const Text('Заказать обратный звонок',
                               style: TextStyle(
                                 fontSize: 13,
                                 color: Color(0XFF52B060),
-                                  shadows: shadowList
                               )),
                           AnimatedContainer(
                             color: Colors.red,

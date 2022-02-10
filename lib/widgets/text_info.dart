@@ -35,8 +35,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
           color: Colors.blueGrey.shade100.withOpacity(0.1),
           image: const DecorationImage(
               image: AssetImage('assets/arrow.png'),
-              alignment: Alignment.bottomCenter,
-              matchTextDirection: true),
+              alignment: Alignment.bottomCenter,),
           border: widget.border),
       height: SizeWidget.isSmallScreen(context)
           ? screenSize.height * 0.1

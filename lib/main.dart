@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:web_site/main_screen.dart';
+import 'package:web_site/pages/contacts.dart';
+import 'package:web_site/pages/main_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     precacheImage(const AssetImage('assets/house.jpg'), context);
     return  MaterialApp(
-      home: const MainScreen(),
+      initialRoute: '/',
+      routes: {
+        '/':(context)=> const MainScreen(),
+        '/contacts':(context)=>const Contacts()
+      },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity,fontFamily: 'Comfortaa'),
     );

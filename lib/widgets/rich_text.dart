@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:web_site/widgets/small_changes.dart';
 
 class MyRichText extends StatefulWidget {
   bool isHovering;
@@ -9,13 +8,17 @@ class MyRichText extends StatefulWidget {
   final String what;
   final dynamic sizeParam;
   final String webOnlyWindowName;
+  final Color colorText;
+  final List<Shadow>? shadow;
+  final String ?fontFamily;
+  final int maxLines;
 
   MyRichText(
       {Key? key,
       required this.isHovering,
       required this.text,
       required this.sizeParam,
-      required this.what, this.webOnlyWindowName="_self",})
+      required this.what, this.webOnlyWindowName="_self", this.colorText = Colors.white, this.shadow, this.fontFamily='Comfortaa', this.maxLines=1,})
       : super(key: key);
 
   @override
@@ -26,6 +29,7 @@ class _MyRichTextState extends State<MyRichText> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      hoverColor: Colors.grey.withOpacity(0),
       onHover: (value) {
         setState(() {
           widget.isHovering = value;
@@ -36,10 +40,11 @@ class _MyRichTextState extends State<MyRichText> {
         TextSpan(
             text: widget.text,
             style: TextStyle(
+              fontFamily: widget.fontFamily,
                 color:
-                    widget.isHovering ? const Color(0XFF52B060) : Colors.white,
+                    widget.isHovering ? const Color(0XFF52B060) :widget.colorText,
                 fontSize: widget.sizeParam,
-            shadows: shadowList),
+            shadows: widget.shadow),
             mouseCursor: SystemMouseCursors.click,
             recognizer: TapGestureRecognizer()
               ..onTap = () async {
@@ -50,6 +55,7 @@ class _MyRichTextState extends State<MyRichText> {
         toolbarOptions: const ToolbarOptions(copy: true, selectAll: true),
         cursorColor: Colors.red,
         showCursor: true,
+        maxLines: widget.maxLines,
       ),
     );
   }

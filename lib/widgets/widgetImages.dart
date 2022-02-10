@@ -3,7 +3,6 @@ import 'package:web_site/animation/scaleTransition.dart';
 import 'package:web_site/widgets/small_changes.dart';
 import '../animation/text_anim.dart';
 import 'SizeWidget.dart';
-import 'appBar.dart';
 
 class MainImage extends StatefulWidget {
   const MainImage({Key? key}) : super(key: key);
@@ -41,12 +40,8 @@ class _MainImageState extends State<MainImage> {
               'assets/logo1.png',
               color: Colors.black.withOpacity(0.3),
             )),
-        SizeWidget.isPhoneScreen(context)
-            ? const SmallAppBar(opacity: 0)
-            : const PrefSizeAppBar(
-                opacity: 0,
-              ),
-        Padding(
+
+       SizeWidget.isPhoneScreen(context)&&screenSize.width<350?const SizedBox.shrink():Padding(
           padding: EdgeInsets.only(
               left: screenSize.width * 0.04, top: screenSize.height * 0.7),
           child: TextAnimation(

@@ -16,7 +16,7 @@ class _BottomBarState extends State<BottomBar> {
   final _isHovering = [false, false, false];
 
   textStyle(screenWidth) => TextStyle(
-      color: Colors.white, fontSize: sizeParam(screenWidth, 0.008, 8));
+      color: Colors.white, fontSize: sizeParam(screenWidth, 0.007, 8));
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +126,7 @@ class _BottomBarState extends State<BottomBar> {
                           ),
                           MyRichText(
                             isHovering: _isHovering[2],
+                            maxLines: 3,
                             text: StringRes.address,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what:
@@ -152,9 +153,10 @@ class _BottomBarState extends State<BottomBar> {
                   'Мы в социальных сетях:',
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: sizeParam(screenSize.width, 0.009, 10)),
+                      fontSize: sizeParam(screenSize.width, 0.008, 10)),
                 ),
                 InkWell(
+                    hoverColor: Colors.grey.withOpacity(0),
                     onTap: () async {
                       launch(
                         'https://www.instagram.com/enki.crimea/',
@@ -162,9 +164,10 @@ class _BottomBarState extends State<BottomBar> {
                     },
                     child: Image.asset(
                       'assets/social/insta.png',
-                      scale: SizeWidget.isPhoneScreen(context)?50:40,
+                      scale: 60,
                     )),
                 InkWell(
+                    hoverColor: Colors.grey.withOpacity(0),
                     onTap: () async {
                       launch(
                         'https://vk.com/enki.crimea',
@@ -172,7 +175,7 @@ class _BottomBarState extends State<BottomBar> {
                     },
                     child: Image.asset(
                       'assets/social/vk.png',
-                      scale: SizeWidget.isPhoneScreen(context)?50:40,
+                      scale: 60,
                     )),
               ],
             ),
