@@ -11,6 +11,8 @@ import 'package:web_site/widgets/small_changes.dart';
 import 'package:web_site/widgets/text_info.dart';
 import 'package:web_site/widgets/widgetImages.dart';
 
+import '../widgets/map.dart';
+
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -35,7 +37,6 @@ class _MainScreenState extends State<MainScreen> {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
       drawer: SizeWidget.isSmallScreen(context) ? const MyDrawer() : null,
-      extendBodyBehindAppBar: true,
       body: SafeArea(
         child: Scrollbar(
           controller: _scrollController,
@@ -52,11 +53,13 @@ class _MainScreenState extends State<MainScreen> {
                     children: [
                       const MainImage(),
                       SizeWidget.isPhoneScreen(context)
-                          ? const SmallAppBar(shadow: shadowList,)
+                          ? const SmallAppBar(
+                              shadow: shadowList,
+                            )
                           : const PrefSizeAppBar(
-                        dividerColor: Colors.white54,
-                        shadow: shadowList,
-                      ),
+                              dividerColor: Colors.white54,
+                              shadow: shadowList,
+                            ),
                     ],
                   ),
                   GridView.count(
@@ -71,10 +74,10 @@ class _MainScreenState extends State<MainScreen> {
                         text1: '999+',
                         text2: 'Проектов реализовано',
                         border: Border(
-                            right:
-                                BorderSide(color: Colors.black.withOpacity(0.1)),
-                            bottom:
-                                BorderSide(color: Colors.black.withOpacity(0.1))),
+                            right: BorderSide(
+                                color: Colors.black.withOpacity(0.1)),
+                            bottom: BorderSide(
+                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                       ),
@@ -82,10 +85,10 @@ class _MainScreenState extends State<MainScreen> {
                         text1: '999+',
                         text2: 'Проектов реализовано',
                         border: Border(
-                            right:
-                                BorderSide(color: Colors.black.withOpacity(0.1)),
-                            bottom:
-                                BorderSide(color: Colors.black.withOpacity(0.1))),
+                            right: BorderSide(
+                                color: Colors.black.withOpacity(0.1)),
+                            bottom: BorderSide(
+                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                         durationStart: const Duration(milliseconds: 200),
@@ -94,10 +97,10 @@ class _MainScreenState extends State<MainScreen> {
                         text1: '10 лет',
                         text2: 'Безупречного опыта',
                         border: Border(
-                            right:
-                                BorderSide(color: Colors.black.withOpacity(0.1)),
-                            bottom:
-                                BorderSide(color: Colors.black.withOpacity(0.1))),
+                            right: BorderSide(
+                                color: Colors.black.withOpacity(0.1)),
+                            bottom: BorderSide(
+                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                         durationStart: const Duration(milliseconds: 400),
@@ -127,7 +130,8 @@ class _MainScreenState extends State<MainScreen> {
                                   fontStyle: FontStyle.italic),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 10,bottom: 5),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 5),
                               child: InkWell(
                                 hoverColor: Colors.grey.withOpacity(0),
                                 onTap: () {},
@@ -166,12 +170,11 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                               ),
                             ),
-
                           ],
                         )),
                   ),
                   const InterActiveWidget(),
-                  // getMap(screenSize.height/2,screenSize.width/2),
+                  myMap(screenSize.width,screenSize.height * 0.6),
                   const BottomBar(),
                 ],
               )),

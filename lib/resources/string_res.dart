@@ -9,4 +9,5 @@ class StringRes {
       '''«ENKI» - Это эксперты\nв области проектирования,\nстроительства, ремонта и\nдизайна интерьера!''';
   static const String bestWindow = 'Лучшие окна';
   static const String bestFoundation = 'Хороший фундамент';
+  static const String mapMarkerInfo = '''<div style='float:left'><img src='http://i.stack.imgur.com/g672i.png'></div><div style='float:right; padding: 10px;'><b>Title</b><br/>123 Address<br/> City,Country</div>''';
 }
