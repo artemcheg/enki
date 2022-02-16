@@ -7,10 +7,8 @@ import 'package:web_site/widgets/appBar.dart';
 import 'package:web_site/widgets/bottom_bar.dart';
 import 'package:web_site/widgets/drawer.dart';
 import 'package:web_site/widgets/interactive.dart';
-import 'package:web_site/widgets/small_changes.dart';
 import 'package:web_site/widgets/text_info.dart';
 import 'package:web_site/widgets/widgetImages.dart';
-
 import '../widgets/map.dart';
 
 class MainScreen extends StatefulWidget {
@@ -25,6 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   final parentKey = GlobalKey();
   final childKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
+  bool isScrolling = true;
 
   @override
   void initState() {
@@ -46,19 +45,18 @@ class _MainScreenState extends State<MainScreen> {
           child: SingleChildScrollView(
               key: parentKey,
               controller: _scrollController,
-              physics: const ClampingScrollPhysics(),
+              physics: isScrolling
+                  ? const ClampingScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
                   Stack(
                     children: [
                       const MainImage(),
                       SizeWidget.isPhoneScreen(context)
-                          ? const SmallAppBar(
-                              shadow: shadowList,
-                            )
+                          ? const SmallAppBar()
                           : const PrefSizeAppBar(
                               dividerColor: Colors.white54,
-                              shadow: shadowList,
                             ),
                     ],
                   ),
@@ -73,22 +71,12 @@ class _MainScreenState extends State<MainScreen> {
                       TextInfoWidget(
                         text1: '999+',
                         text2: 'Проектов реализовано',
-                        border: Border(
-                            right: BorderSide(
-                                color: Colors.black.withOpacity(0.1)),
-                            bottom: BorderSide(
-                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                       ),
                       TextInfoWidget(
                         text1: '999+',
                         text2: 'Проектов реализовано',
-                        border: Border(
-                            right: BorderSide(
-                                color: Colors.black.withOpacity(0.1)),
-                            bottom: BorderSide(
-                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                         durationStart: const Duration(milliseconds: 200),
@@ -96,11 +84,6 @@ class _MainScreenState extends State<MainScreen> {
                       TextInfoWidget(
                         text1: '10 лет',
                         text2: 'Безупречного опыта',
-                        border: Border(
-                            right: BorderSide(
-                                color: Colors.black.withOpacity(0.1)),
-                            bottom: BorderSide(
-                                color: Colors.black.withOpacity(0.1))),
                         scrollController: _scrollController,
                         parentKey: parentKey,
                         durationStart: const Duration(milliseconds: 400),
@@ -173,8 +156,18 @@ class _MainScreenState extends State<MainScreen> {
                           ],
                         )),
                   ),
-                  const InterActiveWidget(),
-                  myMap(screenSize.width,screenSize.height * 0.6),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: InterActiveWidget(),
+                  ),
+                  InkWell(
+                      onTap: () {},
+                      onHover: (value) {
+                        setState(() {
+                          isScrolling = !value;
+                        });
+                      },
+                      child: myMap(screenSize.width, screenSize.height * 0.6)),
                   const BottomBar(),
                 ],
               )),

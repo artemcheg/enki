@@ -1,7 +1,6 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import '../animation/fade_animation.dart';
-import 'SizeWidget.dart';
 
 class ContainerWithBest extends StatelessWidget {
   final String text;
@@ -17,7 +16,7 @@ class ContainerWithBest extends StatelessWidget {
       left: 200,
       child: FadeAnimation(
         child: Container(
-          decoration: const BoxDecoration(color: Colors.white),
+          decoration:  BoxDecoration(color: Colors.white.withOpacity(0.5)),
           width: width,
           height: height,
           child: Padding(
@@ -85,7 +84,7 @@ class _PositionedIconState extends State<PositionedIcon> {
         child: Icon(
           Icons.add_circle,
           color: widget.isHovering ? const Color(0XFF52B060) : Colors.white,
-          size: SizeWidget.isSmallScreen(context)?50:50,
+          size: 50,
         ));
   }
 }

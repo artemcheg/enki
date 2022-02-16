@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyRichText extends StatefulWidget {
-  bool isHovering;
+
   final String text;
   final String what;
   final dynamic sizeParam;
@@ -13,9 +13,8 @@ class MyRichText extends StatefulWidget {
   final String ?fontFamily;
   final int maxLines;
 
-  MyRichText(
+  const MyRichText(
       {Key? key,
-      required this.isHovering,
       required this.text,
       required this.sizeParam,
       required this.what, this.webOnlyWindowName="_self", this.colorText = Colors.white, this.shadow, this.fontFamily='Comfortaa', this.maxLines=1,})
@@ -26,13 +25,14 @@ class MyRichText extends StatefulWidget {
 }
 
 class _MyRichTextState extends State<MyRichText> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       hoverColor: Colors.grey.withOpacity(0),
       onHover: (value) {
         setState(() {
-          widget.isHovering = value;
+          selected = value;
         });
       },
       onTap: () {},
@@ -42,7 +42,7 @@ class _MyRichTextState extends State<MyRichText> {
             style: TextStyle(
               fontFamily: widget.fontFamily,
                 color:
-                    widget.isHovering ? const Color(0XFF52B060) :widget.colorText,
+                    selected ? const Color(0XFF52B060) :widget.colorText,
                 fontSize: widget.sizeParam,
             shadows: widget.shadow),
             mouseCursor: SystemMouseCursors.click,

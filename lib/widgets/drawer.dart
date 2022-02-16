@@ -42,7 +42,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         _isHovering[0] = value;
                       });
                     },
-                    onTap: () {},
+                    onTap: () {Navigator.pushNamed(context, '/');},
                     child: Text(
                       'ГЛАВНАЯ',
                       style: _isHovering[0] ? styleOn : styleOff,
@@ -66,21 +66,7 @@ class _MyDrawerState extends State<MyDrawer> {
                   const SizedBox(
                     height: 15,
                   ),
-                  InkWell(
-                    onHover: (value) {
-                      setState(() {
-                        _isHovering[2] = value;
-                      });
-                    },
-                    onTap: () {},
-                    child: Text(
-                      'РАСЧЕТ СТОИМОСТИ',
-                      style: _isHovering[2] ? styleOn : styleOff,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
+
                   InkWell(
                     onHover: (value) {
                       setState(() {
@@ -117,7 +103,10 @@ class _MyDrawerState extends State<MyDrawer> {
                         _isHovering[5] = value;
                       });
                     },
-                    onTap: () {},
+                    onTap: () {Navigator.pushNamed(
+                      context,
+                      '/contacts',
+                    );},
                     child: Text(
                       'КОНТАКТЫ',
                       style: _isHovering[5] ? styleOn : styleOff,

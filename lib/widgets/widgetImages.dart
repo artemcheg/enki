@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:web_site/animation/scaleTransition.dart';
 import 'package:web_site/widgets/small_changes.dart';
-import '../animation/text_anim.dart';
+import '../animation/transit_anim.dart';
 import 'SizeWidget.dart';
 
 class MainImage extends StatefulWidget {
@@ -44,7 +44,7 @@ class _MainImageState extends State<MainImage> {
        SizeWidget.isPhoneScreen(context)&&screenSize.width<350?const SizedBox.shrink():Padding(
           padding: EdgeInsets.only(
               left: screenSize.width * 0.04, top: screenSize.height * 0.7),
-          child: TextAnimation(
+          child: TransitionAnimation(
               animTime: const Duration(seconds: 2),
               offset: 2,
               curve: Curves.ease,

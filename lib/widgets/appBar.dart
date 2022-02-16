@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_site/resources/string_res.dart';
 import 'package:web_site/widgets/menu_item.dart';
 import 'package:web_site/widgets/rich_text.dart';
+import 'package:web_site/widgets/small_changes.dart';
 import 'SizeWidget.dart';
 
 class PrefSizeAppBar extends StatefulWidget {
@@ -11,7 +12,7 @@ class PrefSizeAppBar extends StatefulWidget {
   final List<Shadow>? shadow;
   final Color dividerColor;
 
-  const PrefSizeAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow, this.dividerColor=Colors.black54}) : super(key: key);
+  const PrefSizeAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow = shadowList, this.dividerColor=Colors.black54}) : super(key: key);
 
   @override
   _PrefSizeAppBarState createState() => _PrefSizeAppBarState();
@@ -84,10 +85,10 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                       ),
                       MyRichText(
                         colorText: widget.colorText,
-                        isHovering: _isHovering[4],
                         text: StringRes.phone,
                         sizeParam: 14,
                         what: 'tel:${StringRes.phone}',
+                        shadow: widget.shadow,
                       )
                     ],
                   ),
@@ -106,8 +107,8 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
                       ),
                       MyRichText(
                         colorText: widget.colorText,
-                        isHovering: _isHovering[5],
                         text: StringRes.mail,
+                        shadow: widget.shadow,
                         sizeParam: 14,
                         what: 'mailto:${StringRes.mail}',
                       )
@@ -186,67 +187,29 @@ class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    InkWell(
-                        hoverColor: Colors.grey.withOpacity(0),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/');
-                        },
-                        onHover: (value) {
-                          setState(() {
-                            _isHovering[0] = value;
-                          });
-                        },
-                        child: MenuItem(
-                          colorText: widget.colorText,
-                          isHovering: _isHovering[0],
-                          text: 'ГЛАВНАЯ',
-                        )),
-                    InkWell(
-                      hoverColor: Colors.grey.withOpacity(0),
-                      onTap: () {},
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[1] = value;
-                        });
-                      },
-                      child: MenuItem(
-                       colorText: widget.colorText,
-                        isHovering: _isHovering[1],
-                        text: 'УСЛУГИ',
-                      ),
+                    MenuItem(
+                      route: '/',
+                      colorText: widget.colorText,
+                      text: 'ГЛАВНАЯ',
+                      shadow: widget.shadow,
                     ),
-                    InkWell(
-                      hoverColor: Colors.grey.withOpacity(0),
-                      onTap: () {},
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[2] = value;
-                        });
-                      },
-                      child: MenuItem(
-                        colorText: widget.colorText,
-                        isHovering: _isHovering[2],
-                        text: 'НАШИ ПРОЕКТЫ',
-                      ),
+                    MenuItem(
+                      route: '/services',
+                     colorText: widget.colorText,
+                      text: 'УСЛУГИ',
+                      shadow: widget.shadow,
                     ),
-                    InkWell(
-                      hoverColor: Colors.grey.withOpacity(0),
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/contacts',
-                        );
-                      },
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[3] = value;
-                        });
-                      },
-                      child: MenuItem(
-                        colorText: widget.colorText,
-                        isHovering: _isHovering[3],
-                        text: 'КОНТАКТЫ',
-                      ),
+                    MenuItem(
+                      route:'/',
+                      colorText: widget.colorText,
+                      text: 'НАШИ ПРОЕКТЫ',
+                      shadow: widget.shadow,
+                    ),
+                    MenuItem(
+                      route:'/contacts',
+                      colorText: widget.colorText,
+                      text: 'КОНТАКТЫ',
+                      shadow: widget.shadow,
                     )
                   ],
                 ),
@@ -342,7 +305,6 @@ class _SmallAppBarState extends State<SmallAppBar> {
                     MyRichText(
                       shadow: widget.shadow,
                       colorText: widget.colorText,
-                      isHovering: _isHovering[0],
                       text: StringRes.phone,
                       sizeParam: 13,
                       what: 'tel:${StringRes.phone}',
@@ -368,7 +330,6 @@ class _SmallAppBarState extends State<SmallAppBar> {
                     MyRichText(
                       shadow: widget.shadow,
                       colorText: widget.colorText,
-                      isHovering: _isHovering[1],
                       text: StringRes.mail,
                       sizeParam: 13,
                       what: 'mailto:${StringRes.mail}',

@@ -32,7 +32,7 @@ class FullImage extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Hero(
-                tag: 'fullImage',
+                tag: imagePath,
                 child: Image.asset(
                   imagePath,
                   fit: BoxFit.cover,

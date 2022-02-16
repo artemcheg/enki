@@ -17,8 +17,9 @@ class _CarouselState extends State<Carousel> {
     'assets/carousel/office.jpg',
     'assets/carousel/1.jpg',
     'assets/carousel/2.jpg',
-    'assets/carousel/3.jpg',
-    'assets/house.jpg'
+    'assets/carousel/4.jpg',
+    'assets/carousel/5.jpg',
+    'assets/carousel/6.jpg',
   ];
   int initialIndexDrag = 0;
 
@@ -67,7 +68,7 @@ class _CarouselState extends State<Carousel> {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Hero(
-                          tag: 'fullImage',
+                          tag: entry.value,
                           child: Image.asset(
                             entry.value,
                             fit: BoxFit.cover,

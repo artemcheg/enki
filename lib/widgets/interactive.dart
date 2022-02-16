@@ -12,33 +12,37 @@ class InterActiveWidget extends StatefulWidget {
 }
 
 class _InterActiveWidgetState extends State<InterActiveWidget> {
-
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       alignment: Alignment.centerLeft,
       fit: BoxFit.contain,
       child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {  if(SizeWidget.isSmallScreen(context)){return const StackSmall();}else{return const StackLarge();}},
-
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if (SizeWidget.isSmallScreen(context)) {
+            return const StackSmall();
+          } else {
+            return const StackLarge();
+          }
+        },
       ),
     );
   }
 }
 
-void change(List<bool> isHovering,int index){
-  isHovering[index]=!isHovering[index];
-  for(int i = 0;i<isHovering.length;i++){
-    if(i!=index) {
+void change(List<bool> isHovering, int index) {
+  isHovering[index] = !isHovering[index];
+  for (int i = 0; i < isHovering.length; i++) {
+    if (i != index) {
       isHovering[i] = false;
     }
   }
 }
 
-void changeHover(List<bool> isHovering,int index,bool value){
-  isHovering[index]=true;
-  for(int i = 0;i<isHovering.length;i++){
-    if(i!=index) {
+void changeHover(List<bool> isHovering, int index, bool value) {
+  isHovering[index] = true;
+  for (int i = 0; i < isHovering.length; i++) {
+    if (i != index) {
       isHovering[i] = false;
     }
   }
@@ -52,114 +56,61 @@ class StackLarge extends StatefulWidget {
 }
 
 class _StackLargeState extends State<StackLarge> {
-  final _isHovering = [true,false];
+  final _isHovering = [true, false];
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Image.asset(
-          'assets/interactive.jpg',
-          width: 1919,
-          height: 738,
-        ),
-        Positioned(
-          top: 290,
-          left: 990,
-          child: InkWell(
-            onTap: (){},
-            onHover: (value){setState(() {
-              changeHover(_isHovering, 0, value);
-            });},
-            child: PositionedIcon(isHovering: _isHovering[0]),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 10,
+            offset: const Offset(0, 3), // changes position of shadow
           ),
-        ),
-
-        Positioned(
-          top: 650,
-          left: 1200,
-          child: InkWell(
-            onTap: (){},
-            onHover: (value){setState(() {
-              changeHover(_isHovering, 1, value);
-            });},
-            child: PositionedIcon(isHovering: _isHovering[1]),
-          ),
-        ),
-
-
-        const Positioned(
-          top: 30,
-          left: 1000,
-          child: Text(
-            'Почему мы лучшие:',
-            style: TextStyle(
-              fontSize: 50,
-              color: Colors.white,
-              shadows: shadowList,
-            ),
-          ),
-        ),
-
-        ContainerWithBest(text: StringRes.bestWindow,show: _isHovering[0],height: 736,),
-        ContainerWithBest(text: StringRes.bestFoundation,show: _isHovering[1],height: 736,),
-
-      ],
-    );
-  }
-}
-
-
-class StackSmall extends StatefulWidget {
-  const StackSmall({Key? key}) : super(key: key);
-
-  @override
-  _StackSmallState createState() => _StackSmallState();
-}
-
-class _StackSmallState extends State<StackSmall> {
-  final _isHovering = [true,false];
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Stack(
           children: [
             Image.asset(
-              'assets/interactive3.jpg',
-              width: 1084,
-              height: 582,
+              'assets/interactive.jpg',
+              width: 1919,
+              height: 738,
             ),
             Positioned(
-              top: 140,
-              left: 220,
+              top: 290,
+              left: 990,
               child: InkWell(
-                onTap: () {
+                onTap: () {},
+                onHover: (value) {
                   setState(() {
-                      change(_isHovering, 0);
+                    changeHover(_isHovering, 0, value);
                   });
                 },
                 child: PositionedIcon(isHovering: _isHovering[0]),
               ),
             ),
-
             Positioned(
-              top: 500,
-              left: 250,
+              top: 650,
+              left: 1200,
               child: InkWell(
-
-                onTap: () {
+                onTap: () {},
+                onHover: (value) {
                   setState(() {
-                      change(_isHovering, 1);
+                    changeHover(_isHovering, 1, value);
                   });
                 },
                 child: PositionedIcon(isHovering: _isHovering[1]),
               ),
             ),
-
-
             const Positioned(
-              top: 10,
-              left: 10,
+              top: 30,
+              left: 1000,
               child: Text(
                 'Почему мы лучшие:',
                 style: TextStyle(
@@ -169,13 +120,109 @@ class _StackSmallState extends State<StackSmall> {
                 ),
               ),
             ),
-
-
-
+            ContainerWithBest(
+              text: StringRes.bestWindow,
+              show: _isHovering[0],
+              height: 736,
+            ),
+            ContainerWithBest(
+              text: StringRes.bestFoundation,
+              show: _isHovering[1],
+              height: 736,
+            ),
           ],
         ),
-        ContainerWithBestSmall(text: StringRes.bestWindow,show: _isHovering[0],height:600 ,),
-        ContainerWithBestSmall(text: StringRes.bestFoundation,show: _isHovering[1],height:600,),
+      ),
+    );
+  }
+}
+
+class StackSmall extends StatefulWidget {
+  const StackSmall({Key? key}) : super(key: key);
+
+  @override
+  _StackSmallState createState() => _StackSmallState();
+}
+
+class _StackSmallState extends State<StackSmall> {
+  final _isHovering = [true, false];
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.black,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 10,
+                offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              children: [
+                Image.asset(
+                  'assets/interactive3.jpg',
+                  width: 1084,
+                  height: 582,
+                ),
+                Positioned(
+                  top: 140,
+                  left: 220,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        change(_isHovering, 0);
+                      });
+                    },
+                    child: PositionedIcon(isHovering: _isHovering[0]),
+                  ),
+                ),
+                Positioned(
+                  top: 500,
+                  left: 250,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        change(_isHovering, 1);
+                      });
+                    },
+                    child: PositionedIcon(isHovering: _isHovering[1]),
+                  ),
+                ),
+                const Positioned(
+                  top: 10,
+                  left: 10,
+                  child: Text(
+                    'Почему мы лучшие:',
+                    style: TextStyle(
+                      fontSize: 50,
+                      color: Colors.white,
+                      shadows: shadowList,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ContainerWithBestSmall(
+          text: StringRes.bestWindow,
+          show: _isHovering[0],
+          height: 600,
+        ),
+        ContainerWithBestSmall(
+          text: StringRes.bestFoundation,
+          show: _isHovering[1],
+          height: 600,
+        ),
       ],
     );
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:web_site/widgets/rich_text.dart';
-
 import '../resources/string_res.dart';
 import 'SizeWidget.dart';
 
@@ -13,8 +12,6 @@ class BottomBar extends StatefulWidget {
 }
 
 class _BottomBarState extends State<BottomBar> {
-  final _isHovering = [false, false, false];
-
   textStyle(screenWidth) => TextStyle(
       color: Colors.white, fontSize: sizeParam(screenWidth, 0.007, 8));
 
@@ -77,7 +74,6 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.white,
                           ),
                           MyRichText(
-                            isHovering: _isHovering[0],
                             text: StringRes.phone,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what: 'tel:${StringRes.phone}',
@@ -95,7 +91,6 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.white,
                           ),
                           MyRichText(
-                            isHovering: _isHovering[1],
                             text: StringRes.mail,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what: 'mailto:${StringRes.mail}',
@@ -125,7 +120,6 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.white,
                           ),
                           MyRichText(
-                            isHovering: _isHovering[2],
                             maxLines: 3,
                             text: StringRes.address,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),

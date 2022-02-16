@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:web_site/animation/transit_anim.dart';
 import 'package:web_site/resources/string_res.dart';
-import 'package:web_site/widgets/carousel.dart';
 import 'package:web_site/widgets/drawer.dart';
+import 'package:web_site/widgets/map_contact.dart';
 
 import '../widgets/SizeWidget.dart';
 import '../widgets/appBar.dart';
@@ -16,7 +18,7 @@ class Contacts extends StatefulWidget {
 }
 
 class _ContactsState extends State<Contacts> {
-  final ScrollController _scrollController = ScrollController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,32 +27,14 @@ class _ContactsState extends State<Contacts> {
       extendBodyBehindAppBar: true,
       drawer: const MyDrawer(),
       body: SafeArea(
-        child: Scrollbar(
-          controller: _scrollController,
-          trackVisibility: true,
-          showTrackOnHover: true,
-          isAlwaysShown: true,
-          child: SingleChildScrollView(
-            controller: _scrollController,
-            physics: const ClampingScrollPhysics(),
-            child: Column(
-              children: [
-                LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                    if (SizeWidget.isSmallScreen(context)) {
-                      return const ContactsSmall();
-                    } else {
-                      return const ContactsLarge();
-                    }
-                  },
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 6),
-                  child: BottomBar(),
-                ),
-              ],
-            ),
-          ),
+        child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            if (SizeWidget.isSmallScreen(context)) {
+              return const ContactsSmall();
+            } else {
+              return const ContactsLarge();
+            }
+          },
         ),
       ),
     );
@@ -65,165 +49,143 @@ class ContactsLarge extends StatefulWidget {
 }
 
 class _ContactsLargeState extends State<ContactsLarge> {
-  final _isHovering = [false, false, false];
-
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const PrefSizeAppBar(
-                shadow: null,
-                colorText: Colors.black,
-                colorDrawer: Colors.blue,
-              ),
-        Container(
-          alignment: Alignment.centerLeft,
-          width: screenSize.width,
-          height: 50,
-          padding: const EdgeInsets.all(10),
-          color: Colors.black.withOpacity(0.1),
-          child: const Text(
-            'Контакты',
-            style: TextStyle(fontSize: 30),
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.shade900,
+          ),
+          child: const PrefSizeAppBar(
+            dividerColor: Colors.white54,
+            shadow: null,
+            colorDrawer: Colors.blue,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(
-            left: 20,
-          ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 20, top: 20, bottom: 20),
+        child: FittedBox(
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
+              SizedBox(
+                height: 310,
+                width: 330,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'Телефоны:',
-                      style: TextStyle(
-                          fontSize: sizeParam(screenSize.width, 0.015, 18)),
+                    const TransitionAnimation(
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+                          text: StringRes.phone,
+                          maxLines: 1,
+                          what: 'tel:${StringRes.phone}',
+                          sizeParam: null,
+                        ),
+                        leading: Icon(
+                          Icons.phone,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 500),
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+                          text: StringRes.mail,
+                          sizeParam: null,
+                          what: 'mailto:${StringRes.mail}',
+                        ),
+                        leading: Icon(
+                          Icons.mail,
+                          color: Colors.lightBlueAccent,
+                        ),
+                      ),
                     ),
-                    MyRichText(
-                      fontFamily: 'Oswald',
-                      shadow: null,
-                      colorText: Colors.black,
-                      isHovering: _isHovering[0],
-                      text: StringRes.phone,
-                      sizeParam: sizeParam(screenSize.width, 0.008, 10),
-                      maxLines: 2,
-                      what: 'tel:${StringRes.phone}',
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 1000),
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+
+                          text: StringRes.address,
+                          sizeParam: null,
+                          maxLines: 4,
+                          what:
+                              'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
+                          webOnlyWindowName: '_blank',
+                        ),
+                        leading: Icon(
+                          Icons.place,
+                          color: Colors.red,
+                        ),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 5,
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 1500),
+                      child: ListTile(
+                        title: SelectableText(StringRes.workTime),
+                        leading: Icon(
+                          Icons.watch,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                    Text(
-                      'Почта:',
-                      style: TextStyle(
-                          fontSize: sizeParam(screenSize.width, 0.015, 18)),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    MyRichText(
-                      fontFamily: 'Oswald',
-                      shadow: null,
-                      colorText: Colors.black,
-                      isHovering: _isHovering[1],
-                      text: StringRes.mail,
-                      sizeParam: sizeParam(screenSize.width, 0.008, 10),
-                      what: 'mailto:${StringRes.mail}',
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(
-                  children: [
-                    Text(
-                      "Адрес:",
-                      style: TextStyle(
-                          fontSize: sizeParam(screenSize.width, 0.015, 18)),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    MyRichText(
-                      fontFamily: 'Oswald',
-                      shadow: null,
-                      colorText: Colors.black,
-                      isHovering: _isHovering[2],
-                      text: StringRes.address,
-                      sizeParam: sizeParam(screenSize.width, 0.008, 10),
-                      maxLines: 5,
-                      what:
-                          'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
-                      webOnlyWindowName: '_blank',
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 80),
+                      child: TransitionAnimation(
+                        durationStart: const Duration(milliseconds: 2000),
+                        child: Row(
+                          children: [
+                            InkWell(
+                                hoverColor: Colors.grey.withOpacity(0),
+                                onTap: () async {
+                                  launch(
+                                    'https://www.instagram.com/enki.crimea/',
+                                  );
+                                },
+                                child: Image.asset(
+                                  'assets/social/insta.png',
+                                  scale: 60,
+                                )),
+                            InkWell(
+                                hoverColor: Colors.grey.withOpacity(0),
+                                onTap: () async {
+                                  launch(
+                                    'https://vk.com/enki.crimea',
+                                  );
+                                },
+                                child: Image.asset(
+                                  'assets/social/vk.png',
+                                  scale: 60,
+                                )),
+                          ],
+                        ),
+                      ),
                     )
                   ],
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(
-                  children: [
-                    Text(
-                      'Время работы:',
-                      style: TextStyle(
-                          fontSize: sizeParam(screenSize.width, 0.015, 18)),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SelectableText(
-                      'пн-пт: с 9:00 до 18:00',
-                      style: TextStyle(
-                        fontSize: sizeParam(screenSize.width, 0.008, 10),
-                        fontFamily: 'Oswald',
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    SelectableText('сб-вс: выходной',
-                        style: TextStyle(
-                            fontFamily: 'Oswald',
-                            fontSize: sizeParam(screenSize.width, 0.008, 10))),
-
-                  ],
-                ),
-              ),
-              // FittedBox(
-              //   fit: BoxFit.contain,
-              //   child: Image.asset(
-              //     'assets/office.jpg',
-              //     width: screenSize.width*0.5,
-              //     height: screenSize.width*0.3,
-              //   ),
-              // ),
+                padding: const EdgeInsets.only(right: 10),
+                child: TransitionAnimation(
+                    child: mapContact(
+                        screenSize.width * 0.8, screenSize.height * 0.56)),
+              )
             ],
           ),
         ),
-        Container(
-            alignment: Alignment.centerLeft,
-            width: screenSize.width,
-            height: 50,
-            margin: const EdgeInsets.only(top: 10,bottom: 10),
-            padding: const EdgeInsets.all(10),
-            color: Colors.black.withOpacity(0.1),
-            child: const Text('Наш офис',
-                style: TextStyle(
-                    fontSize: 30))),
-
-        const Carousel(),
-      ],
-    );
+      ),
+      const BottomBar(),
+    ]);
   }
 }
 
@@ -235,136 +197,155 @@ class ContactsSmall extends StatefulWidget {
 }
 
 class _ContactsSmallState extends State<ContactsSmall> {
-  final _isHovering = [false, false, false];
+  final ScrollController _scrollController = ScrollController();
+  bool isScrolling = true;
 
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-         const SmallAppBar(
-                colorText: Colors.black,
+    return Scrollbar(
+      controller: _scrollController,
+      trackVisibility: true,
+      showTrackOnHover: true,
+      isAlwaysShown: true,
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        physics: isScrolling
+            ? const ClampingScrollPhysics()
+            : const NeverScrollableScrollPhysics(),
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                color: Colors.blueGrey.shade900,
+              ),
+              child: const SmallAppBar(
                 shadow: null,
-                colorDrawer: Colors.blue,
-              ),
-        Container(
-            alignment: Alignment.centerLeft,
-            width: screenSize.width,
-            height: 50,
-            margin: const EdgeInsets.only(top: 10,bottom: 10),
-            padding: const EdgeInsets.all(10),
-            color: Colors.black.withOpacity(0.1),
-            child: const Text('Контакты',textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 30))),
-        Column(
-          children: [
-            const Text(
-              'Телефоны:',
-              style: TextStyle(fontSize: 25),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyRichText(
-              fontFamily: 'Oswald',
-              shadow: null,
-              colorText: Colors.black,
-              isHovering: _isHovering[0],
-              text: StringRes.phone,
-              sizeParam: 15,
-              maxLines: 2,
-              what: 'tel:${StringRes.phone}',
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              'Почта:',
-              style: TextStyle(fontSize: 25),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            MyRichText(
-              fontFamily: 'Oswald',
-              shadow: null,
-              colorText: Colors.black,
-              isHovering: _isHovering[1],
-              text: StringRes.mail,
-              sizeParam: 15,
-              what: 'mailto:${StringRes.mail}',
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Column(
-          children: [
-            const Text(
-              "Адрес:",
-              style: TextStyle(fontSize: 25),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            MyRichText(
-              fontFamily: 'Oswald',
-              shadow: null,
-              colorText: Colors.black,
-              isHovering: _isHovering[2],
-              text: StringRes.address,
-              sizeParam: 15,
-              maxLines: 5,
-              what:
-                  'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
-              webOnlyWindowName: '_blank',
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Column(
-          children: const [
-            Text(
-              'Время работы:',
-              style: TextStyle(fontSize: 25),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'пн-пт: с 9:00 до 18:00',
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: 'Oswald',
+                colorDrawer: Colors.white,
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 310,
+              width: 330,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const TransitionAnimation(
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+
+                          text: StringRes.phone,
+                          maxLines: 1,
+                          what: 'tel:${StringRes.phone}',
+                          sizeParam: null,
+                        ),
+                        leading: Icon(
+                          Icons.phone,
+                          color: Colors.greenAccent,
+                        ),
+                      ),
+                    ),
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 500),
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+
+                          text: StringRes.mail,
+                          sizeParam: null,
+                          what: 'mailto:${StringRes.mail}',
+                        ),
+                        leading: Icon(
+                          Icons.mail,
+                          color: Colors.lightBlueAccent,
+                        ),
+                      ),
+                    ),
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 1000),
+                      child: ListTile(
+                        title: MyRichText(
+                          shadow: null,
+                          colorText: Colors.black,
+                          text: StringRes.address,
+                          sizeParam: null,
+                          maxLines: 4,
+                          what:
+                              'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
+                          webOnlyWindowName: '_blank',
+                        ),
+                        leading: Icon(
+                          Icons.place,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                    const TransitionAnimation(
+                      durationStart: Duration(milliseconds: 1500),
+                      child: ListTile(
+                        title: SelectableText(StringRes.workTime),
+                        leading: Icon(
+                          Icons.watch,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    TransitionAnimation(
+                      durationStart: const Duration(milliseconds: 2000),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                              hoverColor: Colors.grey.withOpacity(0),
+                              onTap: () async {
+                                launch(
+                                  'https://www.instagram.com/enki.crimea/',
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/social/insta.png',
+                                scale: 60,
+                              )),
+                          InkWell(
+                              hoverColor: Colors.grey.withOpacity(0),
+                              onTap: () async {
+                                launch(
+                                  'https://vk.com/enki.crimea',
+                                );
+                              },
+                              child: Image.asset(
+                                'assets/social/vk.png',
+                                scale: 60,
+                              )),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
-            Text('сб-вс: выходной',
-                style: TextStyle(fontFamily: 'Oswald', fontSize: 15))
+            TransitionAnimation(
+                child: InkWell(
+                    onTap: () {},
+                    onHover: (value) {
+                      setState(() {
+                        isScrolling = !value;
+                      });
+                    },
+                    child:
+                        mapContact(screenSize.width, screenSize.height * 0.5))),
+            const BottomBar(),
           ],
         ),
-        Container(
-            alignment: Alignment.centerLeft,
-            width: screenSize.width,
-            height: 50,
-            margin: const EdgeInsets.only(top: 10,bottom: 10),
-            padding: const EdgeInsets.all(10),
-            color: Colors.black.withOpacity(0.1),
-            child: const Text('Наш офис',textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 30))),
-        const Carousel(),
-      ],
+      ),
     );
   }
 }

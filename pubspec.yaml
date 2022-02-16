@@ -38,6 +38,7 @@ dependencies:
   google_maps: ^6.0.0
   avatar_glow: ^2.0.2
   carousel_slider: ^4.0.0
+  flutter_staggered_grid_view: ^0.6.1
 
 
 
@@ -68,6 +69,8 @@ flutter:
     - assets/
     - assets/social/
     - assets/carousel/
+    - assets/map/
+    - assets/services/
 
   fonts:
     - family: Comfortaa

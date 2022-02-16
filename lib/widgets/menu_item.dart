@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MenuItem extends StatefulWidget {
-  final bool isHovering;
   final String text;
   final Color colorText;
  final List<Shadow>? shadow;
+ final String route;
   const MenuItem({
     Key? key,
-    required this.isHovering,
-    required this.text, this.colorText = Colors.white, this.shadow,
+    required this.text, this.colorText = Colors.white, this.shadow, required this.route,
   }) : super(key: key);
 
   @override
@@ -16,8 +15,10 @@ class MenuItem extends StatefulWidget {
 }
 
 class _MenuItemState extends State<MenuItem> {
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
+
     var screenSize = MediaQuery.of(context).size;
     var styleOn = TextStyle(
         color: const Color(0XFF52B060),
@@ -28,15 +29,26 @@ class _MenuItemState extends State<MenuItem> {
         fontSize: screenSize.width * 0.014,
         shadows: widget.shadow);
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(widget.text, style: widget.isHovering ? styleOn : styleOff),
-        const SizedBox(
-          height: 5,
-        ),
-        // selected(widget.isHovering)
-      ],
+    return InkWell(
+      hoverColor: Colors.grey.withOpacity(0),
+      onTap: () {
+        Navigator.pushNamed(context, widget.route);
+      },
+      onHover: (value) {
+        setState(() {
+          selected = value;
+        });
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(widget.text, style: selected ? styleOn : styleOff),
+          const SizedBox(
+            height: 5,
+          ),
+          // selected(widget.isHovering)
+        ],
+      ),
     );
   }
 }

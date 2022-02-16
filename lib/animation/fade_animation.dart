@@ -4,8 +4,9 @@ class FadeAnimation extends StatefulWidget {
   final Widget child;
   final double begin;
   final double end;
+  final Duration duration;
 
-  const FadeAnimation({Key? key, required this.child, this.begin = 0, this.end = 1}) : super(key: key);
+  const FadeAnimation({Key? key, required this.child, this.begin = 0, this.end = 1, this.duration=const Duration(seconds: 1)}) : super(key: key);
 
   @override
   _FadeAnimationState createState() => _FadeAnimationState();
@@ -20,7 +21,7 @@ class _FadeAnimationState extends State<FadeAnimation>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: widget.duration,
       vsync: this,
     );
     _animation = Tween<double>(begin: widget.begin, end: widget.end).animate(_controller);
