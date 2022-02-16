@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:web_site/widgets/animated_container.dart';
+import '../widgets/SizeWidget.dart';
 import '../widgets/appBar.dart';
 import '../widgets/bottom_bar.dart';
 import '../widgets/drawer.dart';
@@ -29,10 +29,18 @@ class _ServicesState extends State<Services> {
                 decoration: BoxDecoration(
                   color: Colors.blueGrey.shade900,
                 ),
-                child: const PrefSizeAppBar(
-                  dividerColor: Colors.white54,
-                  shadow: null,
-                  colorDrawer: Colors.blue,
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    if (SizeWidget.isSmallScreen(context)) {
+                      return const SmallAppBar();
+                    } else {
+                      return const PrefSizeAppBar(
+                        dividerColor: Colors.white54,
+                        shadow: null,
+                        colorDrawer: Colors.blue,
+                      );
+                    }
+                  },
                 ),
               ),
 
@@ -42,114 +50,37 @@ class _ServicesState extends State<Services> {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   crossAxisCount: 3,
-                  children: const [
+                  children: [
                     StaggeredGridTile.count(
-                        mainAxisCellCount: 0.8,
+                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
                         crossAxisCellCount: 1,
-                        child: MyServiceContainer(
+                        child: const MyServiceContainer(
                             assets: 'assets/services/3.jpg',
                             centerText: 'Строительство')),
                     StaggeredGridTile.count(
-                        mainAxisCellCount: 0.8,
+                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
                         crossAxisCellCount: 2,
-                        child: MyServiceContainer(
+                        child: const MyServiceContainer(
                           centerText: 'Ремонт и отделка',
                           assets: 'assets/services/2.jpg',
                         )),
                     StaggeredGridTile.count(
-                        mainAxisCellCount: 0.8,
+                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
                         crossAxisCellCount: 2,
-                        child: MyServiceContainer(
+                        child: const MyServiceContainer(
                           centerText: 'Дизайн интерьера',
                           assets: 'assets/services/1.jpg',
                         )),
                     StaggeredGridTile.count(
-                        mainAxisCellCount: 0.8,
+                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
                         crossAxisCellCount: 1,
-                        child: MyServiceContainer(
+                        child: const MyServiceContainer(
                           centerText: 'Ландшафтный дизайн',
                           assets: 'assets/services/4.jpg',
                         )),
                   ],
                 ),
               ),
-
-              // GridView.count(
-              //   padding: const EdgeInsets.all(10),
-              //   crossAxisSpacing:10,
-              //   mainAxisSpacing: 10,
-              //   childAspectRatio: 1.5,
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   crossAxisCount: 2,
-              //   children: [
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.black.withOpacity(0.5),
-              //               spreadRadius: 1,
-              //               blurRadius: 5,
-              //               offset: const Offset(
-              //                   0, 3), // changes position of shadow
-              //             ),
-              //           ],
-              //         borderRadius: const BorderRadius.all(Radius.circular(20)),
-              //           image: const DecorationImage(
-              //               image: AssetImage('assets/services/3.jpg'),
-              //               fit: BoxFit.cover)),
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.black.withOpacity(0.5),
-              //               spreadRadius: 1,
-              //               blurRadius: 5,
-              //               offset: const Offset(
-              //                   0, 3), // changes position of shadow
-              //             ),
-              //           ],
-              //           borderRadius: const BorderRadius.all(Radius.circular(20)),
-              //           image: const DecorationImage(
-              //               image: AssetImage('assets/services/2.jpg'),
-              //               fit: BoxFit.cover)),
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.black.withOpacity(0.5),
-              //               spreadRadius: 1,
-              //               blurRadius: 5,
-              //               offset: const Offset(
-              //                   0, 3), // changes position of shadow
-              //             ),
-              //           ],
-              //           borderRadius: const BorderRadius.all(Radius.circular(20)),
-              //           image: const DecorationImage(
-              //               image: AssetImage('assets/services/1.jpg'),
-              //               fit: BoxFit.cover)),
-              //     ),
-              //     Container(
-              //       decoration: BoxDecoration(
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.black.withOpacity(0.5),
-              //               spreadRadius: 1,
-              //               blurRadius: 5,
-              //               offset: const Offset(
-              //                   0, 3), // changes position of shadow
-              //             ),
-              //           ],
-              //           borderRadius: const BorderRadius.all(Radius.circular(20)),
-              //           image: const DecorationImage(
-              //               image: AssetImage('assets/services/4.jpg'),
-              //               fit: BoxFit.cover)),
-              //     ),
-              //   ],
-              // ),
-
               const BottomBar(),
             ],
           ),

@@ -52,9 +52,6 @@ class _ScaleAnimationState extends State<ScaleAnimation>
   }
 }
 
-
-
-
 class ScaledContainer extends StatefulWidget {
   final Widget child;
   final double beginScale;
@@ -89,7 +86,7 @@ class _ScaledContainerState extends State<ScaledContainer>
     );
     _animation = Tween<double>(begin: widget.beginScale, end: widget.endScale)
         .animate(_controller);
-    _controller.forward();
+
     super.initState();
   }
 
