@@ -68,28 +68,25 @@ Widget myMap(width, height) {
     return elem;
   });
 
-  return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-    child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Colors.black,
-          boxShadow:  [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 10,
-              offset: const Offset(
-                  0, 3), // changes position of shadow
-            ),
-          ],),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child:HtmlElementView(viewType: htmlId),
-        )),
-  );
+  return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black,
+        boxShadow:  [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 10,
+            offset: const Offset(
+                0, 3), // changes position of shadow
+          ),
+        ],),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child:HtmlElementView(viewType: htmlId),
+      ));
 }
 
 final roadAtlasStyles = <gmap.MapTypeStyle>[

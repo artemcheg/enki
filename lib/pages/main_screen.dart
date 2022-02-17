@@ -160,14 +160,53 @@ class _MainScreenState extends State<MainScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: InterActiveWidget(),
                   ),
-                  InkWell(
-                      onTap: () {},
-                      onHover: (value) {
+                  // InkWell(
+                  //     onTap: () {},
+                  //     onHover: (value) {
+                  //       setState(() {
+                  //         isScrolling = !value;
+                  //       });
+                  //     },
+                  //     child: myMap(screenSize.width, screenSize.height * 0.6)),
+                  MouseRegion(
+                    onHover: (value){setState(() {
+                      isScrolling = false;
+                    });},
+                    onExit: (value){setState(() {
+                      isScrolling = true;
+                    });},
+                    child: GestureDetector(
+                      onVerticalDragCancel: (){
                         setState(() {
-                          isScrolling = !value;
-                        });
-                      },
-                      child: myMap(screenSize.width, screenSize.height * 0.6)),
+                        isScrolling = true;
+                      });},
+                      onVerticalDragUpdate: (d){setState(() {
+                        isScrolling = false;
+                      });},
+                      onVerticalDragEnd: (d){setState(() {
+                        isScrolling = true;
+                      });},
+                      onVerticalDragStart: (d){setState(() {
+                        isScrolling = false;
+                      });},
+                      onHorizontalDragEnd: (d){setState(() {
+                        isScrolling = true;
+                      });},
+                      onHorizontalDragCancel: (){setState(() {
+                        isScrolling = true;
+                      });},
+                      onHorizontalDragUpdate: (d){setState(() {
+                        isScrolling = false;
+                      });},
+                      onHorizontalDragStart: (d) {setState(() {
+                        isScrolling = false;
+                      });},
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 10,horizontal:SizeWidget.isSmallScreen(context)?0:20),
+                        child: myMap(screenSize.width,SizeWidget.isSmallScreen(context)?screenSize.height*0.7:screenSize.height * 0.6),
+                      ),
+                    ),
+                  ),
                   const BottomBar(),
                 ],
               )),

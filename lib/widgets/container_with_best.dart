@@ -7,7 +7,7 @@ class ContainerWithBest extends StatelessWidget {
   final bool show;
   final double width;
   final double height;
-  const ContainerWithBest({Key? key,required this.text, this.show=false, this.width=300, this.height=700}) : super(key: key);
+  const ContainerWithBest({Key? key,required this.text, this.show=false, this.width=400, this.height=700}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +15,7 @@ class ContainerWithBest extends StatelessWidget {
         ? Positioned(
       left: 200,
       child: FadeAnimation(
+        duration: Duration(milliseconds: 500),
         child: Container(
           decoration:  BoxDecoration(color: Colors.white.withOpacity(0.5)),
           width: width,
