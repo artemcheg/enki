@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         '/services':(context)=>const Services()
       },
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity,fontFamily: 'Comfortaa'),
+      theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity,fontFamily: 'Comfortaa',scaffoldBackgroundColor: const Color(0xffede0d4)),
     );
   }
 

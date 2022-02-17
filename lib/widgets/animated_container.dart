@@ -3,6 +3,7 @@ import 'package:web_site/animation/scaleTransition.dart';
 import 'package:web_site/animation/transit_anim.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
 
+
 class MyServiceContainer extends StatefulWidget {
   final String assets;
   final String centerText;
@@ -67,92 +68,68 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
                 child: Container(
                   decoration:
                       BoxDecoration(color: Colors.black12.withOpacity(0.4)),
-                  child: Stack(
-                    children: [
-                      Center(
-                          child: Text(
-                        widget.centerText,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: sizeParam(screenSize.width, 0.02, 12)),
-                      )),
-                      // Positioned(
-                      //   top: 20,
-                      //   left: 20,
-                      //   child: InkWell(
-                      //     hoverColor: Colors.transparent,
-                      //     onTap: () {},
-                      //     onHover: (value) {
-                      //       setState(() {
-                      //         selected = value;
-                      //       });
-                      //     },
-                      //     child: Text(
-                      //       'ПОДРОБНЕЕ',
-                      //       style: TextStyle(
-                      //           color: selected
-                      //               ? const Color(0XFF52B060)
-                      //               : Colors.white,
-                      //           fontSize:
-                      //               sizeParam(screenSize.width, 0.008, 8)),
-                      //     ),
-                      //   ),
-                      // )
-                    ],
-                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 20,right: 20),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: InkWell(
-                    hoverColor: Colors.transparent,
-                    onTap: () {},
-                    onHover: (value) {
-                      setState(() {
-                        selected = value;
-                      });
-                    },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'ПОДРОБНЕЕ',
-                              style: TextStyle(
-                                  color: selected
-                                      ? const Color(0XFF52B060)
-                                      : Colors.white,
-                                  fontSize:
-                                  SizeWidget.isSmallScreen(context)?8:SizeWidget.isMediumScreen(context)?10:15),
-                            ),
-                            Icon(Icons.arrow_forward,color:  selected
-                                ? const Color(0XFF52B060)
-                                : Colors.white,)
-                          ],
-                        ),
-                        AnimatedContainer(
-                          color: Colors.red,
-                          duration: const Duration(
-                            milliseconds: 100,
-                          ),
-                          child: const SizedBox(
-                            height: 2,
-                            width: 130,
-                          ),
-                          width: selected ? 20 : SizeWidget.isSmallScreen(context)?78:SizeWidget.isMediumScreen(context)?92:128,
-                          // width: selected ? 20 : 130,
-                        )
-                      ],
-                    ),
+                padding: const EdgeInsets.all(10),
+                child: AnimatedAlign(
+                  alignment: isHovering?Alignment.center:Alignment.bottomLeft,
+                  duration: const Duration(milliseconds: 400),
+                  child: Text(
+                    widget.centerText,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: sizeParam(screenSize.width, 0.015, 12)),
                   ),
                 ),
               ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: (){},
+                    onHover: (value){setState(() {
+                      selected=value;
+                    });},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'ПОДРОБНЕЕ',
+                          style: TextStyle(
+                              color: selected
+                                  ? const Color(0XFF52B060)
+                                  : Colors.white,
+                              fontSize:
+                              SizeWidget.isSmallScreen(context)?8:SizeWidget.isMediumScreen(context)?10:15),
+                        ),
+                        Icon(Icons.arrow_forward,color:  selected
+                            ? const Color(0XFF52B060)
+                            : Colors.white,)
+                      ],
+                    ),
+                  ),
+                  AnimatedContainer(
+                    color: Colors.red,
+                    duration: const Duration(
+                      milliseconds: 100,
+                    ),
+                    child: const SizedBox(
+                      height: 2,
+                      width: 130,
+                    ),
+                    width: selected ? 20 : SizeWidget.isSmallScreen(context)?78:SizeWidget.isMediumScreen(context)?92:128,
+                  )
+                ],
+              ),
+            ),
+          ),
+
             ],
           ),
         ),

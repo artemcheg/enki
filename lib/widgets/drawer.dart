@@ -73,7 +73,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         _isHovering[3] = value;
                       });
                     },
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/services');
+                    },
                     child: Text(
                       'УСЛУГИ',
                       style: _isHovering[3] ? styleOn : styleOff,

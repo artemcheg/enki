@@ -151,67 +151,50 @@ class _StackSmallState extends State<StackSmall> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: Colors.black,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.5),
-                spreadRadius: 5,
-                blurRadius: 10,
-                offset: const Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Stack(
-              children: [
-                Image.asset(
-                  'assets/interactive3.jpg',
-                  width: 1084,
-                  height: 582,
-                ),
-                Positioned(
-                  top: 140,
-                  left: 220,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        change(_isHovering, 0);
-                      });
-                    },
-                    child: PositionedIcon(isHovering: _isHovering[0]),
-                  ),
-                ),
-                Positioned(
-                  top: 500,
-                  left: 250,
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        change(_isHovering, 1);
-                      });
-                    },
-                    child: PositionedIcon(isHovering: _isHovering[1]),
-                  ),
-                ),
-                const Positioned(
-                  top: 10,
-                  left: 10,
-                  child: Text(
-                    'Почему мы лучшие:',
-                    style: TextStyle(
-                      fontSize: 50,
-                      color: Colors.white,
-                      shadows: shadowList,
-                    ),
-                  ),
-                ),
-              ],
+        Stack(
+          children: [
+            Image.asset(
+              'assets/interactive3.jpg',
+              width: 1084,
+              height: 600,
             ),
-          ),
+            Positioned(
+              top: 140,
+              left: 220,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    change(_isHovering, 0);
+                  });
+                },
+                child: PositionedIcon(isHovering: _isHovering[0]),
+              ),
+            ),
+            Positioned(
+              top: 500,
+              left: 250,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    change(_isHovering, 1);
+                  });
+                },
+                child: PositionedIcon(isHovering: _isHovering[1]),
+              ),
+            ),
+            const Positioned(
+              top: 10,
+              left: 10,
+              child: Text(
+                'Почему мы лучшие:',
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Colors.white,
+                  shadows: shadowList,
+                ),
+              ),
+            ),
+          ],
         ),
         ContainerWithBestSmall(
           text: StringRes.bestWindow,

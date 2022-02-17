@@ -16,6 +16,25 @@ class HtmlRes {
       <br/>ул.Тургенева 13 А.
       </div>''';
 
+
+  static const String mapMarkerInfoPhone =
+  '''<div style='float:top; 
+      align:top; 
+     padding-left:70px;
+      padding-top:5px;'>
+      <img src='assets/map/map_marker.png' 
+      width="50px" height="30px" >
+      </div>
+      <div style='float:bottom; 
+      text-align: center;
+      padding-top:5px;'>
+      <b>Строительная компания ENKI</b>
+      <br/>Республика Крым,
+      <br/>г.Симферополь,
+      <br/>ул.Тургенева 13 А.
+      </div>''';
+
+
   static const String mapMarkerAlushta = '''
   <div 
   style='color: black;

@@ -78,20 +78,13 @@ class _ScrollAnimationState extends State<ScrollAnimation>
     final listViewHeight = listViewObject.paintBounds.height;
     final animatedObjectTop =
         animatedBoxObject.getTransformTo(listViewObject).getTranslation().y;
-
-
-
-
-
     final animatedBoxVisible =
         (animatedObjectTop + enterAnimationMinHeight < listViewHeight);
     if (animatedBoxVisible) {
       // start animation
-      Timer(widget.durationStart,(){
+      Timer(widget.durationStart, () {
         _controller.forward();
       });
-
-
     }
   }
 

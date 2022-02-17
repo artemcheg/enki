@@ -38,7 +38,6 @@ class _MainImageState extends State<MainImage> {
             margin: EdgeInsets.only(left: 1, top: screenSize.height * 0.3),
             child: Image.asset(
               'assets/logo1.png',
-              color: Colors.black.withOpacity(0.3),
             )),
 
        SizeWidget.isPhoneScreen(context)&&screenSize.width<350?const SizedBox.shrink():Padding(

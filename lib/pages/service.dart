@@ -18,12 +18,12 @@ class _ServicesState extends State<Services> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.withOpacity(0.1),
       extendBodyBehindAppBar: true,
       drawer: const MyDrawer(),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
+            mainAxisSize:MainAxisSize.max,
             children: [
               Container(
                 decoration: BoxDecoration(
@@ -32,7 +32,10 @@ class _ServicesState extends State<Services> {
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     if (SizeWidget.isSmallScreen(context)) {
-                      return const SmallAppBar();
+                      return const Padding(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: SmallAppBar(),
+                      );
                     } else {
                       return const PrefSizeAppBar(
                         dividerColor: Colors.white54,
@@ -49,30 +52,30 @@ class _ServicesState extends State<Services> {
                 child: StaggeredGrid.count(
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
-                  crossAxisCount: 3,
+                  crossAxisCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:3,
                   children: [
-                    StaggeredGridTile.count(
-                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
+                     StaggeredGridTile.count(
+                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount: 1,
                         child: const MyServiceContainer(
                             assets: 'assets/services/3.jpg',
                             centerText: 'Строительство')),
                     StaggeredGridTile.count(
-                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
-                        crossAxisCellCount: 2,
+                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
+                        crossAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
                         child: const MyServiceContainer(
                           centerText: 'Ремонт и отделка',
                           assets: 'assets/services/2.jpg',
                         )),
                     StaggeredGridTile.count(
-                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
-                        crossAxisCellCount: 2,
+                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
+                        crossAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
                         child: const MyServiceContainer(
                           centerText: 'Дизайн интерьера',
                           assets: 'assets/services/1.jpg',
                         )),
-                    StaggeredGridTile.count(
-                        mainAxisCellCount: !SizeWidget.isLargeScreen(context)?1.5:1,
+                     StaggeredGridTile.count(
+                        mainAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount: 1,
                         child: const MyServiceContainer(
                           centerText: 'Ландшафтный дизайн',
@@ -81,7 +84,8 @@ class _ServicesState extends State<Services> {
                   ],
                 ),
               ),
-              const BottomBar(),
+
+             const BottomBar(),
             ],
           ),
         ),

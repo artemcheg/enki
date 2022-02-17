@@ -21,7 +21,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final List _isHovering = [false];
   final parentKey = GlobalKey();
-  final childKey = GlobalKey();
   final ScrollController _scrollController = ScrollController();
   bool isScrolling = true;
 
@@ -35,6 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: SizeWidget.isSmallScreen(context) ? const MyDrawer() : null,
       body: SafeArea(
         child: Scrollbar(
@@ -97,7 +97,6 @@ class _MainScreenState extends State<MainScreen> {
                     parentKey: parentKey,
                     scrollController: _scrollController,
                     child: Container(
-                        key: childKey,
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 10),
                         child: Flex(
@@ -156,18 +155,11 @@ class _MainScreenState extends State<MainScreen> {
                           ],
                         )),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: InterActiveWidget(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal:SizeWidget.isSmallScreen(context)?0:20),
+                    child: const InterActiveWidget(),
                   ),
-                  // InkWell(
-                  //     onTap: () {},
-                  //     onHover: (value) {
-                  //       setState(() {
-                  //         isScrolling = !value;
-                  //       });
-                  //     },
-                  //     child: myMap(screenSize.width, screenSize.height * 0.6)),
+
                   MouseRegion(
                     onHover: (value){setState(() {
                       isScrolling = false;

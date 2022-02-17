@@ -33,9 +33,9 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
     return Container(
       decoration: BoxDecoration(
           color: Colors.blueGrey.shade100.withOpacity(0.1),
-          image: const DecorationImage(
-              image: AssetImage('assets/arrow.png'),
-              alignment: Alignment.bottomCenter,),
+          // image: const DecorationImage(
+          //     image: AssetImage('assets/arrow.png'),
+          //     alignment: Alignment.bottomCenter,),
           border: Border(
               right: BorderSide(
                   color: Colors.black.withOpacity(0.1)),

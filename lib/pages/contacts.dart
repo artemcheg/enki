@@ -23,7 +23,6 @@ class _ContactsState extends State<Contacts> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown.withOpacity(0.1),
       extendBodyBehindAppBar: true,
       drawer: const MyDrawer(),
       body: SafeArea(
@@ -64,7 +63,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
         physics: isScrolling
             ? const ClampingScrollPhysics()
             : const NeverScrollableScrollPhysics(),
-        child: Column(mainAxisSize: MainAxisSize.max,crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,mainAxisSize: MainAxisSize.min,crossAxisAlignment: CrossAxisAlignment.start, children: [
           Container(
             decoration: BoxDecoration(
               color: Colors.blueGrey.shade900,
@@ -221,7 +220,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
                               onHorizontalDragStart: (d) {setState(() {
                                 isScrolling = false;
                               });},
-                              child: mapContact(screenSize.width*0.8, screenSize.height * 0.7)),
+                              child: mapContact(screenSize.width*0.8, screenSize.height * 0.9)),
                         )),
 
 
@@ -230,7 +229,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
               ),
             ),
           ),
-          const SizedBox(height:200,child: Expanded(child: BottomBar())),
+           const BottomBar(),
         ]),
       ),
     );
@@ -416,7 +415,7 @@ class _ContactsSmallState extends State<ContactsSmall> {
                         onHorizontalDragStart: (d) {setState(() {
                           isScrolling = false;
                         });},
-                        child: mapContact(screenSize.width, screenSize.height * 0.7)),
+                        child: mapContactPhone(screenSize.width, screenSize.height * 0.7)),
                   )),
             ),
             const BottomBar(),
