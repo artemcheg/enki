@@ -1,5 +1,6 @@
 class StringRes {
   static const String phone = '+7 (978) 723 12 40';
+  static const String phoneSecond = '+7 (978) 726 29 99';
   static const String mail = 'info@enki-crimea.com';
   static const String address =
       'Республика Крым,\nг.Симферополь,\nул.Тургенева 13 А.';

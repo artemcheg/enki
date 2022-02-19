@@ -21,14 +21,16 @@ class _MainImageState extends State<MainImage> {
         InteractiveViewer(
           panEnabled: false,
           scaleEnabled: false,
-          child: ScaleAnimation(
-            child: Container(
-              height: screenSize.height,
-              width: screenSize.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: backImage,
-                      fit: BoxFit.cover)),
+          child: RepaintBoundary(
+            child: ScaleAnimation(
+              child: Container(
+                height: screenSize.height,
+                width: screenSize.width,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: backImage,
+                        fit: BoxFit.cover)),
+              ),
             ),
           ),
         ),
@@ -42,13 +44,13 @@ class _MainImageState extends State<MainImage> {
 
        SizeWidget.isPhoneScreen(context)&&screenSize.width<350?const SizedBox.shrink():Padding(
           padding: EdgeInsets.only(
-              left: screenSize.width * 0.04, top: screenSize.height * 0.7),
+              left: screenSize.width * 0.04, top: screenSize.height * 0.75),
           child: TransitionAnimation(
               animTime: const Duration(seconds: 2),
               offset: 2,
               curve: Curves.ease,
               child: Text(
-                'Проектирование, строительство, ремонт и\nдизайн интерьера.',
+                'Cтроительство, ремонт и дизайн интерьера.',
                 style: TextStyle(
                     fontSize: screenSize.height < 350
                         ? 15

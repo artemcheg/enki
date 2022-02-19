@@ -3,273 +3,248 @@ import 'package:web_site/resources/string_res.dart';
 import 'package:web_site/widgets/menu_item.dart';
 import 'package:web_site/widgets/rich_text.dart';
 import 'package:web_site/widgets/small_changes.dart';
+import 'package:web_site/widgets/social_widget.dart';
 import 'SizeWidget.dart';
 
-class PrefSizeAppBar extends StatefulWidget {
-
+class PrefSizeAppBar extends StatelessWidget {
   final Color colorDrawer;
   final Color colorText;
   final List<Shadow>? shadow;
   final Color dividerColor;
+  final Color backGround;
 
-  const PrefSizeAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow = shadowList, this.dividerColor=Colors.black54}) : super(key: key);
-
-  @override
-  _PrefSizeAppBarState createState() => _PrefSizeAppBarState();
-}
-
-class _PrefSizeAppBarState extends State<PrefSizeAppBar> {
-  final List _isHovering = [false, false, false, false, false, false, false];
+  const PrefSizeAppBar({Key? key,
+    this.colorDrawer = Colors.white,
+    this.colorText = Colors.white,
+    this.shadow = shadowList,
+    this.dividerColor = Colors.black54,
+    this.backGround = const Color(
+        0xff263238)})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IntrinsicHeight(
-                child: Row(
+    var screenSize = MediaQuery
+        .of(context)
+        .size;
+    return Container(
+      color: backGround,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IntrinsicHeight(
+                  child: Row(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        child: InkWell(
+                            hoverColor: Colors.grey.withOpacity(0),
+                            onTap: () {
+                              Navigator.pushNamed(context, '/');
+                            },
+                            child: Image.asset(
+                              'assets/logo.png',
+                              width: sizeParam(screenSize.width, 0.1, 100),
+                              height: sizeParam(screenSize.width, 0.03, 50),
+                              color: Colors.amberAccent,
+                            )),
+                      ),
+                      SizedBox(width: screenSize.width * 0.008),
+                      VerticalDivider(
+                        width: 1,
+                        thickness: 1,
+                        indent: 10,
+                        endIndent: 7,
+                        color: dividerColor,
+                      ),
+                      SizedBox(width: screenSize.width * 0.008),
+                      Text(
+                        'Крымская\nстроительная\nкомпания',
+                        style: TextStyle(
+                            color: colorText,
+                            fontSize: 15,
+                            shadows: shadow),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
                   children: [
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 10),
-                      child: InkWell(
-                          hoverColor: Colors.grey.withOpacity(0),
-                          onTap: () {
-                            Navigator.pushNamed(context, '/');
-                          },
-                          child: Image.asset(
-                            'assets/logo.png',
-                            width: sizeParam(screenSize.width, 0.1, 100),
-                            height: sizeParam(screenSize.width, 0.03, 50),
-                            color: Colors.amberAccent,
-                          )),
-                    ),
-                    SizedBox(width: screenSize.width * 0.008),
-                    VerticalDivider(
-                      width: 1,
-                      thickness: 1,
-                      indent: 10,
-                      endIndent: 7,
-                      color: widget.dividerColor,
-                    ),
-                    SizedBox(width: screenSize.width * 0.008),
-                     Text(
-                      'Крымская\nстроительная\nкомпания',
+                    Text(
+                      'Мы в социальных сетях:',
                       style: TextStyle(
-                          color: widget.colorText,
-                          fontSize: 14,
-                          shadows: widget.shadow),
+                          color: colorText,
+                          shadows: shadow,
+                          fontSize: 15),
                     ),
+                    const SocialWidget(),
                   ],
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.phone,
-                        color: Colors.amberAccent,
-                        size: sizeParam(screenSize.width, 0.01, 20),
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      MyRichText(
-                        colorText: widget.colorText,
-                        text: StringRes.phone,
-                        sizeParam: 14,
-                        what: 'tel:${StringRes.phone}',
-                        shadow: widget.shadow,
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: screenSize.width * 0.0015,
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.mail_rounded,
-                        size: sizeParam(screenSize.width, 0.01, 20),
-                        color: Colors.amberAccent,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      MyRichText(
-                        colorText: widget.colorText,
-                        text: StringRes.mail,
-                        shadow: widget.shadow,
-                        sizeParam: 14,
-                        what: 'mailto:${StringRes.mail}',
-                      )
-                    ],
-                  )
-                ],
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.phone_forwarded,
-                    color: Colors.amberAccent,
-                    size: sizeParam(screenSize.width, 0.01, 20),
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                       Text(
-                        'Нужна консультация?',
-                        style: TextStyle(
-                            color: widget.colorText,
-                            fontSize: 14,
-                            shadows: widget.shadow),
-                      ),
-                       Text('Мы перезвоним!',
-                          style: TextStyle(
-                              color: widget.colorText,
-                              fontSize: 14,
-                              shadows: widget.shadow)),
-                      InkWell(
-                        hoverColor: Colors.grey.withOpacity(0),
-                        onHover: (value) {
-                          setState(() {
-                            _isHovering[6] = value;
-                          });
-                        },
-                        onTap: () {},
-                        child: Column(
-                          children: [
-                            const Text('Заказать обратный звонок',
-                                style: TextStyle(
-                                  color: Color(0XFF52B060),
-                                  fontSize: 14,
-                                )),
-                            AnimatedContainer(
-                              color: Colors.red,
-                              duration: const Duration(
-                                milliseconds: 100,
-                              ),
-                              child: SizedBox(
-                                height: 2,
-                                width: screenSize.width * 0.1,
-                              ),
-                              width: _isHovering[6] ? 50 : 215,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: screenSize.height * 0.05,
-          ),
-          SizeWidget.isSmallScreen(context)
-              ? const SizedBox.shrink()
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    MenuItem(
-                      route: '/',
-                      colorText: widget.colorText,
-                      text: 'ГЛАВНАЯ',
-                      shadow: widget.shadow,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.amberAccent,
+                          size: sizeParam(screenSize.width, 0.01, 20),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        MyRichText(
+                          colorText: colorText,
+                          text: StringRes.phone,
+                          sizeParam: 15,
+                          what: 'tel:${StringRes.phone}',
+                          shadow: shadow,
+                        )
+                      ],
                     ),
-                    MenuItem(
-                      route: '/services',
-                     colorText: widget.colorText,
-                      text: 'УСЛУГИ',
-                      shadow: widget.shadow,
+                    const SizedBox(
+                      height: 5,
                     ),
-                    MenuItem(
-                      route:'/',
-                      colorText: widget.colorText,
-                      text: 'НАШИ ПРОЕКТЫ',
-                      shadow: widget.shadow,
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.amberAccent,
+                          size: sizeParam(screenSize.width, 0.01, 20),
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        MyRichText(
+                          colorText: colorText,
+                          text: StringRes.phoneSecond,
+                          sizeParam: 15,
+                          what: 'tel:${StringRes.phoneSecond}',
+                          shadow: shadow,
+                        )
+                      ],
                     ),
-                    MenuItem(
-                      route:'/contacts',
-                      colorText: widget.colorText,
-                      text: 'КОНТАКТЫ',
-                      shadow: widget.shadow,
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.mail_rounded,
+                          size: sizeParam(screenSize.width, 0.01, 20),
+                          color: Colors.amberAccent,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        MyRichText(
+                          colorText: colorText,
+                          text: StringRes.mail,
+                          shadow: shadow,
+                          sizeParam: 15,
+                          what: 'mailto:${StringRes.mail}',
+                        )
+                      ],
                     )
                   ],
                 ),
-          SizeWidget.isSmallScreen(context)
-              ? Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        'МЕНЮ',
-                        style:
-                            TextStyle(color: widget.colorDrawer, shadows: widget.shadow),
-                      ),
-                    ),
-                    IconButton(
-                      hoverColor: Colors.white.withOpacity(0),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                      icon: const Icon(Icons.view_headline_sharp),
-                      color: widget.colorDrawer,
-                    ),
-                  ],
+              ],
+            ),
+            const SizedBox(height: 30,),
+            SizeWidget.isSmallScreen(context)
+                ? const SizedBox.shrink()
+                : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                MenuItem(
+                  route: '/',
+                  colorText: colorText,
+                  text: 'ГЛАВНАЯ',
+                  shadow: shadow,
+                ),
+                MenuItem(
+                  route: '/services',
+                  colorText: colorText,
+                  text: 'УСЛУГИ',
+                  shadow: shadow,
+                ),
+                MenuItem(
+                  route: '/',
+                  colorText: colorText,
+                  text: 'НАШИ ПРОЕКТЫ',
+                  shadow: shadow,
+                ),
+                MenuItem(
+                  route: '/contacts',
+                  colorText: colorText,
+                  text: 'КОНТАКТЫ',
+                  shadow: shadow,
                 )
-              : const SizedBox.shrink(),
-        ],
+              ],
+            ),
+            SizeWidget.isSmallScreen(context)
+                ? Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    'МЕНЮ',
+                    style: TextStyle(
+                        color: colorDrawer, shadows: shadow),
+                  ),
+                ),
+                IconButton(
+                  hoverColor: Colors.white.withOpacity(0),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                  icon: const Icon(Icons.view_headline_sharp),
+                  color: colorDrawer,
+                ),
+              ],
+            )
+                : const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
 }
 
-class SmallAppBar extends StatefulWidget {
+
+class SmallAppBar extends StatelessWidget {
   final Color colorDrawer;
   final Color colorText;
   final List<Shadow>? shadow;
-  const SmallAppBar({Key? key,this.colorDrawer = Colors.white, this.colorText = Colors.white, this.shadow}) : super(key: key);
+  final Color backGround;
 
-  @override
-  _SmallAppBarState createState() => _SmallAppBarState();
-}
-
-class _SmallAppBarState extends State<SmallAppBar> {
-  final List _isHovering = [false, false, false];
+  const SmallAppBar({Key? key,
+    this.colorDrawer = Colors.white,
+    this.colorText = Colors.white,
+    this.shadow, this.backGround = const Color(
+        0xff263238) })
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    return Column(
-      // crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
+    return Container(
+        color: backGround,
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: IconButton(
-                hoverColor: Colors.white.withOpacity(0),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-                icon: const Icon(Icons.view_headline_sharp),
-                color: widget.colorDrawer,
-              ),
+            IconButton(
+              hoverColor: Colors.white.withOpacity(0),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+              icon: const Icon(Icons.view_headline_sharp),
+              color: colorDrawer,
             ),
             Container(
                 margin: const EdgeInsets.only(bottom: 20),
@@ -279,146 +254,9 @@ class _SmallAppBarState extends State<SmallAppBar> {
                   width: 200,
                   height: 100,
                 )),
-            const SizedBox.shrink(),
+            const SizedBox.shrink()
           ],
-        ),
-
-        Flex(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          direction: screenSize.height < 360 ? Axis.horizontal : Axis.vertical,
-          children: [
-            Flex(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              direction:
-                  SizeWidget.isSmallScreen(context) ? Axis.vertical : Axis.horizontal,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Icon(
-                      Icons.phone,
-                      color: Colors.amberAccent,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    MyRichText(
-                      shadow: widget.shadow,
-                      colorText: widget.colorText,
-                      text: StringRes.phone,
-                      sizeParam: 13,
-                      what: 'tel:${StringRes.phone}',
-                    ),
-                    const SizedBox(
-                      width: 70,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Icon(
-                      Icons.mail_rounded,
-                      color: Colors.amberAccent,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    MyRichText(
-                      shadow: widget.shadow,
-                      colorText: widget.colorText,
-                      text: StringRes.mail,
-                      sizeParam: 13,
-                      what: 'mailto:${StringRes.mail}',
-                    ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                const Icon(
-                  Icons.phone_forwarded,
-                  color: Colors.amberAccent,
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                     Text(
-                      'Нужна консультация?',
-                      style: TextStyle(
-                          fontSize: 13,
-                          color: widget.colorText,
-                          shadows: widget.shadow),
-                    ),
-                    Text('Мы перезвоним!',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: widget.colorText,
-                          shadows: widget.shadow,
-                        )),
-                    InkWell(
-                      hoverColor: Colors.transparent,
-                      splashColor: Colors.transparent,
-                      onHover: (value) {
-                        setState(() {
-                          _isHovering[2] = value;
-                        });
-                      },
-                      onTap: () {},
-                      child: Column(
-                        children: [
-                          const Text('Заказать обратный звонок',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0XFF52B060),
-                              )),
-                          AnimatedContainer(
-                            color: Colors.red,
-                            duration: const Duration(
-                              milliseconds: 100,
-                            ),
-                            child: SizedBox(
-                              height: 2,
-                              width: screenSize.width * 0.2,
-                            ),
-                            width: _isHovering[2] ? 50 : 200,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-              ],
-            ),
-          ],
-        ),
-        // const SizedBox(
-        //   height: 20,
-        // ),
-        //
-        // const SizedBox(
-        //   height: 20,
-        // ),
-      ],
-    );
+        ));
   }
 }
+

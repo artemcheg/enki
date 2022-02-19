@@ -22,6 +22,7 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
   bool selected = false;
   bool isHovering = false;
 
+
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -37,100 +38,106 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: InkWell(
-          hoverColor: Colors.transparent,
-          onTap: () {},
-          onHover: (value) {
-            setState(() {
-              isHovering = value;
-            });
-          },
-          child: Stack(
-            children: [
-              InteractiveViewer(
-                panEnabled: false,
-                scaleEnabled: false,
-                child: ScaledContainer(
-                  start: isHovering,
-                  child: Container(
-                    alignment: Alignment.bottomRight,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(widget.assets),
-                            fit: BoxFit.cover)),
-                  ),
-                ),
-              ),
-              TransitionAnimationContainer(
-                forward: isHovering,
-                child: Container(
-                  decoration:
-                      BoxDecoration(color: Colors.black12.withOpacity(0.4)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: AnimatedAlign(
-                  alignment: isHovering?Alignment.center:Alignment.bottomLeft,
-                  duration: const Duration(milliseconds: 400),
-                  child: Text(
-                    widget.centerText,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeParam(screenSize.width, 0.015, 12)),
-                  ),
-                ),
-              ),
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  InkWell(
-                    onTap: (){},
-                    onHover: (value){setState(() {
-                      selected=value;
-                    });},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'ПОДРОБНЕЕ',
-                          style: TextStyle(
-                              color: selected
-                                  ? const Color(0XFF52B060)
-                                  : Colors.white,
-                              fontSize:
-                              SizeWidget.isSmallScreen(context)?8:SizeWidget.isMediumScreen(context)?10:15),
-                        ),
-                        Icon(Icons.arrow_forward,color:  selected
-                            ? const Color(0XFF52B060)
-                            : Colors.white,)
-                      ],
+      child: RepaintBoundary(
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+          child: InkWell(
+            hoverColor: Colors.transparent,
+            onTap: () {},
+            onHover: (value) {
+              setState(() {
+                isHovering = value;
+              });
+            },
+            child: Stack(
+              children: [
+                InteractiveViewer(
+                  panEnabled: false,
+                  scaleEnabled: false,
+                  child: RepaintBoundary(
+                    child: ScaledContainer(
+                      start: isHovering,
+                      child: Container(
+                        alignment: Alignment.bottomRight,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(widget.assets),
+                                fit: BoxFit.cover)),
+                      ),
                     ),
                   ),
-                  AnimatedContainer(
-                    color: Colors.red,
-                    duration: const Duration(
-                      milliseconds: 100,
+                ),
+                RepaintBoundary(
+                  child: TransitionAnimationContainer(
+                    forward: isHovering,
+                    child: Container(
+                      decoration:
+                          BoxDecoration(color: Colors.black12.withOpacity(0.4)),
                     ),
-                    child: const SizedBox(
-                      height: 2,
-                      width: 130,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: AnimatedAlign(
+                    alignment: isHovering?Alignment.center:Alignment.bottomLeft,
+                    duration: const Duration(milliseconds: 400),
+                    child: Text(
+                      widget.centerText,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: sizeParam(screenSize.width, 0.015, 12)),
                     ),
-                    width: selected ? 20 : SizeWidget.isSmallScreen(context)?78:SizeWidget.isMediumScreen(context)?92:128,
-                  )
-                ],
+                  ),
+                ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: (){},
+                      onHover: (value){setState(() {
+                        selected=value;
+                      });},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'ПОДРОБНЕЕ',
+                            style: TextStyle(
+                                color: selected
+                                    ? const Color(0XFF52B060)
+                                    : Colors.white,
+                                fontSize:
+                                SizeWidget.isSmallScreen(context)?8:SizeWidget.isMediumScreen(context)?10:15),
+                          ),
+                          Icon(Icons.arrow_forward,color:  selected
+                              ? const Color(0XFF52B060)
+                              : Colors.white,)
+                        ],
+                      ),
+                    ),
+                    AnimatedContainer(
+                      color: Colors.red,
+                      duration: const Duration(
+                        milliseconds: 100,
+                      ),
+                      child: const SizedBox(
+                        height: 2,
+                        width: 130,
+                      ),
+                      width: selected ? 20 : SizeWidget.isSmallScreen(context)?78:SizeWidget.isMediumScreen(context)?92:128,
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -52,4 +52,8 @@ class HtmlRes {
   float:top; 
   border-radius: 10px;'></div>
   ''';
+
 }
+
+
+

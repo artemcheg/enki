@@ -15,7 +15,7 @@ class ContainerWithBest extends StatelessWidget {
         ? Positioned(
       left: 200,
       child: FadeAnimation(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         child: Container(
           decoration:  BoxDecoration(color: Colors.white.withOpacity(0.5)),
           width: width,
@@ -43,21 +43,23 @@ class ContainerWithBestSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return show
-        ? FadeAnimation(
-          child: Container(
-            height: height,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                text,
-                style: const TextStyle(fontSize: 50),
-                textAlign: TextAlign.center,
+    return RepaintBoundary(
+      child: show
+          ? FadeAnimation(
+            child: SizedBox(
+              height: height,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  text,
+                  style: const TextStyle(fontSize: 50),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-        )
-        : const SizedBox.shrink();
+          )
+          : const SizedBox.shrink(),
+    );
   }
 }
 
@@ -75,17 +77,19 @@ class PositionedIcon extends StatefulWidget {
 class _PositionedIconState extends State<PositionedIcon> {
   @override
   Widget build(BuildContext context) {
-    return AvatarGlow(
-        endRadius: 50,
-        glowColor: Colors.white,
-        duration: const Duration(seconds: 3),
-        repeat: true,
-        showTwoGlows: true,
-        curve: Curves.easeOutQuart,
-        child: Icon(
-          Icons.add_circle,
-          color: widget.isHovering ? const Color(0XFF52B060) : Colors.white,
-          size: 50,
-        ));
+    return RepaintBoundary(
+      child: AvatarGlow(
+          endRadius: 50,
+          glowColor: Colors.white,
+          duration: const Duration(seconds: 3),
+          repeat: true,
+          showTwoGlows: true,
+          curve: Curves.easeOutQuart,
+          child: Icon(
+            Icons.add_circle,
+            color: widget.isHovering ? const Color(0XFF52B060) : Colors.white,
+            size: 50,
+          )),
+    );
   }
 }

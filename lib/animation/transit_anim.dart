@@ -11,7 +11,7 @@ class TransitionAnimation extends StatefulWidget {
   final Direct direct;
   final Duration durationStart;
   final Duration animTime;
-  final bool forward;
+
 
   const TransitionAnimation({
     required this.child,
@@ -21,7 +21,6 @@ class TransitionAnimation extends StatefulWidget {
     this.durationStart = const Duration(seconds: 0),
     this.animTime = const Duration(milliseconds: 800),
     Key? key,
-    this.forward = true,
   }) : super(key: key);
 
   @override
@@ -32,7 +31,6 @@ class _TransitionAnimationState extends State<TransitionAnimation>
     with SingleTickerProviderStateMixin {
   late Animation<Offset> _animationSlide;
   late AnimationController _controller;
-
   late Animation<double> _animationFade;
 
   @override
@@ -67,11 +65,13 @@ class _TransitionAnimationState extends State<TransitionAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _animationFade,
-      child: SlideTransition(
-        position: _animationSlide,
-        child: widget.child,
+    return RepaintBoundary(
+      child: FadeTransition(
+        opacity: _animationFade,
+        child: SlideTransition(
+          position: _animationSlide,
+          child: widget.child,
+        ),
       ),
     );
   }
@@ -146,14 +146,11 @@ class _TransitionAnimationContainerState extends State<TransitionAnimationContai
     }else{
       _controller.forward();
     }
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
-      child: FadeTransition(
-        opacity: _animationFade,
-        child: SlideTransition(
-          position:_animationSlide,
-          child: widget.child,
-        ),
+    return FadeTransition(
+      opacity: _animationFade,
+      child: SlideTransition(
+        position:_animationSlide,
+        child: widget.child,
       ),
     );
   }

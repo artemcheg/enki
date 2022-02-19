@@ -90,12 +90,14 @@ class _ScrollAnimationState extends State<ScrollAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      key: childKey,
-      opacity: _animationFade,
-      child: SlideTransition(
-        position: _animationSlide,
-        child: widget.child,
+    return RepaintBoundary(
+      child: FadeTransition(
+        key: childKey,
+        opacity: _animationFade,
+        child: SlideTransition(
+          position: _animationSlide,
+          child: widget.child,
+        ),
       ),
     );
   }

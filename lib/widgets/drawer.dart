@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:web_site/widgets/rich_text.dart';
+import 'package:web_site/widgets/social_widget.dart';
+import '../resources/string_res.dart';
 
 class MyDrawer extends StatefulWidget {
   const MyDrawer({Key? key}) : super(key: key);
@@ -15,7 +18,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 700,
+      width: 800,
       child: Drawer(
           backgroundColor: Colors.blueGrey.shade900,
           child: Center(
@@ -114,6 +117,76 @@ class _MyDrawerState extends State<MyDrawer> {
                       style: _isHovering[5] ? styleOn : styleOff,
                     ),
                   ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.phone,
+                        color: Colors.amberAccent,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      MyRichText(
+                        colorText: Colors.white,
+                        text: StringRes.phone,
+                        sizeParam: 15,
+                        what: 'tel:${StringRes.phone}',
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.phone,
+                        color: Colors.amberAccent,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      MyRichText(
+                        colorText: Colors.white,
+                        text: StringRes.phone,
+                        sizeParam: 15,
+                        what: 'tel:${StringRes.phone}',
+                      )
+                    ],
+                  ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.mail_rounded,
+                        size: 20,
+                        color: Colors.amberAccent,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      MyRichText(
+                        colorText: Colors.white,
+                        text: StringRes.mail,
+                        sizeParam: 15,
+                        what: 'mailto:${StringRes.mail}',
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const SocialWidget()
                 ],
               ),
             ),

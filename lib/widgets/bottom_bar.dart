@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:web_site/widgets/rich_text.dart';
+import 'package:web_site/widgets/social_widget.dart';
 import '../resources/string_res.dart';
 import 'SizeWidget.dart';
 
@@ -71,7 +71,7 @@ class _BottomBarState extends State<BottomBar> {
                         children: [
                           const Icon(
                             Icons.phone,
-                            color: Colors.white,
+                            color: Colors.amberAccent,
                           ),
                           MyRichText(
                             text: StringRes.phone,
@@ -87,8 +87,25 @@ class _BottomBarState extends State<BottomBar> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
+                            Icons.phone,
+                            color: Colors.amberAccent,
+                          ),
+                          MyRichText(
+                            text: StringRes.phoneSecond,
+                            sizeParam: sizeParam(screenSize.width, 0.007, 10),
+                            what: 'tel:${StringRes.phoneSecond}',
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
                             Icons.mail_rounded,
-                            color: Colors.white,
+                            color: Colors.amberAccent,
                           ),
                           MyRichText(
                             text: StringRes.mail,
@@ -117,7 +134,7 @@ class _BottomBarState extends State<BottomBar> {
                         children: [
                           const Icon(
                             Icons.location_on,
-                            color: Colors.white,
+                            color: Colors.red,
                           ),
                           MyRichText(
                             maxLines: 3,
@@ -149,28 +166,7 @@ class _BottomBarState extends State<BottomBar> {
                       color: Colors.white,
                       fontSize: sizeParam(screenSize.width, 0.008, 10)),
                 ),
-                InkWell(
-                    hoverColor: Colors.grey.withOpacity(0),
-                    onTap: () async {
-                      launch(
-                        'https://www.instagram.com/enki.crimea/',
-                      );
-                    },
-                    child: Image.asset(
-                      'assets/social/insta.png',
-                      scale: 60,
-                    )),
-                InkWell(
-                    hoverColor: Colors.grey.withOpacity(0),
-                    onTap: () async {
-                      launch(
-                        'https://vk.com/enki.crimea',
-                      );
-                    },
-                    child: Image.asset(
-                      'assets/social/vk.png',
-                      scale: 60,
-                    )),
+                const SocialWidget()
               ],
             ),
           )

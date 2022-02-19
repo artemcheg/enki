@@ -1,9 +1,8 @@
-import 'dart:html';
+import 'dart:html' as html;
 import 'dart:js_util';
 import 'package:flutter/material.dart';
 import 'package:google_maps/google_maps.dart' as gmap;
 import 'dart:ui' as ui;
-import '../resources/html_res.dart';
 
 Widget myMap(width, height) {
   String htmlId = "7";
@@ -16,32 +15,31 @@ Widget myMap(width, height) {
       ..minZoom = 9
       ..maxZoom = 12
       ..mapTypeControlOptions = (gmap.MapTypeControlOptions()
-      ..mapTypeIds = [gmap.MapTypeId.ROADMAP,myMapTypeId])
+        ..mapTypeIds = [gmap.MapTypeId.ROADMAP, myMapTypeId])
       ..mapTypeId = myMapTypeId
       ..center = latLng;
 
-
-    final elem = DivElement()
+    final elem = html.DivElement()
       ..id = htmlId
       ..style.width = "100%"
       ..style.height = "100%";
     final map = gmap.GMap(elem, mapOptions);
-    final styledMapTypeOptions = gmap.StyledMapTypeOptions()..name = 'Выполненые объекты';
-    final customMapType = gmap.StyledMapType(roadAtlasStyles, styledMapTypeOptions);
+    final styledMapTypeOptions = gmap.StyledMapTypeOptions()
+      ..name = 'Выполненые объекты';
+    final customMapType =
+        gmap.StyledMapType(_roadAtlasStyles, styledMapTypeOptions);
     map.mapTypes!.set(myMapTypeId, customMapType);
 
-
-    final marker = gmap.Marker(gmap.MarkerOptions()
+    final markerAlushta = gmap.Marker(gmap.MarkerOptions()
       ..position = gmap.LatLng(44.675790804298124, 34.41000774576945)
       ..map = map
       ..clickable = true
       ..title = 'Алушта');
 
-    final infowindow = gmap.InfoWindow(
-        gmap.InfoWindowOptions()
-          ..content = HtmlRes.mapMarkerAlushta);
-    marker.onClick.listen((event) {
-      infowindow.open(map, marker);
+    final infoWindow = gmap.InfoWindow(gmap.InfoWindowOptions()
+      ..content =_markers('Отделка в Алуште', '150m2', 'alushta.jpg'));
+    markerAlushta.onClick.listen((event) {
+      infoWindow.open(map, markerAlushta);
     });
 
     final marker2 = gmap.Marker(gmap.MarkerOptions()
@@ -61,10 +59,6 @@ Widget myMap(width, height) {
       ..map = map
       ..clickable = true
       ..title = 'Бельбек');
-
-
-
-
     return elem;
   });
 
@@ -74,26 +68,48 @@ Widget myMap(width, height) {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.black,
-        boxShadow:  [
+        boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.5),
             spreadRadius: 5,
             blurRadius: 10,
-            offset: const Offset(
-                0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
-        ],),
+        ],
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child:HtmlElementView(viewType: htmlId),
+        child: HtmlElementView(viewType: htmlId),
       ));
 }
 
-final roadAtlasStyles = <gmap.MapTypeStyle>[
+String _markers(String textWhat,String textMetres,String assets){
+  String mapMarkerAlushta = '''
+  <div 
+  style='color: black;
+   margin: 1px;
+   float:top;
+   padding-top:5px;
+   text-align:center;'><b>$textWhat<br/>$textMetres</b>
+   </div>
+   
+  <div 
+  style='background-image:url("./assets/map/$assets");
+  background-repeat: no-repeat; 
+  height:150px; width:120px; 
+  background-size: 100%; 
+  float:top; 
+  margin-left: auto; 
+  border-radius: 10px;'></div>
+  ''';
+  return mapMarkerAlushta;
+}
+
+final _roadAtlasStyles = <gmap.MapTypeStyle>[
   gmap.MapTypeStyle()
     ..elementType = 'geometry'
     ..stylers = [
-      jsify({'color': '#f5f5f5'}),
+      jsify({'color': '#ffedd8'}),
     ],
   gmap.MapTypeStyle()
     ..elementType = 'labels.icon'
@@ -128,46 +144,11 @@ final roadAtlasStyles = <gmap.MapTypeStyle>[
     ..stylers = [
       jsify({'color': '#bdbdbd'}),
     ],
-  // gmap.MapTypeStyle()
-  //   ..elementType = 'poi'
-  //   ..stylers = [
-  //     jsify({'visibility': 'off'}),
-  //   ],
-  // gmap.MapTypeStyle()
-  //   ..elementType = 'geometry'
-  //   ..featureType = "poi"
-  //   ..stylers = [
-  //     jsify({'color': '#eeeeee'}),
-  //   ],
-  // gmap.MapTypeStyle()
-  //   ..featureType = 'poi'
-  //   ..elementType = 'labels.text'
-  //   ..stylers = [
-  //     jsify({'visibility': 'off'}),
-  //   ],
-  // gmap.MapTypeStyle()
-  //   ..elementType = 'labels.text.fill'
-  //   ..featureType = "poi"
-  //   ..stylers = [
-  //     jsify({'color': '#757575'}),
-  //   ],
-  // gmap.MapTypeStyle()
-  //   ..elementType = 'geometry'
-  //   ..featureType = "poi.park"
-  //   ..stylers = [
-  //     jsify({'color': '#e5e5e5'}),
-  //   ],
-  // gmap.MapTypeStyle()
-  //   ..featureType = "poi.park"
-  //   ..elementType = 'labels.text.fill'
-  //   ..stylers = [
-  //     jsify({'color': '#9e9e9e'}),
-  //   ],
   gmap.MapTypeStyle()
     ..featureType = "road"
     ..elementType = 'geometry'
     ..stylers = [
-      jsify({'color': '#ffffff'}),
+      jsify({'color': '#9b26'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = 'road'
@@ -178,19 +159,19 @@ final roadAtlasStyles = <gmap.MapTypeStyle>[
   gmap.MapTypeStyle()
     ..featureType = 'road.arterial'
     ..stylers = [
-      jsify({'visibility': 'off'}),
+      jsify({'color': '#ddb892'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = "road.arterial"
     ..elementType = 'labels.text.fill'
     ..stylers = [
-      jsify({'color': '#757575'}),
+      jsify({'color': '#faedcd'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = "road.highway"
     ..elementType = 'geometry'
     ..stylers = [
-      jsify({'color': '#dadada'}),
+      jsify({'color': '#ddb892'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = 'road.highway'
@@ -207,7 +188,7 @@ final roadAtlasStyles = <gmap.MapTypeStyle>[
   gmap.MapTypeStyle()
     ..featureType = 'road.local'
     ..stylers = [
-      jsify({'visibility': 'off'}),
+      jsify({'color': '#faedcd'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = 'road.local'
@@ -242,7 +223,7 @@ final roadAtlasStyles = <gmap.MapTypeStyle>[
     ..featureType = "water"
     ..elementType = 'geometry'
     ..stylers = [
-      jsify({'color': '#c9c9c9'}),
+      jsify({'color': '#d6e2e9'}),
     ],
   gmap.MapTypeStyle()
     ..featureType = "water"
