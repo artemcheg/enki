@@ -16,17 +16,14 @@ class Services extends StatelessWidget {
       extendBodyBehindAppBar: true,
       drawer: const MyDrawer(),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
+        child: ListView(
             // mainAxisSize:MainAxisSize.max,
             children: [
-
               SizeWidget.isPhoneScreen(context)
                   ? const SmallAppBar()
                   : const PrefSizeAppBar(
                 dividerColor: Colors.white54,
               ),
-
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: StaggeredGrid.count(
@@ -38,12 +35,14 @@ class Services extends StatelessWidget {
                         mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount: 1,
                         child: const MyServiceContainer(
+                          route: '/serviceInfoBuild',
                             assets: 'assets/services/3.jpg',
                             centerText: 'Строительство')),
                     StaggeredGridTile.count(
                         mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
                         child: const MyServiceContainer(
+                          route: '/serviceInfoRemont',
                           centerText: 'Ремонт и отделка',
                           assets: 'assets/services/1.jpg',
                         )),
@@ -51,6 +50,7 @@ class Services extends StatelessWidget {
                         mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
                         child: const MyServiceContainer(
+                          route: '/serviceInfoInterier',
                           centerText: 'Дизайн интерьера',
                           assets: 'assets/services/2.jpg',
                         )),
@@ -58,6 +58,7 @@ class Services extends StatelessWidget {
                         mainAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
                         crossAxisCellCount: 1,
                         child: const MyServiceContainer(
+                          route: '/serviceInfoLandshaft',
                           centerText: 'Ландшафтный дизайн',
                           assets: 'assets/services/4.jpg',
                         )),
@@ -69,7 +70,7 @@ class Services extends StatelessWidget {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

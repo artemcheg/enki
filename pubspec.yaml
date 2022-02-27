@@ -71,6 +71,7 @@ flutter:
     - assets/carousel/
     - assets/map/
     - assets/services/
+    - assets/interactive/
 
   fonts:
     - family: Comfortaa

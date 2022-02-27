@@ -20,7 +20,8 @@ class _BottomBarState extends State<BottomBar> {
     var screenSize = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.blueGrey.shade900,
+      color: const Color(
+          0xff263238),
       child: Column(
         children: [
           Padding(

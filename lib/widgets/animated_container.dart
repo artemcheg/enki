@@ -4,14 +4,16 @@ import 'package:web_site/animation/transit_anim.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
 
 
+
 class MyServiceContainer extends StatefulWidget {
   final String assets;
   final String centerText;
+  final String route;
 
   const MyServiceContainer({
     Key? key,
     required this.assets,
-    required this.centerText,
+    required this.centerText, required this.route,
   }) : super(key: key);
 
   @override
@@ -43,7 +45,11 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: InkWell(
             hoverColor: Colors.transparent,
-            onTap: () {},
+            onTap: () {
+                Navigator.pushNamed(
+                  context,widget.route
+                );
+             },
             onHover: (value) {
               setState(() {
                 isHovering = value;
@@ -97,7 +103,11 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     InkWell(
-                      onTap: (){},
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context,widget.route
+                        );
+                      },
                       onHover: (value){setState(() {
                         selected=value;
                       });},

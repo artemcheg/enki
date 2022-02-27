@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:web_site/animation/scroll_animation.dart';
 
-import 'SizeWidget.dart';
+import '../../widgets/SizeWidget.dart';
 
 class TextInfoWidget extends StatefulWidget {
   final String text1;
