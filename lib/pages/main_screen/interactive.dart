@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
 import 'package:web_site/pages/main_screen/positionItem.dart';
 
@@ -107,57 +110,180 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
   ];
 
   List<Item> itemsFourth = [
-    const Item(
-      top: 50,
-      left: 515,
-      text: 'Монтаж оконных блоков',
-      index: 0),
-    const Item(
-        top: 600,
-        left: 515,
-        text: 'Закладка стен',
-        index: 1),
+    const Item(top: 50, left: 515, text: 'Монтаж оконных блоков', index: 0),
+    const Item(top: 600, left: 515, text: 'Закладка стен', index: 1),
     const Item(
         top: 245,
         right: 500,
         text: 'Железобетонные конструкции любой сложности',
         index: 2),
   ];
+  final PageController _controller = PageController();
+  double i = 0;
+
+  @override
+  void initState() {
+    if (_controller.hasClients) {
+      i = _controller.page!;
+    } else {
+      i = 0;
+    }
+    super.initState();
+  }
+
+  bool previous = false;
+  bool next = false;
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Text('Наши преимущества:',style: TextStyle(fontSize: 35,fontWeight: FontWeight.w600),),
-        const SizedBox(height: 20,),
-        GridView.count(
-            crossAxisCount: SizeWidget.isSmallScreen(context) ? 1 : 2,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            childAspectRatio: 1.7,
-            children: [
-              InteractiveItem(
-                assets: assets[0],
-                listPos: itemsFirst,
-              ),
-              InteractiveItem(
-                assets: assets[1],
-                listPos: itemsSecond,
-              ),
-              InteractiveItem(
-                assets: assets[2],
-                listPos: itemsThird,
-              ),
-              InteractiveItem(
-                assets: assets[3],
-                listPos: itemsFourth,
-              ),
-            ]),
+        Text(
+          'Наши преимущества:',
+          style: TextStyle(
+              fontSize: SizeWidget.isSmallScreen(context) ? 20 : 35,
+              fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Stack(
+          children: [
+            SizedBox(
+              height: SizeWidget.isLargeScreen(context)
+                  ? width * 0.4
+                  : width * 0.58,
+              width: width,
+              child: PageView(
+                  scrollBehavior:
+                      MyCustomScrollBehavior().copyWith(scrollbars: false),
+                  controller: _controller,
+                  clipBehavior: Clip.none,
+                  children: [
+                    InteractiveItem(
+                      assets: assets[0],
+                      listPos: itemsFirst,
+                    ),
+                    InteractiveItem(
+                      assets: assets[1],
+                      listPos: itemsSecond,
+                    ),
+                    InteractiveItem(
+                      assets: assets[2],
+                      listPos: itemsThird,
+                    ),
+                    InteractiveItem(
+                      assets: assets[3],
+                      listPos: itemsFourth,
+                    ),
+                  ]),
+            ),
+            SizeWidget.isLargeScreen(context)
+                ? Positioned(
+                    top: width * 0.35 / 2,
+                    left: width * 0.05,
+                    child: InkWell(
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        _controller.previousPage(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeIn);
+
+                      },
+                      onHover: (value) {
+                        setState(() {
+                          previous = value;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: previous
+                                  ? const Color(0XFF52B060)
+                                  : Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 8, top: 8, bottom: 8),
+                          child: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            size: 70,
+                            color: previous
+                                ? const Color(0XFF52B060)
+                                : Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            SizeWidget.isLargeScreen(context)
+                ? Positioned(
+                    top: width * 0.35 / 2,
+                    right: width * 0.05,
+                    child: InkWell(
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      splashColor: Colors.transparent,
+                      onTap: () {
+                        _controller.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn);
+                      },
+                      onHover: (value) {
+                        setState(() {
+                          next = value;
+                        });
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color:
+                                  next ? const Color(0XFF52B060) : Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                          child: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 70,
+                            color:
+                                next ? const Color(0XFF52B060) : Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: InkWell(
+            highlightColor:Colors.transparent,
+            hoverColor:Colors.transparent ,
+            splashColor: Colors.transparent,
+            onTap: (){},
+            child: SmoothPageIndicator(
+              effect: const WormEffect(activeDotColor: Color(0XFF52B060)),
+              controller: _controller,
+              count: 4,
+              onDotClicked: (page) {
+                _controller.animateToPage(page,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeIn);
+              },
+            ),
+          ),
+        )
       ],
     );
   }
@@ -175,7 +301,7 @@ class InteractiveItem extends StatefulWidget {
 }
 
 class _InteractiveItemState extends State<InteractiveItem> {
-  final List<bool> isHovering = [true, false, false, false, false, false];
+  final List<bool> isHovering = [true, false, false, false, false];
   late String text;
 
   @override
@@ -190,7 +316,7 @@ class _InteractiveItemState extends State<InteractiveItem> {
       child: Stack(children: [
         Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(40),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.5),
@@ -201,7 +327,7 @@ class _InteractiveItemState extends State<InteractiveItem> {
               ],
             ),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(40),
                 child: Image.asset(
                   widget.assets,
                   fit: BoxFit.contain,
@@ -263,7 +389,8 @@ class _InteractiveItemState extends State<InteractiveItem> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   text,
-                  style: const TextStyle(fontSize: 50),
+                  style: TextStyle(
+                      fontSize: SizeWidget.isSmallScreen(context) ? 70 : 50),
                 ),
               ),
             ),
@@ -299,4 +426,15 @@ void changeHover(List<bool> isHovering, int index) {
       isHovering[i] = false;
     }
   }
+}
+
+class MyCustomScrollBehavior extends ScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        PointerDeviceKind.invertedStylus,
+        PointerDeviceKind.stylus,
+      };
 }

@@ -179,10 +179,9 @@ class _MainScreenState extends State<MainScreen> {
                     });
                   },
                   child: Padding(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 10,
-                        horizontal:
-                            SizeWidget.isSmallScreen(context) ? 0 : 20),
+                        horizontal: 5),
                     child: RepaintBoundary(
                         child: myMap(
                             screenSize.width,

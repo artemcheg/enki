@@ -1,5 +1,6 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
+import 'package:web_site/widgets/SizeWidget.dart';
 
 
 class PositionedIcon extends StatelessWidget {
@@ -20,7 +21,7 @@ class PositionedIcon extends StatelessWidget {
           child: Icon(
             Icons.add_circle_outlined,
             color: isHovering ? const Color(0XFF52B060) : Colors.white,
-            size: 70,
+            size: SizeWidget.isSmallScreen(context)?100:70,
           )),
     );
   }

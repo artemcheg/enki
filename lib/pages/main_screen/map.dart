@@ -1,5 +1,6 @@
 import 'dart:html' as html;
 import 'dart:js_util';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_maps/google_maps.dart' as gmap;
 import 'dart:ui' as ui;
@@ -232,5 +233,4 @@ final _roadAtlasStyles = <gmap.MapTypeStyle>[
       jsify({'color': '#9e9e9e'}),
     ],
 ];
-
 
