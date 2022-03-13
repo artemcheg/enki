@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MenuItem extends StatefulWidget {
-  final String text;
+  final MenuItems items;
   final Color colorText;
  final List<Shadow>? shadow;
- final String route;
+
   const MenuItem({
     Key? key,
-    required this.text, this.colorText = Colors.white, this.shadow, required this.route,
+    this.colorText = Colors.white, this.shadow, required this.items,
   }) : super(key: key);
 
   @override
@@ -21,10 +21,12 @@ class _MenuItemState extends State<MenuItem> {
 
     var screenSize = MediaQuery.of(context).size;
     var styleOn = TextStyle(
+        fontWeight: FontWeight.bold,
         color: const Color(0XFF52B060),
         fontSize: screenSize.width * 0.014,
         shadows: widget.shadow);
     var styleOff = TextStyle(
+        fontWeight: FontWeight.bold,
         color: widget.colorText,
         fontSize: screenSize.width * 0.014,
         shadows: widget.shadow);
@@ -32,7 +34,7 @@ class _MenuItemState extends State<MenuItem> {
     return InkWell(
       hoverColor: Colors.grey.withOpacity(0),
       onTap: () {
-        Navigator.pushNamed(context, widget.route);
+        Navigator.pushNamed(context, widget.items.routes);
       },
       onHover: (value) {
         setState(() {
@@ -42,7 +44,7 @@ class _MenuItemState extends State<MenuItem> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.text, style: selected ? styleOn : styleOff),
+          Text(widget.items.text, style: selected ? styleOn : styleOff),
           const SizedBox(
             height: 5,
           ),
@@ -53,3 +55,8 @@ class _MenuItemState extends State<MenuItem> {
   }
 }
 
+class MenuItems{
+  final String text;
+  final String routes;
+  const MenuItems(this.text, this.routes);
+}

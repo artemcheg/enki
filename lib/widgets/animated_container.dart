@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_site/animation/scaleTransition.dart';
 import 'package:web_site/animation/transit_anim.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
+import 'package:web_site/widgets/small_changes.dart';
 
 
 
@@ -57,19 +58,16 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
             },
             child: Stack(
               children: [
-                InteractiveViewer(
-                  panEnabled: false,
-                  scaleEnabled: false,
-                  child: RepaintBoundary(
-                    child: ScaledContainer(
-                      start: isHovering,
-                      child: Container(
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(widget.assets),
-                                fit: BoxFit.cover)),
-                      ),
+                RepaintBoundary(
+                  child: ScaledContainer(
+                    start: isHovering,
+                    child: Container(
+                      clipBehavior: Clip.hardEdge,
+                      alignment: Alignment.bottomRight,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(widget.assets),
+                              fit: BoxFit.cover)),
                     ),
                   ),
                 ),
@@ -91,7 +89,9 @@ class _MyServiceContainerState extends State<MyServiceContainer> {
                       widget.centerText,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: sizeParam(screenSize.width, 0.015, 12)),
+                          fontWeight: FontWeight.bold,
+                          shadows: shadowList,
+                          fontSize: sizeParam(screenSize.width, 0.015, 15)),
                     ),
                   ),
                 ),

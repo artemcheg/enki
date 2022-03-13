@@ -22,114 +22,160 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
 
   List<Item> itemsFirst = [
     const Item(
-        top: 280, left: 300, text: 'Фасадные работы любой сложности', index: 0),
+        top: 400,
+        left: 300,
+        text: 'Фасадные работы любой сложности',
+        index: 0,
+        alignment: Alignment.topLeft),
     const Item(
-        top: 470, left: 600, text: 'Фасадные работы любой сложности', index: 0),
+        top: 420,
+        left: 750,
+        text: 'Фасадные работы любой сложности',
+        index: 1,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 350,
         right: 160,
         text: 'Фасадные работы любой сложности',
-        index: 0),
+        index: 2,
+        alignment: Alignment.centerLeft),
     const Item(
-        top: 310,
+        top: 270,
         right: 850,
         text: 'Панарамное остекление любой сложности',
-        index: 1),
+        index: 3,
+        alignment: Alignment.centerLeft),
     const Item(
-        bottom: 350,
+        bottom: 420,
         right: 850,
         text: 'Панарамное остекление любой сложности',
-        index: 1),
+        index: 4,
+        alignment: Alignment.centerLeft),
     const Item(
-        bottom: 60, left: 730, text: 'Строительство бассейнов', index: 2),
+        bottom: 60,
+        left: 730,
+        text: 'Строительство бассейнов',
+        index: 5,
+        alignment: Alignment.centerLeft),
     const Item(
         bottom: 350,
         left: 140,
         text: 'Благоустройство и ландшафтные работы',
-        index: 3),
+        index: 6,
+        alignment: Alignment.centerLeft),
     const Item(
         bottom: 240,
         left: 730,
         text: 'Благоустройство и ландшафтные работы',
-        index: 3),
+        index: 7,
+        alignment: Alignment.centerLeft),
     const Item(
         bottom: 350,
         right: 65,
         text: 'Благоустройство и ландшафтные работы',
-        index: 3),
+        index: 8,
+        alignment: Alignment.centerLeft),
   ];
 
   List<Item> itemsSecond = [
-    const Item(top: 470, left: 10, text: 'Декоративная штукатурка', index: 0),
+    const Item(
+        top: 500,
+        left: 10,
+        text: 'Декоративная штукатурка',
+        index: 0,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 420,
         left: 300,
         text: 'Стеклянные перегородки по индивидуальному заказу',
-        index: 1),
+        index: 1,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 400,
-        left: 700,
+        left: 870,
         text: 'Собственный цех по изготовлению мебели',
-        index: 2),
-    const Item(bottom: 50, left: 400, text: 'Натуральный паркет', index: 3),
-    const Item(top: 120, left: 800, text: 'Многоуровневые потолки', index: 4),
+        index: 2,
+        alignment: Alignment.centerLeft),
+    const Item(
+        bottom: 50,
+        left: 400,
+        text: 'Натуральный паркет',
+        index: 3,
+        alignment: Alignment.centerLeft),
+    const Item(
+        top: 120,
+        left: 800,
+        text: 'Многоуровневые потолки',
+        index: 4,
+        alignment: Alignment.centerLeft),
   ];
 
   List<Item> itemsThird = [
-    const Item(top: 470, left: 350, text: 'Пошив штор', index: 0),
+    const Item(
+        top: 470,
+        left: 350,
+        text: 'Пошив штор',
+        index: 0,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 700,
         left: 550,
         text: 'Собственное производство дизайнерской мебели и декора из дерева',
-        index: 1),
+        index: 1,
+        alignment: Alignment.centerLeft),
     const Item(
         bottom: 250,
         right: 350,
         text: 'Собственное производство дизайнерской мебели и декора из дерева',
-        index: 1),
+        index: 2,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 150,
         left: 550,
         text: 'Собственное производство дизайнерской мебели и декора из дерева',
-        index: 1),
+        index: 3,
+        alignment: Alignment.centerLeft),
     const Item(
-        bottom: 300,
-        right: 900,
+        bottom: 400,
+        right: 800,
         text: 'Собственное производство дизайнерской мебели и декора из дерева',
-        index: 1),
+        index: 4,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 300,
         right: 600,
         text: 'Облицовка стен керамогранитом под натуральный камень',
-        index: 2),
+        index: 5,
+        alignment: Alignment.centerLeft),
     const Item(
         bottom: 100,
         left: 600,
         text: 'Облицовка пола мрамором, натуральным камнем',
-        index: 3),
+        index: 6,
+        alignment: Alignment.centerLeft),
   ];
 
   List<Item> itemsFourth = [
-    const Item(top: 50, left: 515, text: 'Монтаж оконных блоков', index: 0),
-    const Item(top: 600, left: 515, text: 'Закладка стен', index: 1),
+    const Item(
+        top: 50,
+        left: 515,
+        text: 'Монтаж оконных блоков',
+        index: 0,
+        alignment: Alignment.centerLeft),
+    const Item(
+        top: 600,
+        left: 515,
+        text: 'Закладка стен',
+        index: 1,
+        alignment: Alignment.centerLeft),
     const Item(
         top: 245,
         right: 500,
         text: 'Железобетонные конструкции любой сложности',
-        index: 2),
+        index: 2,
+        alignment: Alignment.centerLeft),
   ];
   final PageController _controller = PageController();
-  double i = 0;
-
-  @override
-  void initState() {
-    if (_controller.hasClients) {
-      i = _controller.page!;
-    } else {
-      i = 0;
-    }
-    super.initState();
-  }
 
   bool previous = false;
   bool next = false;
@@ -194,7 +240,6 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                         _controller.previousPage(
                             duration: const Duration(milliseconds: 400),
                             curve: Curves.easeIn);
-
                       },
                       onHover: (value) {
                         setState(() {
@@ -211,7 +256,7 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                             borderRadius: BorderRadius.circular(50)),
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              right: 8, top: 8, bottom: 8),
+                              left: 8, right: 8, top: 8, bottom: 8),
                           child: Icon(
                             Icons.arrow_back_ios_rounded,
                             size: 70,
@@ -250,8 +295,8 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                             ),
                             borderRadius: BorderRadius.circular(50)),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.only(left: 8, top: 8, bottom: 8),
+                          padding: const EdgeInsets.only(
+                              left: 8, right: 8, top: 8, bottom: 8),
                           child: Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 70,
@@ -268,10 +313,10 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: InkWell(
-            highlightColor:Colors.transparent,
-            hoverColor:Colors.transparent ,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
-            onTap: (){},
+            onTap: () {},
             child: SmoothPageIndicator(
               effect: const WormEffect(activeDotColor: Color(0XFF52B060)),
               controller: _controller,
@@ -301,7 +346,18 @@ class InteractiveItem extends StatefulWidget {
 }
 
 class _InteractiveItemState extends State<InteractiveItem> {
-  final List<bool> isHovering = [true, false, false, false, false];
+  final List<bool> isHovering = [
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
   late String text;
 
   @override
@@ -332,70 +388,109 @@ class _InteractiveItemState extends State<InteractiveItem> {
                   widget.assets,
                   fit: BoxFit.contain,
                 ))),
-        ...widget.listPos
-            .map(
-              (e) => Positioned(
-                top: e.top,
-                left: e.left,
-                right: e.right,
-                bottom: e.bottom,
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      changeHover(isHovering, e.index);
-                      text = e.text;
-                    });
-                  },
-                  onHover: (value) {
-                    setState(() {
-                      changeHover(isHovering, e.index);
-                      text = e.text;
-                    });
-                  },
-                  child: PositionedIcon(
-                    isHovering: isHovering[e.index],
-                    text: e.text,
-                  ),
-                ),
-              ),
-            )
-            .toList(),
-        Positioned(
-          right: 10,
-          top: 10,
-          child: AnimatedSwitcher(
-            transitionBuilder: (child, animation) {
-              return ScaleTransition(
-                scale: animation,
-                child: child,
-              );
-            },
-            layoutBuilder: (currentChild, previousChildren) {
-              return Stack(
-                alignment: Alignment.bottomRight,
-                children: <Widget>[
-                  ...previousChildren,
-                  if (currentChild != null) currentChild,
-                ],
-              );
-            },
-            duration: const Duration(milliseconds: 500),
-            child: Container(
-              key: ValueKey<String>(text),
-              decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                      fontSize: SizeWidget.isSmallScreen(context) ? 70 : 50),
-                ),
+        ...widget.listPos.map(
+          (e) => Positioned(
+            top: e.top,
+            left: e.left,
+            right: e.right,
+            bottom: e.bottom,
+            child: InkWell(
+              onTap: () {
+                setState(() {
+                  changeHover(isHovering, e.index);
+                  text = e.text;
+                });
+              },
+              onHover: (value) {
+                setState(() {
+                  changeHover(isHovering, e.index);
+                  text = e.text;
+                });
+              },
+              child: PositionedIcon(
+                isHovering: isHovering[e.index],
               ),
             ),
           ),
         ),
+
+        ...widget.listPos.map(
+          (e) => Positioned(
+            right: correctPos(e.right),
+            top: correctPos(e.top),
+            bottom: correctPos(e.bottom),
+            left: correctPos(e.left),
+            child: AnimatedSwitcher(
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+
+              duration: const Duration(milliseconds: 500),
+              child: isHovering[e.index]
+                  ? Container(
+                width: SizeWidget.isSmallScreen(context)?500:430,
+                      key: ValueKey<String>(text),
+                      decoration: const BoxDecoration(
+                          color: Color(0XFF52B060),
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          text,
+                          textAlign: TextAlign.center,
+                          textScaleFactor: 0.8,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  SizeWidget.isSmallScreen(context) ? 70 : 50),
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ),
+        )
+
+        // Positioned(
+        //   right: 10,
+        //   top: 10,
+        //   child: AnimatedSwitcher(
+        //     transitionBuilder: (child, animation) {
+        //       return ScaleTransition(
+        //         scale: animation,
+        //         child: child,
+        //       );
+        //     },
+        //     layoutBuilder: (currentChild, previousChildren) {
+        //       return Stack(
+        //         alignment: Alignment.bottomRight,
+        //         children: <Widget>[
+        //           ...previousChildren,
+        //           if (currentChild != null) currentChild,
+        //         ],
+        //       );
+        //     },
+        //     duration: const Duration(milliseconds: 500),
+        //     child: Container(
+        //       key: ValueKey<String>(text),
+        //       decoration: const BoxDecoration(
+        //           color: Colors.white,
+        //           borderRadius: BorderRadius.all(Radius.circular(20))),
+        //       child: Padding(
+        //         padding: const EdgeInsets.all(8.0),
+        //         child: Text(
+        //           text,
+        //           textScaleFactor:0.8,
+        //           style: TextStyle(
+        //               fontSize: SizeWidget.isSmallScreen(context) ? 70 : 50),
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
       ]),
     );
   }
@@ -408,8 +503,10 @@ class Item {
   final double? bottom;
   final double? right;
   final String text;
+  final Alignment alignment;
 
   const Item({
+    required this.alignment,
     required this.index,
     this.top,
     this.left,
@@ -437,4 +534,12 @@ class MyCustomScrollBehavior extends ScrollBehavior {
         PointerDeviceKind.invertedStylus,
         PointerDeviceKind.stylus,
       };
+}
+
+double? correctPos(double? incorrectPosition) {
+  if (incorrectPosition != null) {
+    return incorrectPosition + 30;
+  } else {
+    return null;
+  }
 }

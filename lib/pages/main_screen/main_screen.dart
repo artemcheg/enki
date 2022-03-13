@@ -29,7 +29,7 @@ class _MainScreenState extends State<MainScreen> {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      drawer: SizeWidget.isSmallScreen(context) ? const MyDrawer() : null,
+      drawer: SizeWidget.isLargeScreen(context) ? null : const MyDrawer(),
       body: SafeArea(
         child: Scrollbar(
           controller: _scrollController,
@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
                       ? const SmallAppBar(
                           backGround: Colors.transparent,
                         )
-                      : const PrefSizeAppBar(
+                      : PrefSizeAppBar2(
                           backGround: Colors.transparent,
                           dividerColor: Colors.white54,
                         ),
@@ -179,9 +179,8 @@ class _MainScreenState extends State<MainScreen> {
                     });
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10,
-                        horizontal: 5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                     child: RepaintBoundary(
                         child: myMap(
                             screenSize.width,

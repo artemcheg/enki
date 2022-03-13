@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // precacheImage(const AssetImage('assets/mainImage.jpg'), context);
     return  MaterialApp(
       initialRoute: '/',
       routes: {

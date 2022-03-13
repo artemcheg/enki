@@ -69,6 +69,7 @@ class _ScrollAnimationState extends State<ScrollAnimation>
       return; // animation already in progress/finished
     }
 
+
     RenderObject? listViewObject =
         widget.parentKey.currentContext?.findRenderObject();
     RenderObject? animatedBoxObject =
@@ -86,6 +87,12 @@ class _ScrollAnimationState extends State<ScrollAnimation>
         _controller.forward();
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

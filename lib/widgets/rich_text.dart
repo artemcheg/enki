@@ -12,12 +12,13 @@ class MyRichText extends StatefulWidget {
   final List<Shadow>? shadow;
   final String ?fontFamily;
   final int maxLines;
+  final FontWeight? weight;
 
   const MyRichText(
       {Key? key,
       required this.text,
       required this.sizeParam,
-      required this.what, this.webOnlyWindowName="_self", this.colorText = Colors.white, this.shadow, this.fontFamily='Comfortaa', this.maxLines=1,})
+      required this.what, this.webOnlyWindowName="_self", this.colorText = Colors.white, this.shadow, this.fontFamily='Comfortaa', this.maxLines=1, this.weight = FontWeight.bold,})
       : super(key: key);
 
   @override
@@ -40,6 +41,7 @@ class _MyRichTextState extends State<MyRichText> {
         TextSpan(
             text: widget.text,
             style: TextStyle(
+                fontWeight:widget.weight,
               fontFamily: widget.fontFamily,
                 color:
                     selected ? const Color(0XFF52B060) :widget.colorText,

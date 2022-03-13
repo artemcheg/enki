@@ -75,6 +75,7 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.amberAccent,
                           ),
                           MyRichText(
+                            weight: null,
                             text: StringRes.phone,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what: 'tel:${StringRes.phone}',
@@ -92,6 +93,7 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.amberAccent,
                           ),
                           MyRichText(
+                            weight: null,
                             text: StringRes.phoneSecond,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what: 'tel:${StringRes.phoneSecond}',
@@ -109,6 +111,7 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.amberAccent,
                           ),
                           MyRichText(
+                            weight: null,
                             text: StringRes.mail,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),
                             what: 'mailto:${StringRes.mail}',
@@ -138,6 +141,7 @@ class _BottomBarState extends State<BottomBar> {
                             color: Colors.red,
                           ),
                           MyRichText(
+                            weight: null,
                             maxLines: 3,
                             text: StringRes.address,
                             sizeParam: sizeParam(screenSize.width, 0.007, 10),

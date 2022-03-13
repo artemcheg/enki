@@ -74,7 +74,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
                     0, 3), // changes position of shadow
               ),
             ]),
-            child:  const PrefSizeAppBar(
+            child:  PrefSizeAppBar2(
               dividerColor: Colors.white54,
               colorDrawer: Colors.blue,
             ),
@@ -94,6 +94,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
                         TransitionAnimation(
                           child: ListTile(
                             title: MyRichText(
+                              weight: null,
                               shadow: null,
                               colorText: Colors.black,
                               text: StringRes.phone,
@@ -110,6 +111,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
                         TransitionAnimation(
                           child: ListTile(
                             title: MyRichText(
+                              weight: null,
                               shadow: null,
                               colorText: Colors.black,
                               text: StringRes.phoneSecond,
@@ -128,6 +130,7 @@ class _ContactsLargeState extends State<ContactsLarge> {
                             durationStart: Duration(milliseconds: 500),
                             child: ListTile(
                               title: MyRichText(
+                                weight: null,
                                 shadow: null,
                                 colorText: Colors.black,
                                 text: StringRes.mail,
@@ -146,9 +149,9 @@ class _ContactsLargeState extends State<ContactsLarge> {
                             durationStart: Duration(milliseconds: 1000),
                             child: ListTile(
                               title: MyRichText(
+                                weight: null,
                                 shadow: null,
                                 colorText: Colors.black,
-
                                 text: StringRes.address,
                                 sizeParam: null,
                                 maxLines: 4,
@@ -284,7 +287,7 @@ class _ContactsSmallState extends State<ContactsSmall> {
                         title: MyRichText(
                           shadow: null,
                           colorText: Colors.black,
-
+                          weight: null,
                           text: StringRes.phone,
                           maxLines: 1,
                           what: 'tel:${StringRes.phone}',
@@ -303,7 +306,7 @@ class _ContactsSmallState extends State<ContactsSmall> {
                         title: MyRichText(
                           shadow: null,
                           colorText: Colors.black,
-
+                          weight: null,
                           text: StringRes.phoneSecond,
                           maxLines: 1,
                           what: 'tel:${StringRes.phoneSecond}',
@@ -321,6 +324,7 @@ class _ContactsSmallState extends State<ContactsSmall> {
                       durationStart: Duration(milliseconds: 500),
                       child: ListTile(
                         title: MyRichText(
+                          weight: null,
                           shadow: null,
                           colorText: Colors.black,
                           text: StringRes.mail,
@@ -339,6 +343,7 @@ class _ContactsSmallState extends State<ContactsSmall> {
                       durationStart: Duration(milliseconds: 1000),
                       child: ListTile(
                         title: MyRichText(
+                          weight: null,
                           shadow: null,
                           colorText: Colors.black,
                           text: StringRes.address,

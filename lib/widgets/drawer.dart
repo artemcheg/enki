@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_site/widgets/SizeWidget.dart';
 import 'package:web_site/widgets/rich_text.dart';
 import 'package:web_site/widgets/social_widget.dart';
 import '../resources/string_res.dart';
@@ -18,7 +19,7 @@ class _MyDrawerState extends State<MyDrawer> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 800,
+      width: SizeWidget.isMediumScreen(context)?400:800,
       child: Drawer(
           backgroundColor: Colors.blueGrey.shade900,
           child: Center(
@@ -132,6 +133,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: 5,
                       ),
                       MyRichText(
+                        weight: null,
                         colorText: Colors.white,
                         text: StringRes.phone,
                         sizeParam: 15,
@@ -154,6 +156,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: 5,
                       ),
                       MyRichText(
+                        weight: null,
                         colorText: Colors.white,
                         text: StringRes.phone,
                         sizeParam: 15,
@@ -176,6 +179,7 @@ class _MyDrawerState extends State<MyDrawer> {
                         width: 5,
                       ),
                       MyRichText(
+                        weight: null,
                         colorText: Colors.white,
                         text: StringRes.mail,
                         sizeParam: 15,

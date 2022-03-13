@@ -12,7 +12,7 @@ class MainImage extends StatefulWidget {
 }
 
 class _MainImageState extends State<MainImage> {
-  ImageProvider backImage = const AssetImage('assets/mainImage.jpg');
+  ImageProvider backImage = const AssetImage('assets/mainImage.png');
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
@@ -20,7 +20,7 @@ class _MainImageState extends State<MainImage> {
       children: [
         _ImageOnMain(screenSize: screenSize, backImage: backImage),
         _LogoOnImage(screenSize: screenSize),
-       _TextOnImage(screenSize: screenSize)
+       // _TextOnImage(screenSize: screenSize)
       ],
     );
   }
@@ -43,6 +43,7 @@ class _ImageOnMain extends StatelessWidget {
       scaleEnabled: false,
       child: RepaintBoundary(
         child: ScaleAnimation(
+          duration: const Duration(seconds: 10),
           child: Container(
             height: screenSize.height,
             width: screenSize.width,

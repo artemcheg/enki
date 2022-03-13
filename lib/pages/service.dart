@@ -6,7 +6,6 @@ import '../widgets/appBar.dart';
 import '../widgets/bottom_bar.dart';
 import '../widgets/drawer.dart';
 
-
 class Services extends StatelessWidget {
   const Services({Key? key}) : super(key: key);
 
@@ -17,60 +16,127 @@ class Services extends StatelessWidget {
       drawer: const MyDrawer(),
       body: SafeArea(
         child: ListView(
-            // mainAxisSize:MainAxisSize.max,
-            children: [
-              SizeWidget.isPhoneScreen(context)
-                  ? const SmallAppBar()
-                  : const PrefSizeAppBar(
-                dividerColor: Colors.white54,
+          // mainAxisSize:MainAxisSize.max,
+          children: [
+            SizeWidget.isPhoneScreen(context)
+                ? const SmallAppBar()
+                : PrefSizeAppBar2(
+                    dividerColor: Colors.white54,
+                  ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: StaggeredGrid.count(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                crossAxisCount: SizeWidget.isSmallScreen(context) ||
+                        SizeWidget.isMediumScreen(context)
+                    ? 1
+                    : 3,
+                children: [
+                  StaggeredGrid.count(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: [
+                        StaggeredGridTile.count(
+                            mainAxisCellCount:
+                                SizeWidget.isSmallScreen(context) ||
+                                        SizeWidget.isMediumScreen(context)
+                                    ? 0.5
+                                    : 0.7,
+                            crossAxisCellCount: 1,
+                            child: const MyServiceContainer(
+                                route: '/serviceInfoBuild',
+                                assets: 'assets/services/3.jpg',
+                                centerText: 'Строительство')),
+                        StaggeredGridTile.count(
+                            mainAxisCellCount:
+                                SizeWidget.isSmallScreen(context) ||
+                                        SizeWidget.isMediumScreen(context)
+                                    ? 0.5
+                                    : 0.7,
+                            crossAxisCellCount: 1,
+                            child: const MyServiceContainer(
+                              route: '/serviceInfoLandshaft',
+                              centerText: 'Ландшафтный дизайн',
+                              assets: 'assets/services/4.jpg',
+                            )),
+                        // StaggeredGridTile.count(
+                        //     mainAxisCellCount:
+                        //         SizeWidget.isSmallScreen(context) ||
+                        //                 SizeWidget.isMediumScreen(context)
+                        //             ? 0.5
+                        //             : 0.46,
+                        //     crossAxisCellCount: 1,
+                        //     child: const MyServiceContainer(
+                        //         route: '/serviceInfoBuild',
+                        //         assets: 'assets/services/5.jpg',
+                        //         centerText: 'Разработка котлованов')),
+                      ]),
+                  StaggeredGridTile.count(
+                      mainAxisCellCount: SizeWidget.isSmallScreen(context) ||
+                              SizeWidget.isMediumScreen(context)
+                          ? 0.5
+                          : 1.4,
+                      crossAxisCellCount: SizeWidget.isSmallScreen(context) ||
+                              SizeWidget.isMediumScreen(context)
+                          ? 1
+                          : 2,
+                      child: const MyServiceContainer(
+                        route: '/serviceInfoRemont',
+                        centerText: 'Ремонт и отделка',
+                        assets: 'assets/services/1.jpg',
+                      )),
+                  StaggeredGridTile.count(
+                      mainAxisCellCount: SizeWidget.isSmallScreen(context) ||
+                              SizeWidget.isMediumScreen(context)
+                          ? 0.5
+                          : 1.4,
+                      crossAxisCellCount: SizeWidget.isSmallScreen(context) ||
+                              SizeWidget.isMediumScreen(context)
+                          ? 1
+                          : 2,
+                      child: const MyServiceContainer(
+                        route: '/serviceInfoInterier',
+                        centerText: 'Дизайн интерьера',
+                        assets: 'assets/services/2.jpg',
+                      )),
+                  StaggeredGrid.count(
+                      crossAxisCount: 1,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      children: [
+                        StaggeredGridTile.count(
+                            mainAxisCellCount:
+                                SizeWidget.isSmallScreen(context) ||
+                                        SizeWidget.isMediumScreen(context)
+                                    ? 0.5
+                                    : 0.7,
+                            crossAxisCellCount: 1,
+                            child: const MyServiceContainer(
+                                route: '/serviceInfoBuild',
+                                assets: 'assets/services/5.jpg',
+                                centerText: 'Разработка котлованов')),
+                        StaggeredGridTile.count(
+                            mainAxisCellCount:
+                                SizeWidget.isSmallScreen(context) ||
+                                        SizeWidget.isMediumScreen(context)
+                                    ? 0.5
+                                    : 0.7,
+                            crossAxisCellCount: 1,
+                            child: const MyServiceContainer(
+                              route: '/serviceInfoLandshaft',
+                              centerText: 'Геодезия',
+                              assets: 'assets/services/6.jpg',
+                            )),
+                      ]),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: StaggeredGrid.count(
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  crossAxisCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:3,
-                  children: [
-                    StaggeredGridTile.count(
-                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
-                        crossAxisCellCount: 1,
-                        child: const MyServiceContainer(
-                          route: '/serviceInfoBuild',
-                            assets: 'assets/services/3.jpg',
-                            centerText: 'Строительство')),
-                    StaggeredGridTile.count(
-                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
-                        crossAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
-                        child: const MyServiceContainer(
-                          route: '/serviceInfoRemont',
-                          centerText: 'Ремонт и отделка',
-                          assets: 'assets/services/1.jpg',
-                        )),
-                    StaggeredGridTile.count(
-                        mainAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
-                        crossAxisCellCount: SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?1:2,
-                        child: const MyServiceContainer(
-                          route: '/serviceInfoInterier',
-                          centerText: 'Дизайн интерьера',
-                          assets: 'assets/services/2.jpg',
-                        )),
-                    StaggeredGridTile.count(
-                        mainAxisCellCount:SizeWidget.isSmallScreen(context)||SizeWidget.isMediumScreen(context)?0.5:1,
-                        crossAxisCellCount: 1,
-                        child: const MyServiceContainer(
-                          route: '/serviceInfoLandshaft',
-                          centerText: 'Ландшафтный дизайн',
-                          assets: 'assets/services/4.jpg',
-                        )),
-                  ],
-                ),
-              ),
-
-              const BottomBar(),
-            ],
-          ),
+            ),
+            const BottomBar(),
+          ],
         ),
-
+      ),
     );
   }
 }
