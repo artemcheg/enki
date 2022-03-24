@@ -24,7 +24,7 @@ class _MenuItemState extends State<MenuItem> {
         fontWeight: FontWeight.bold,
         color: const Color(0XFF52B060),
         fontSize: screenSize.width * 0.014,
-        shadows: widget.shadow);
+        shadows:selected?null:widget.shadow);
     var styleOff = TextStyle(
         fontWeight: FontWeight.bold,
         color: widget.colorText,

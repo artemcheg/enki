@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:web_site/widgets/animated_container.dart';
-import '../widgets/SizeWidget.dart';
-import '../widgets/appBar.dart';
-import '../widgets/bottom_bar.dart';
-import '../widgets/drawer.dart';
+import 'package:web_site/pages/services/animated_container.dart';
+import '../../widgets/SizeWidget.dart';
+import '../../widgets/appBar.dart';
+import '../../widgets/bottom_bar.dart';
+import '../../widgets/drawer.dart';
 
 class Services extends StatelessWidget {
   const Services({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class Services extends StatelessWidget {
           children: [
             SizeWidget.isPhoneScreen(context)
                 ? const SmallAppBar()
-                : PrefSizeAppBar2(
+                : PrefSizeAppBar(
                     dividerColor: Colors.white54,
                   ),
             Padding(
@@ -46,9 +46,10 @@ class Services extends StatelessWidget {
                                     : 0.7,
                             crossAxisCellCount: 1,
                             child: const MyServiceContainer(
-                                route: '/serviceInfoBuild',
-                                assets: 'assets/services/3.jpg',
-                                centerText: 'Строительство')),
+                              route: '/serviceInfoRemont',
+                              centerText: 'Ремонт и отделка',
+                              assets: 'assets/services/1.jpg',
+                            )),
                         StaggeredGridTile.count(
                             mainAxisCellCount:
                                 SizeWidget.isSmallScreen(context) ||
@@ -61,17 +62,6 @@ class Services extends StatelessWidget {
                               centerText: 'Ландшафтный дизайн',
                               assets: 'assets/services/4.jpg',
                             )),
-                        // StaggeredGridTile.count(
-                        //     mainAxisCellCount:
-                        //         SizeWidget.isSmallScreen(context) ||
-                        //                 SizeWidget.isMediumScreen(context)
-                        //             ? 0.5
-                        //             : 0.46,
-                        //     crossAxisCellCount: 1,
-                        //     child: const MyServiceContainer(
-                        //         route: '/serviceInfoBuild',
-                        //         assets: 'assets/services/5.jpg',
-                        //         centerText: 'Разработка котлованов')),
                       ]),
                   StaggeredGridTile.count(
                       mainAxisCellCount: SizeWidget.isSmallScreen(context) ||
@@ -83,10 +73,9 @@ class Services extends StatelessWidget {
                           ? 1
                           : 2,
                       child: const MyServiceContainer(
-                        route: '/serviceInfoRemont',
-                        centerText: 'Ремонт и отделка',
-                        assets: 'assets/services/1.jpg',
-                      )),
+                          route: '/serviceInfoBuild',
+                          assets: 'assets/services/3.jpg',
+                          centerText: 'Строительство')),
                   StaggeredGridTile.count(
                       mainAxisCellCount: SizeWidget.isSmallScreen(context) ||
                               SizeWidget.isMediumScreen(context)

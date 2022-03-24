@@ -47,7 +47,7 @@ class _MainScreenState extends State<MainScreen> {
                       ? const SmallAppBar(
                           backGround: Colors.transparent,
                         )
-                      : PrefSizeAppBar2(
+                      : PrefSizeAppBar(
                           backGround: Colors.transparent,
                           dividerColor: Colors.white54,
                         ),
@@ -81,7 +81,9 @@ class _MainScreenState extends State<MainScreen> {
                           padding: const EdgeInsets.only(top: 10, bottom: 5),
                           child: InkWell(
                             hoverColor: Colors.grey.withOpacity(0),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, '/about');
+                            },
                             onHover: (value) {
                               setState(() {
                                 _isHovering[0] = value;

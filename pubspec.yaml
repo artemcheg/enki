@@ -44,6 +44,7 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -73,6 +74,7 @@ flutter:
     - assets/map/
     - assets/services/
     - assets/interactive/
+    - assets/about/
 
   fonts:
     - family: Comfortaa

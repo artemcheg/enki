@@ -29,6 +29,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
+    this.context.findRenderObject();
 
     return Container(
       decoration: BoxDecoration(

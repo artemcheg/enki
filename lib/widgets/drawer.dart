@@ -94,7 +94,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         _isHovering[4] = value;
                       });
                     },
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/about');
+                    },
                     child: Text(
                       'О НАС',
                       style: _isHovering[4] ? styleOn : styleOff,

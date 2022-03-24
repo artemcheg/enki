@@ -46,7 +46,7 @@ class _MyRichTextState extends State<MyRichText> {
                 color:
                     selected ? const Color(0XFF52B060) :widget.colorText,
                 fontSize: widget.sizeParam,
-            shadows: widget.shadow),
+            shadows: selected?null:widget.shadow),
             mouseCursor: SystemMouseCursors.click,
             recognizer: TapGestureRecognizer()
               ..onTap = () async {

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:web_site/animation/transit_anim.dart';
 import 'package:web_site/resources/string_res.dart';
 import 'package:web_site/widgets/drawer.dart';
-import 'package:web_site/widgets/map_contact.dart';
-import '../widgets/SizeWidget.dart';
-import '../widgets/appBar.dart';
-import '../widgets/bottom_bar.dart';
-import '../widgets/rich_text.dart';
-import '../widgets/social_widget.dart';
+import 'package:web_site/pages/contacts/map_contact.dart';
+import '../../widgets/SizeWidget.dart';
+import '../../widgets/appBar.dart';
+import '../../widgets/bottom_bar.dart';
+import '../../widgets/rich_text.dart';
+import '../../widgets/social_widget.dart';
 
 class Contacts extends StatefulWidget {
   const Contacts({Key? key}) : super(key: key);
@@ -74,9 +74,8 @@ class _ContactsLargeState extends State<ContactsLarge> {
                     0, 3), // changes position of shadow
               ),
             ]),
-            child:  PrefSizeAppBar2(
+            child:  PrefSizeAppBar(
               dividerColor: Colors.white54,
-              colorDrawer: Colors.blue,
             ),
           ),
           Padding(
@@ -277,109 +276,112 @@ class _ContactsSmallState extends State<ContactsSmall> {
             SizedBox(
               height: 330,
               width: 330,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  RepaintBoundary(
-                    child: TransitionAnimation(
-                      child: ListTile(
-                        title: MyRichText(
-                          shadow: null,
-                          colorText: Colors.black,
-                          weight: null,
-                          text: StringRes.phone,
-                          maxLines: 1,
-                          what: 'tel:${StringRes.phone}',
-                          sizeParam: null,
-                        ),
-                        leading: Icon(
-                          Icons.phone,
-                          color: Colors.teal,
-                        ),
-                      ),
-                    ),
-                  ),
-                  RepaintBoundary(
-                    child: TransitionAnimation(
-                      child: ListTile(
-                        title: MyRichText(
-                          shadow: null,
-                          colorText: Colors.black,
-                          weight: null,
-                          text: StringRes.phoneSecond,
-                          maxLines: 1,
-                          what: 'tel:${StringRes.phoneSecond}',
-                          sizeParam: null,
-                        ),
-                        leading: Icon(
-                          Icons.phone,
-                          color: Colors.deepOrangeAccent,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 60),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    RepaintBoundary(
+                      child: TransitionAnimation(
+                        child: ListTile(
+                          title: MyRichText(
+                            shadow: null,
+                            colorText: Colors.black,
+                            weight: null,
+                            text: StringRes.phone,
+                            maxLines: 1,
+                            what: 'tel:${StringRes.phone}',
+                            sizeParam: null,
+                          ),
+                          leading: Icon(
+                            Icons.phone,
+                            color: Colors.teal,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  RepaintBoundary(
-                    child: TransitionAnimation(
-                      durationStart: Duration(milliseconds: 500),
-                      child: ListTile(
-                        title: MyRichText(
-                          weight: null,
-                          shadow: null,
-                          colorText: Colors.black,
-                          text: StringRes.mail,
-                          sizeParam: null,
-                          what: 'mailto:${StringRes.mail}',
-                        ),
-                        leading: Icon(
-                          Icons.mail,
-                          color: Colors.lightBlueAccent,
-                        ),
-                      ),
-                    ),
-                  ),
-                  RepaintBoundary(
-                    child: TransitionAnimation(
-                      durationStart: Duration(milliseconds: 1000),
-                      child: ListTile(
-                        title: MyRichText(
-                          weight: null,
-                          shadow: null,
-                          colorText: Colors.black,
-                          text: StringRes.address,
-                          sizeParam: null,
-                          maxLines: 4,
-                          what:
-                              'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
-                          webOnlyWindowName: '_blank',
-                        ),
-                        leading: Icon(
-                          Icons.place,
-                          color: Colors.red,
+                    RepaintBoundary(
+                      child: TransitionAnimation(
+                        child: ListTile(
+                          title: MyRichText(
+                            shadow: null,
+                            colorText: Colors.black,
+                            weight: null,
+                            text: StringRes.phoneSecond,
+                            maxLines: 1,
+                            what: 'tel:${StringRes.phoneSecond}',
+                            sizeParam: null,
+                          ),
+                          leading: Icon(
+                            Icons.phone,
+                            color: Colors.deepOrangeAccent,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  RepaintBoundary(
-                    child: TransitionAnimation(
-                      durationStart: Duration(milliseconds: 1500),
-                      child: ListTile(
-                        title: SelectableText(StringRes.workTime),
-                        leading: Icon(
-                          Icons.watch,
-                          color: Colors.black,
+                    RepaintBoundary(
+                      child: TransitionAnimation(
+                        durationStart: Duration(milliseconds: 500),
+                        child: ListTile(
+                          title: MyRichText(
+                            weight: null,
+                            shadow: null,
+                            colorText: Colors.black,
+                            text: StringRes.mail,
+                            sizeParam: null,
+                            what: 'mailto:${StringRes.mail}',
+                          ),
+                          leading: Icon(
+                            Icons.mail,
+                            color: Colors.lightBlueAccent,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 50),
-                    child: TransitionAnimation(
-                      durationStart: Duration(milliseconds: 2000),
-                      child: SocialWidget()
+                    RepaintBoundary(
+                      child: TransitionAnimation(
+                        durationStart: Duration(milliseconds: 1000),
+                        child: ListTile(
+                          title: MyRichText(
+                            weight: null,
+                            shadow: null,
+                            colorText: Colors.black,
+                            text: StringRes.address,
+                            sizeParam: null,
+                            maxLines: 4,
+                            what:
+                                'https://yandex.ru/maps/146/simferopol/house/ulitsa_turgeneva_13a/Z00YdwZkTEEAQFpufXV0cHRkZw==/?from=tabbar&ll=34.114722%2C44.951856&source=serp_navig&z=20',
+                            webOnlyWindowName: '_blank',
+                          ),
+                          leading: Icon(
+                            Icons.place,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                    RepaintBoundary(
+                      child: TransitionAnimation(
+                        durationStart: Duration(milliseconds: 1500),
+                        child: ListTile(
+                          title: SelectableText(StringRes.workTime),
+                          leading: Icon(
+                            Icons.watch,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 50),
+                      child: TransitionAnimation(
+                        durationStart: Duration(milliseconds: 2000),
+                        child: SocialWidget()
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(
