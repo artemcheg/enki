@@ -29,175 +29,230 @@ class _MainScreenState extends State<MainScreen> {
     var screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      drawer: SizeWidget.isLargeScreen(context) ? null : const MyDrawer(),
-      body: SafeArea(
-        child: Scrollbar(
-          controller: _scrollController,
-          trackVisibility: true,
-          showTrackOnHover: true,
-          isAlwaysShown: true,
-          child: ListView(
+        drawer: SizeWidget.isLargeScreen(context) ? null : const MyDrawer(),
+        body: SafeArea(
+          child: Scrollbar(
             controller: _scrollController,
-            key: parentKey,
-            children: [
-              Stack(
+            trackVisibility: true,
+            showTrackOnHover: true,
+            isAlwaysShown: true,
+            child: SingleChildScrollView(
+              physics: isScrolling
+                  ? const ScrollPhysics()
+                  : const NeverScrollableScrollPhysics(),
+              controller: _scrollController,
+              key: parentKey,
+              child: Column(
                 children: [
-                  const MainImage(),
-                  SizeWidget.isPhoneScreen(context)
-                      ? const SmallAppBar(
-                          backGround: Colors.transparent,
-                        )
-                      : PrefSizeAppBar(
-                          backGround: Colors.transparent,
-                          dividerColor: Colors.white54,
-                        ),
-                ],
-              ),
-              WidgetWithBest(
-                  screenSize: screenSize,
-                  scrollController: _scrollController,
-                  parentKey: parentKey),
-              ScrollAnimation(
-                direct: Direct.horizontal,
-                animTime: const Duration(seconds: 2),
-                curve: Curves.easeOutQuart,
-                parentKey: parentKey,
-                scrollController: _scrollController,
-                child: Container(
+                  Stack(
+                    children: [
+                      const MainImage(),
+                      SizeWidget.isPhoneScreen(context)
+                          ? SmallAppBar(
+                              gradient: LinearGradient(
+                                  colors: <Color>[
+                                    const Color(0xff263238).withOpacity(0.4),
+                                    const Color(0xff263238).withOpacity(0.3),
+                                    const Color(0xff263238).withOpacity(0.2),
+                                    const Color(0xff263238).withOpacity(0.1),
+                                    Colors.transparent,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter),
+                            )
+                          : PrefSizeAppBar(
+                              gradient: LinearGradient(
+                                  colors: <Color>[
+                                    const Color(0xff263238).withOpacity(0.4),
+                                    const Color(0xff263238).withOpacity(0.3),
+                                    const Color(0xff263238).withOpacity(0.2),
+                                    const Color(0xff263238).withOpacity(0.1),
+                                    Colors.transparent,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter),
+                            ),
+                    ],
+                  ),
+                  Padding(
                     padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          StringRes.aboutShort,
-                          style: TextStyle(
-                              fontSize: SizeWidget.isSmallScreen(context)
-                                  ? 15
-                                  : sizeParam(screenSize.width, 0.015, 25),
-                              fontStyle: FontStyle.italic),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 5),
-                          child: InkWell(
-                            hoverColor: Colors.grey.withOpacity(0),
-                            onTap: () {
-                              Navigator.pushNamed(context, '/about');
-                            },
-                            onHover: (value) {
-                              setState(() {
-                                _isHovering[0] = value;
-                              });
-                            },
-                            child: RepaintBoundary(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'ПОДРОБНЕЕ О КОМПАНИИ',
-                                    style: TextStyle(
-                                        fontSize:
-                                            SizeWidget.isSmallScreen(context)
+                        vertical: 20, horizontal: 10),
+                    child: Center(
+                        child: ScrollAnimation(
+                      direct: Direct.horizontal,
+                      animTime: const Duration(seconds: 2),
+                      curve: Curves.easeOutQuart,
+                      parentKey: parentKey,
+                      scrollController: _scrollController,
+                      child: Text(
+                        "«ENKI» - это 10 лет безупречного опыта!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: sizeParam(screenSize.width, 0.02, 25),
+                            fontFamily: "Comfortaa"),
+                      ),
+                    )),
+                  ),
+                  // WidgetWithBest(
+                  //     screenSize: screenSize,
+                  //     scrollController: _scrollController,
+                  //     parentKey: parentKey),
+                  ScrollAnimation(
+                    direct: Direct.horizontal,
+                    animTime: const Duration(seconds: 2),
+                    curve: Curves.easeOutQuart,
+                    parentKey: parentKey,
+                    scrollController: _scrollController,
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              StringRes.aboutShort,
+                              style: TextStyle(
+                                  fontSize: SizeWidget.isSmallScreen(context)
+                                      ? 15
+                                      : sizeParam(screenSize.width, 0.015, 25),
+                                  fontStyle: FontStyle.italic),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 5),
+                              child: InkWell(
+                                hoverColor: Colors.grey.withOpacity(0),
+                                onTap: () {
+                                  Navigator.pushNamed(context, '/about');
+                                },
+                                onHover: (value) {
+                                  setState(() {
+                                    _isHovering[0] = value;
+                                  });
+                                },
+                                child: RepaintBoundary(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'ПОДРОБНЕЕ О КОМПАНИИ',
+                                        style: TextStyle(
+                                            fontSize: SizeWidget.isSmallScreen(
+                                                    context)
                                                 ? 10
                                                 : 15,
-                                        color: _isHovering[0]
-                                            ? const Color(0XFF52B060)
-                                            : Colors.black),
+                                            color: _isHovering[0]
+                                                ? const Color(0XFF52B060)
+                                                : Colors.black),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 4, left: 5),
+                                        child: Icon(
+                                          Icons.arrow_forward,
+                                          color: _isHovering[0]
+                                              ? const Color(0XFF52B060)
+                                              : Colors.black,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        bottom: 4, left: 5),
-                                    child: Icon(
-                                      Icons.arrow_forward,
-                                      color: _isHovering[0]
-                                          ? const Color(0XFF52B060)
-                                          : Colors.black,
-                                    ),
-                                  )
-                                ],
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-
-              const InteractiveWidget(),
-
-              //Карта
-              MouseRegion(
-                onHover: (value) {
-                  setState(() {
-                    isScrolling = false;
-                  });
-                },
-                onExit: (value) {
-                  setState(() {
-                    isScrolling = true;
-                  });
-                },
-                child: GestureDetector(
-                  onVerticalDragCancel: () {
-                    setState(() {
-                      isScrolling = true;
-                    });
-                  },
-                  onVerticalDragUpdate: (d) {
-                    setState(() {
-                      isScrolling = false;
-                    });
-                  },
-                  onVerticalDragEnd: (d) {
-                    setState(() {
-                      isScrolling = true;
-                    });
-                  },
-                  onVerticalDragStart: (d) {
-                    setState(() {
-                      isScrolling = false;
-                    });
-                  },
-                  onHorizontalDragEnd: (d) {
-                    setState(() {
-                      isScrolling = true;
-                    });
-                  },
-                  onHorizontalDragCancel: () {
-                    setState(() {
-                      isScrolling = true;
-                    });
-                  },
-                  onHorizontalDragUpdate: (d) {
-                    setState(() {
-                      isScrolling = false;
-                    });
-                  },
-                  onHorizontalDragStart: (d) {
-                    setState(() {
-                      isScrolling = false;
-                    });
-                  },
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                    child: RepaintBoundary(
-                        child: myMap(
-                            screenSize.width,
-                            SizeWidget.isSmallScreen(context)
-                                ? screenSize.height * 0.7
-                                : screenSize.height * 0.6)),
+                          ],
+                        )),
                   ),
-                ),
+
+                  const InteractiveWidget(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    'Текущие и реализованые объекты:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: sizeParam(screenSize.width, 0.015, 20),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  //Карта
+                  MouseRegion(
+                    onHover: (value) {
+                      setState(() {
+                        isScrolling = false;
+                      });
+                    },
+                    onExit: (value) {
+                      setState(() {
+                        isScrolling = true;
+                      });
+                    },
+                    child: GestureDetector(
+                      onVerticalDragCancel: () {
+                        setState(() {
+                          isScrolling = true;
+                        });
+                      },
+                      onVerticalDragUpdate: (d) {
+                        setState(() {
+                          isScrolling = false;
+                        });
+                      },
+                      onVerticalDragEnd: (d) {
+                        setState(() {
+                          isScrolling = true;
+                        });
+                      },
+                      onVerticalDragStart: (d) {
+                        setState(() {
+                          isScrolling = false;
+                        });
+                      },
+                      onHorizontalDragEnd: (d) {
+                        setState(() {
+                          isScrolling = true;
+                        });
+                      },
+                      onHorizontalDragCancel: () {
+                        setState(() {
+                          isScrolling = true;
+                        });
+                      },
+                      onHorizontalDragUpdate: (d) {
+                        setState(() {
+                          isScrolling = false;
+                        });
+                      },
+                      onHorizontalDragStart: (d) {
+                        setState(() {
+                          isScrolling = false;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 5),
+                        child: RepaintBoundary(
+                            child: myMap(
+                                screenSize.width,
+                                SizeWidget.isSmallScreen(context)
+                                    ? screenSize.height * 0.7
+                                    : screenSize.height * 0.6)),
+                      ),
+                    ),
+                  ),
+                  const BottomBar(),
+                ],
               ),
-              const BottomBar(),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
 

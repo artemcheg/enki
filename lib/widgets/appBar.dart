@@ -10,26 +10,27 @@ class SmallAppBar extends StatelessWidget {
   final Color colorText;
   final List<Shadow>? shadow;
   final Color backGround;
+  final LinearGradient? gradient;
 
   const SmallAppBar(
       {Key? key,
       this.colorDrawer = Colors.white,
       this.colorText = Colors.white,
       this.shadow,
-      this.backGround = const Color(0xff263238)})
+      this.backGround = const Color(0xff263238), this.gradient})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-        color: backGround,
+        padding: const EdgeInsets.only(top: 5),
+        decoration: BoxDecoration(gradient: gradient,color:backGround),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              hoverColor: Colors.white.withOpacity(0),
+              hoverColor: const Color.fromRGBO(255, 255, 255, 0),
               onPressed: () => Scaffold.of(context).openDrawer(),
               icon: const Icon(Icons.view_headline_sharp),
               color: colorDrawer,
@@ -37,7 +38,7 @@ class SmallAppBar extends StatelessWidget {
             Column(
               children: [
                 InkWell(
-                    hoverColor: Colors.grey.withOpacity(0),
+                    hoverColor: const Color.fromRGBO(0, 0, 0, 0),
                     onTap: () {
                       Navigator.pushNamed(context, '/');
                     },
@@ -57,6 +58,7 @@ class SmallAppBar extends StatelessWidget {
                       fontSize: 15,
                       shadows: shadow),
                 ),
+                const SizedBox(height: 10,)
               ],
             ),
             const SizedBox.shrink()
@@ -69,22 +71,22 @@ class PrefSizeAppBar extends StatelessWidget {
   final Color colorDrawer;
   final Color colorText;
   final List<Shadow>? shadow;
-  final Color dividerColor;
   final Color backGround;
+  final LinearGradient? gradient;
 
   PrefSizeAppBar(
       {Key? key,
-      this.colorDrawer = Colors.white,
-      this.colorText = Colors.white,
+      this.colorDrawer = const Color.fromRGBO(255, 255, 255, 1),
+      this.colorText = const Color.fromRGBO(255, 255, 255, 1),
       this.shadow = shadowList,
-      this.dividerColor = Colors.black54,
-      this.backGround = const Color(0xff263238)})
+      this.backGround = const Color(0xff263238),
+      this.gradient})
       : super(key: key);
 
   final List items = [
     const MenuItems('ГЛАВНАЯ', '/'),
     const MenuItems('УСЛУГИ', '/services'),
-    const MenuItems('НАШИ ПРОЕКТЫ', '/'),
+    const MenuItems('ПОРТФОЛИО', '/portfolio'),
     const MenuItems('О НАС', '/about'),
     const MenuItems('КОНТАКТЫ', '/contacts'),
   ];
@@ -93,32 +95,27 @@ class PrefSizeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     return Container(
-      color: backGround,
+      decoration: BoxDecoration(gradient: gradient,color:backGround),
       child: Padding(
-        padding: const EdgeInsets.only(top: 35, left: 20, right: 20),
+        padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizeWidget.isLargeScreen(context)
                 ? _LargeAppBarRow(
                     screenSize: screenSize,
-                    dividerColor: dividerColor,
                     colorText: colorText,
                     shadow: shadow,
                     items: items)
                 : _SmallAppBarRow(
                     screenSize: screenSize,
-                    dividerColor: dividerColor,
                     colorText: colorText,
                     shadow: shadow,
                     items: items,
                     colorDrawer: colorDrawer,
                   ),
-            const SizedBox(
-              height: 30,
-            ),
           ],
         ),
       ),
@@ -130,110 +127,125 @@ class _LargeAppBarRow extends StatelessWidget {
   const _LargeAppBarRow({
     Key? key,
     required this.screenSize,
-    required this.dividerColor,
     required this.colorText,
     required this.shadow,
     required this.items,
   }) : super(key: key);
 
   final Size screenSize;
-  final Color dividerColor;
   final Color colorText;
   final List<Shadow>? shadow;
   final List items;
 
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.only(bottom: 10),
-          child: Column(
-            children: [
-              InkWell(
-                  hoverColor: Colors.grey.withOpacity(0),
-                  onTap: () {
-                    Navigator.pushNamed(context, '/');
-                  },
-                  child: Image.asset(
-                    'assets/logo.png',
-                    width: 190,
-                    height: 190 / 3.5,
-                  )),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Качество меняет все!',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: colorText,
-                    fontSize: 15,
-                    shadows: shadow),
-              ),
-            ],
-          ),
-        ),
-        ...items.map((e) => MenuItem(
-              items: e,
-              colorText: colorText,
-              shadow: shadow,
-            )),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Column(
+                children: [
+                  InkWell(
+                      hoverColor: const Color.fromRGBO(0, 0, 0, 0),
+                      onTap: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: Image.asset(
+                        'assets/logo.png',
+                        width: 190,
+                        height: 190 / 3.5,
+                      ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Качество меняет все!',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: colorText,
+                        fontSize: 15,
+                        shadows: shadow),
+                  ),
+                ],
+              ),
+            ),
+            ...items.map((e) => MenuItem(
+                  items: e,
+                  colorText: colorText,
+                  shadow: shadow,
+                )),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  Icons.phone,
-                  color: Colors.amberAccent,
-                  size: sizeParam(screenSize.width, 0.01, 20),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.phone,
+                      color: const Color(0xFFFFD740),
+                      size: sizeParam(screenSize.width, 0.01, 20),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    MyRichText(
+                      colorText: colorText,
+                      text: StringRes.phone,
+                      sizeParam: 15,
+                      what: 'tel:${StringRes.phone}',
+                      shadow: shadow,
+                    )
+                  ],
                 ),
                 const SizedBox(
-                  width: 5,
+                  height: 5,
                 ),
-                MyRichText(
-                  colorText: colorText,
-                  text: StringRes.phone,
-                  sizeParam: 15,
-                  what: 'tel:${StringRes.phone}',
-                  shadow: shadow,
+                Row(
+                  children: [
+                    Icon(
+                      Icons.phone,
+                      color: const Color(0xFFFFD740),
+                      size: sizeParam(screenSize.width, 0.01, 20),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    MyRichText(
+                      colorText: colorText,
+                      text: StringRes.phoneSecond,
+                      sizeParam: 15,
+                      what: 'tel:${StringRes.phoneSecond}',
+                      shadow: shadow,
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "Консультация бесплатно!",
+                  style: TextStyle(
+                      fontFamily: 'Comfortaa',
+                      color: const Color.fromRGBO(255, 255, 255, 1),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      shadows: shadow),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: 10,
                 )
               ],
             ),
-            const SizedBox(
-              height: 5,
-            ),
-            Row(
-              children: [
-                Icon(
-                  Icons.phone,
-                  color: Colors.amberAccent,
-                  size: sizeParam(screenSize.width, 0.01, 20),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                MyRichText(
-                  colorText: colorText,
-                  text: StringRes.phoneSecond,
-                  sizeParam: 15,
-                  what: 'tel:${StringRes.phoneSecond}',
-                  shadow: shadow,
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 5,
-            ),
-            const SizedBox(
-              height: 10,
-            )
           ],
         ),
+
       ],
     );
   }
@@ -243,7 +255,6 @@ class _SmallAppBarRow extends StatelessWidget {
   const _SmallAppBarRow({
     Key? key,
     required this.screenSize,
-    required this.dividerColor,
     required this.colorText,
     required this.shadow,
     required this.items,
@@ -251,7 +262,6 @@ class _SmallAppBarRow extends StatelessWidget {
   }) : super(key: key);
 
   final Size screenSize;
-  final Color dividerColor;
   final Color colorText;
   final List<Shadow>? shadow;
   final List items;
@@ -261,16 +271,16 @@ class _SmallAppBarRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _MenuDrawerItem(colorDrawer: colorDrawer, shadow: shadow),
         IntrinsicHeight(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: InkWell(
-                    hoverColor: Colors.grey.withOpacity(0),
+                    hoverColor: const Color.fromRGBO(0, 0, 0, 0),
                     onTap: () {
                       Navigator.pushNamed(context, '/');
                     },
@@ -278,7 +288,6 @@ class _SmallAppBarRow extends StatelessWidget {
                       'assets/logo.png',
                       width: 190,
                       height: 190 / 3.5,
-                      color: Colors.amberAccent,
                     )),
               ),
               Flexible(
@@ -287,14 +296,16 @@ class _SmallAppBarRow extends StatelessWidget {
                   maxLines: 2,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: colorText, fontSize:15, shadows: shadow),
+                      color: colorText,
+                      fontSize: 15,
+                      shadows: shadow),
                 ),
               ),
             ],
           ),
         ),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -302,7 +313,7 @@ class _SmallAppBarRow extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.phone,
-                  color: Colors.amberAccent,
+                  color:  Color(0xFFFFD740),
                   size: 20,
                 ),
                 const SizedBox(
@@ -324,7 +335,7 @@ class _SmallAppBarRow extends StatelessWidget {
               children: [
                 const Icon(
                   Icons.phone,
-                  color: Colors.amberAccent,
+                  color: Color(0xFFFFD740),
                   size: 20,
                 ),
                 const SizedBox(
@@ -342,6 +353,20 @@ class _SmallAppBarRow extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
+            Text(
+              "Консультация бесплатно!",
+              style: TextStyle(
+                fontFamily: 'Comfortaa',
+                color: const Color.fromRGBO(255, 255, 255, 1),
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                shadows: shadow,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ],

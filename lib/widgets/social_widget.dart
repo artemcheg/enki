@@ -17,12 +17,14 @@ class SocialWidget extends StatelessWidget {
             hoverColor: Colors.grey.withOpacity(0),
             onTap: () async {
               launch(
-                'https://www.instagram.com/enki.crimea/',
+                'https://t.me/enkicrimea',
               );
             },
             child: Image.asset(
-              'assets/social/insta.png',
+              'assets/social/telegramm.png',
+              scale: 1.49,
             )),
+        const SizedBox(width: 5,),
         InkWell(
             hoverColor: Colors.grey.withOpacity(0),
             onTap: () async {

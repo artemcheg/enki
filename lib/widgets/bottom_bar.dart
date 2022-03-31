@@ -171,6 +171,7 @@ class _BottomBarState extends State<BottomBar> {
                       color: Colors.white,
                       fontSize: sizeParam(screenSize.width, 0.008, 10)),
                 ),
+                const SizedBox(width: 10,),
                 const SocialWidget()
               ],
             ),

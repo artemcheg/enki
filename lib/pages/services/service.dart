@@ -6,8 +6,15 @@ import '../../widgets/appBar.dart';
 import '../../widgets/bottom_bar.dart';
 import '../../widgets/drawer.dart';
 
-class Services extends StatelessWidget {
+class Services extends StatefulWidget {
   const Services({Key? key}) : super(key: key);
+
+  @override
+  State<Services> createState() => _ServicesState();
+}
+
+class _ServicesState extends State<Services> {
+  bool vis = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +22,13 @@ class Services extends StatelessWidget {
       extendBodyBehindAppBar: true,
       drawer: const MyDrawer(),
       body: SafeArea(
-        child: ListView(
-          // mainAxisSize:MainAxisSize.max,
+        child: SingleChildScrollView(
+          child: Column(
           children: [
             SizeWidget.isPhoneScreen(context)
                 ? const SmallAppBar()
                 : PrefSizeAppBar(
-                    dividerColor: Colors.white54,
+              shadow: null,
                   ),
             Padding(
               padding: const EdgeInsets.all(10),
@@ -126,6 +133,6 @@ class Services extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

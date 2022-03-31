@@ -37,11 +37,11 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
           // image: const DecorationImage(
           //     image: AssetImage('assets/arrow.png'),
           //     alignment: Alignment.bottomCenter,),
-          border: Border(
+          border: const Border(
               right: BorderSide(
-                  color: Colors.black.withOpacity(0.1)),
+                  color: Color.fromRGBO(255, 255, 255, 0.1)),
               bottom: BorderSide(
-                  color: Colors.black.withOpacity(0.1)))),
+                  color: Color.fromRGBO(255, 255, 255, 0.1)))),
       height: SizeWidget.isSmallScreen(context)
           ? screenSize.height * 0.1
           : screenSize.height * 0.25,
@@ -58,7 +58,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
             text: TextSpan(
                 text: widget.text1,
                 style: TextStyle(
-                    color: Colors.black,
+                    color: const Color.fromRGBO(255, 255, 255, 1),
                     fontSize: SizeWidget.isSmallScreen(context)
                         ? 20
                         : sizeParam(screenSize.width, 0.02, 20)),
@@ -66,7 +66,7 @@ class _TextInfoWidgetState extends State<TextInfoWidget> {
                   TextSpan(
                       text: '\n${widget.text2}',
                       style: TextStyle(
-                          color: Colors.black,
+                          color: const Color.fromRGBO(255, 255, 255, 1),
                           fontSize: SizeWidget.isSmallScreen(context)
                               ? 15
                               : sizeParam(screenSize.width, 0.02, 15))),

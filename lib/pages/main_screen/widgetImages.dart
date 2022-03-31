@@ -13,13 +13,7 @@ class _MainImageState extends State<MainImage> {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        _ImageOnMain(screenSize: screenSize, backImage: backImage),
-        _LogoOnImage(screenSize: screenSize),
-       // _TextOnImage(screenSize: screenSize)
-      ],
-    );
+    return _ImageOnMain(screenSize: screenSize, backImage: backImage);
   }
 }
 
@@ -55,23 +49,4 @@ class _ImageOnMain extends StatelessWidget {
   }
 }
 
-class _LogoOnImage extends StatelessWidget {
-  const _LogoOnImage({
-    Key? key,
-    required this.screenSize,
-  }) : super(key: key);
-
-  final Size screenSize;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        width: screenSize.width,
-        height: screenSize.height / 3,
-        margin: EdgeInsets.only(left: 1, top: screenSize.height * 0.3),
-        child: Image.asset(
-          'assets/logo1.png',
-        ));
-  }
-}
 

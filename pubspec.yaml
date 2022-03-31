@@ -45,6 +45,7 @@ dependencies:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -75,6 +76,7 @@ flutter:
     - assets/services/
     - assets/interactive/
     - assets/about/
+    - assets/portfolio/otdelka/
 
   fonts:
     - family: Comfortaa

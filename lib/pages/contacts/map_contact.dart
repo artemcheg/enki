@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps/google_maps.dart' as gmap;
 import 'package:web_site/resources/html_res.dart';
 import 'dart:ui' as ui;
+import 'package:web_site/widgets/small_changes.dart';
 
-Widget mapContact(width, height,) {
+Widget mapContact(width, height) {
   String htmlId = "8";
   // ignore: undefined_prefixed_name
   ui.platformViewRegistry.registerViewFactory(htmlId, (int viewId) {
@@ -123,19 +124,11 @@ Widget mapContactPhone(width, height,) {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.black,
-        boxShadow:  [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 10,
-            offset: const Offset(
-                0, 3), // changes position of shadow
-          ),
-        ],),
+        borderRadius: BorderRadius.circular(10),
+        color: const Color.fromRGBO(0, 0, 0, 1),
+        boxShadow:  shadowBox),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(10),
         child:HtmlElementView(viewType: htmlId),
       ));
 }

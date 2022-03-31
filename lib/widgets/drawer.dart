@@ -61,9 +61,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         _isHovering[1] = value;
                       });
                     },
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushNamed(context, '/portfolio');
+                    },
                     child: Text(
-                      'НАШИ ПРОЕКТЫ',
+                      'ПОРТФОЛИО',
                       style: _isHovering[1] ? styleOn : styleOff,
                     ),
                   ),

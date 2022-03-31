@@ -13,14 +13,14 @@ class PositionedIcon extends StatelessWidget {
     return RepaintBoundary(
       child: AvatarGlow(
           endRadius: 60,
-          glowColor:Colors.white,
+          glowColor:const Color.fromRGBO(255, 255, 255, 1),
           duration: const Duration(seconds: 2),
           repeat: true,
           showTwoGlows: true,
           curve: Curves.easeOutQuart,
           child: Icon(
             Icons.add_circle_outlined,
-            color: isHovering ? const Color(0XFF52B060) : Colors.white,
+            color: isHovering ? const Color(0XFF52B060) : const Color.fromRGBO(255, 255, 255, 1),
             size: SizeWidget.isSmallScreen(context) ? 100 : 70,
           )),
     );

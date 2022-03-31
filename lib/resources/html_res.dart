@@ -18,10 +18,8 @@ class HtmlRes {
 
 
   static const String mapMarkerInfoPhone =
-  '''<div style='float:top; 
-      align:top; 
-     padding-left:70px;
-      padding-top:5px;'>
+  '''<div style='
+     text-align:center;'>
       <img src='assets/map/map_marker.png' 
       width="50px" height="30px" >
       </div>

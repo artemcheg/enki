@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:web_site/widgets/SizeWidget.dart';
 import 'package:web_site/pages/main_screen/positionItem.dart';
+import 'package:web_site/widgets/small_changes.dart';
 
 class InteractiveWidget extends StatefulWidget {
   const InteractiveWidget({Key? key}) : super(key: key);
@@ -189,10 +190,11 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'Наши преимущества:',
+          'Наши возможности:',
           style: TextStyle(
-              fontSize: SizeWidget.isSmallScreen(context) ? 20 : 35,
-              fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w800,
+            fontSize: sizeParam(width, 0.015, 20),
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -201,7 +203,7 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
           children: [
             SizedBox(
               height: SizeWidget.isLargeScreen(context)
-                  ? width * 0.4
+                  ? width * 0.45
                   : width * 0.58,
               width: width,
               child: PageView(
@@ -230,12 +232,12 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
             ),
             SizeWidget.isLargeScreen(context)
                 ? Positioned(
-                    top: width * 0.35 / 2,
-                    left: width * 0.05,
+                    top: width * 0.45 / 2,
+                    left: width * 0.03,
                     child: InkWell(
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      splashColor: Colors.transparent,
+                      hoverColor: const Color.fromRGBO(0, 0, 0, 0),
+                      highlightColor: const Color.fromRGBO(0, 0, 0, 0),
+                      splashColor: const Color.fromRGBO(0, 0, 0, 0),
                       onTap: () {
                         _controller.previousPage(
                             duration: const Duration(milliseconds: 400),
@@ -251,7 +253,7 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                             border: Border.all(
                               color: previous
                                   ? const Color(0XFF52B060)
-                                  : Colors.black,
+                                  : const Color.fromRGBO(0, 0, 0, 1),
                             ),
                             borderRadius: BorderRadius.circular(50)),
                         child: Padding(
@@ -262,24 +264,25 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                             size: 70,
                             color: previous
                                 ? const Color(0XFF52B060)
-                                : Colors.black,
+                                : const Color.fromRGBO(0, 0, 0, 1),
                           ),
                         ),
                       ),
                     ),
                   )
                 : const SizedBox.shrink(),
+
             SizeWidget.isLargeScreen(context)
                 ? Positioned(
-                    top: width * 0.35 / 2,
-                    right: width * 0.05,
+                    top: width * 0.45 / 2,
+                    right: width * 0.03,
                     child: InkWell(
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      splashColor: Colors.transparent,
+                      hoverColor: const Color.fromRGBO(0, 0, 0, 0),
+                      highlightColor: const Color.fromRGBO(0, 0, 0, 0),
+                      splashColor: const Color.fromRGBO(0, 0, 0, 0),
                       onTap: () {
                         _controller.nextPage(
-                            duration: const Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 400),
                             curve: Curves.easeIn);
                       },
                       onHover: (value) {
@@ -291,7 +294,7 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                         decoration: BoxDecoration(
                             border: Border.all(
                               color:
-                                  next ? const Color(0XFF52B060) : Colors.black,
+                                  next ? const Color(0XFF52B060) : const Color.fromRGBO(0, 0, 0, 1),
                             ),
                             borderRadius: BorderRadius.circular(50)),
                         child: Padding(
@@ -301,7 +304,7 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                             Icons.arrow_forward_ios_rounded,
                             size: 70,
                             color:
-                                next ? const Color(0XFF52B060) : Colors.black,
+                                next ? const Color(0XFF52B060) : const Color.fromRGBO(0, 0, 0, 1),
                           ),
                         ),
                       ),
@@ -313,9 +316,9 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: InkWell(
-            highlightColor: Colors.transparent,
-            hoverColor: Colors.transparent,
-            splashColor: Colors.transparent,
+            highlightColor: const Color.fromRGBO(0, 0, 0, 0),
+            hoverColor: const Color.fromRGBO(0, 0, 0, 0),
+            splashColor: const Color.fromRGBO(0, 0, 0, 0),
             onTap: () {},
             child: SmoothPageIndicator(
               effect: const WormEffect(activeDotColor: Color(0XFF52B060)),
@@ -369,129 +372,86 @@ class _InteractiveItemState extends State<InteractiveItem> {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
-      child: Stack(children: [
-        Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 4,
-                  offset: const Offset(0, 0), // changes position of shadow
-                ),
-              ],
-            ),
-            child: ClipRRect(
+      child: Stack(
+        children: [
+          Container(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
-                child: Image.asset(
-                  widget.assets,
-                  fit: BoxFit.contain,
-                ))),
-        ...widget.listPos.map(
-          (e) => Positioned(
-            top: e.top,
-            left: e.left,
-            right: e.right,
-            bottom: e.bottom,
-            child: InkWell(
-              onTap: () {
-                setState(() {
-                  changeHover(isHovering, e.index);
-                  text = e.text;
-                });
-              },
-              onHover: (value) {
-                setState(() {
-                  changeHover(isHovering, e.index);
-                  text = e.text;
-                });
-              },
-              child: PositionedIcon(
-                isHovering: isHovering[e.index],
+                boxShadow: shadowBox,
+              ),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset(
+                    widget.assets,
+                    fit: BoxFit.contain,
+                  ))),
+          ...widget.listPos.map(
+            (e) => Positioned(
+              top: e.top,
+              left: e.left,
+              right: e.right,
+              bottom: e.bottom,
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    changeHover(isHovering, e.index);
+                    text = e.text;
+                  });
+                },
+                onHover: (value) {
+                  setState(() {
+                    changeHover(isHovering, e.index);
+                    text = e.text;
+                  });
+                },
+                child: PositionedIcon(
+                  isHovering: isHovering[e.index],
+                ),
               ),
             ),
           ),
-        ),
-
-        ...widget.listPos.map(
-          (e) => Positioned(
-            right: correctPos(e.right),
-            top: correctPos(e.top),
-            bottom: correctPos(e.bottom),
-            left: correctPos(e.left),
-            child: AnimatedSwitcher(
-              transitionBuilder: (child, animation) {
-                return ScaleTransition(
-                  scale: animation,
-                  child: child,
-                );
-              },
-
-              duration: const Duration(milliseconds: 500),
-              child: isHovering[e.index]
-                  ? Container(
-                width: SizeWidget.isSmallScreen(context)?500:430,
-                      key: ValueKey<String>(text),
-                      decoration: const BoxDecoration(
-                          color: Color(0XFF52B060),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          text,
-                          textAlign: TextAlign.center,
-                          textScaleFactor: 0.8,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  SizeWidget.isSmallScreen(context) ? 70 : 50),
+          ...widget.listPos.map(
+            (e) => Positioned(
+              right: correctPos(e.right),
+              top: correctPos(e.top),
+              bottom: correctPos(e.bottom),
+              left: correctPos(e.left),
+              child: AnimatedSwitcher(
+                transitionBuilder: (child, animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                duration: const Duration(milliseconds: 500),
+                child: isHovering[e.index]
+                    ? Container(
+                        width: SizeWidget.isSmallScreen(context) ? 500 : 430,
+                        key: ValueKey<String>(text),
+                        decoration: const BoxDecoration(
+                            color: Color(0XFF52B060),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            text,
+                            textAlign: TextAlign.center,
+                            textScaleFactor: 0.8,
+                            style: TextStyle(
+                                color: const Color.fromRGBO(255, 255, 255, 1),
+                                fontSize: SizeWidget.isSmallScreen(context)
+                                    ? 70
+                                    : 50),
+                          ),
                         ),
-                      ),
-                    )
-                  : const SizedBox.shrink(),
+                      )
+                    : const SizedBox.shrink(),
+              ),
             ),
           ),
-        )
-
-        // Positioned(
-        //   right: 10,
-        //   top: 10,
-        //   child: AnimatedSwitcher(
-        //     transitionBuilder: (child, animation) {
-        //       return ScaleTransition(
-        //         scale: animation,
-        //         child: child,
-        //       );
-        //     },
-        //     layoutBuilder: (currentChild, previousChildren) {
-        //       return Stack(
-        //         alignment: Alignment.bottomRight,
-        //         children: <Widget>[
-        //           ...previousChildren,
-        //           if (currentChild != null) currentChild,
-        //         ],
-        //       );
-        //     },
-        //     duration: const Duration(milliseconds: 500),
-        //     child: Container(
-        //       key: ValueKey<String>(text),
-        //       decoration: const BoxDecoration(
-        //           color: Colors.white,
-        //           borderRadius: BorderRadius.all(Radius.circular(20))),
-        //       child: Padding(
-        //         padding: const EdgeInsets.all(8.0),
-        //         child: Text(
-        //           text,
-        //           textScaleFactor:0.8,
-        //           style: TextStyle(
-        //               fontSize: SizeWidget.isSmallScreen(context) ? 70 : 50),
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // ),
-      ]),
+        ],
+      ),
     );
   }
 }
