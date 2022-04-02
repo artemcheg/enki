@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:web_site/animation/transit_anim.dart';
+import 'package:web_site/resources/image_res.dart';
 import 'package:web_site/widgets/bottom_bar.dart';
 import 'package:web_site/widgets/drawer.dart';
 import 'package:web_site/widgets/small_changes.dart';
-
-import '../../animation/direction.dart';
 import '../../widgets/SizeWidget.dart';
 import '../../widgets/appBar.dart';
+import 'model.dart';
 
 class PortfolioMain extends StatefulWidget {
   const PortfolioMain({Key? key}) : super(key: key);
@@ -18,18 +17,8 @@ class PortfolioMain extends StatefulWidget {
 
 class _PortfolioMainState extends State<PortfolioMain>
     with SingleTickerProviderStateMixin {
-  late TabController controller;
   int page = 0;
   final _model = ImageModel();
-
-  @override
-  void initState() {
-    controller = TabController(length: 4, vsync: this);
-    controller.addListener(() {
-      setPage(controller.index);
-    });
-    super.initState();
-  }
 
   void setPage(int index) {
     setState(() {
@@ -39,68 +28,79 @@ class _PortfolioMainState extends State<PortfolioMain>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const MyDrawer(),
-      body: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            SliverToBoxAdapter(
-                child: Column(children: [
-              SizeWidget.isPhoneScreen(context)
-                  ? const SmallAppBar()
-                  : PrefSizeAppBar(
-                      shadow: null,
-                    ),
-              Container(
-                margin: SizeWidget.isSmallScreen(context)
-                    ? const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
-                    : const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                decoration: const BoxDecoration(
-                    color: Color(0xff4b636e),
-                    borderRadius: BorderRadius.all(Radius.circular(50)),
-                    boxShadow: shadowBox),
-                child: TabBar(
-                  controller: controller,
-                  indicator: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(50))),
-                      color: Color(0XFF52B060)),
-                  tabs: const [
-                    TabBarItem(
-                      text: 'Строительство',
-                    ),
-                    TabBarItem(
-                      text: 'Ремонт',
-                    ),
-                    TabBarItem(
-                      text: 'Дизайн интерьера',
-                    ),
-                    TabBarItem(
-                      text: 'Ландшафтный дизайн',
-                    ),
-                  ],
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        drawer: const MyDrawer(),
+        body: NestedScrollView(
+        controller: ScrollController(),
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(
+                  child: Column(children: [
+                SizeWidget.isPhoneScreen(context)
+                    ? const SmallAppBar()
+                    : PrefSizeAppBar(
+                        shadow: null,
+                      ),
+                Container(
+                  margin: SizeWidget.isSmallScreen(context)
+                      ? const EdgeInsets.symmetric(vertical: 10, horizontal: 10)
+                      : const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                  decoration: const BoxDecoration(
+                      color: Color(0xff4b636e),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      boxShadow: shadowBox),
+                  child: const TabBar(
+                    indicator: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50))),
+                        color: Color(0XFF52B060)),
+                    tabs: [
+                      TabBarItem(
+                        text: 'Строительство',
+                      ),
+                      TabBarItem(
+                        text: 'Отделка',
+                      ),
+                      TabBarItem(
+                        text: 'Дизайн интерьера',
+                      ),
+                      TabBarItem(
+                        text: 'Ландшафтный дизайн',
+                      ),
+                    ],
+                  ),
                 ),
+              ]))
+            ];
+          },
+          body: UpdateImageIndexWidget(
+            model: _model,
+            child: ScrollConfiguration(
+              behavior:
+                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+              child:const RepaintBoundary(
+                child:  TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      TabBarScreen(
+                        assets: ImageRes.stroika,
+                      ),
+                      TabBarScreen(
+                        assets: ImageRes.otdelka,
+                      ),
+                      TabBarScreen(
+                        assets: ImageRes.dizain,
+                      ),
+                      TabBarScreen(
+                        assets: ImageRes.landshaft,
+                      ),
+                    ]),
               ),
-            ]))
-          ];
-        },
-        body: UpdateImageIndexWidget(
-          model: _model,
-          child: Stack(
-            children: [
-              TabBarView(controller: controller, children: const [
-                TabBarScreen(),
-                Center(
-                  child: Text('vznt'),
-                ),
-                Center(
-                  child: Text('vznt'),
-                ),
-                Center(
-                  child: Text('vznt'),
-                ),
-              ]),
-            ],
+            ),
           ),
         ),
       ),
@@ -141,23 +141,31 @@ class _TabBarItemState extends State<TabBarItem> {
 }
 
 class TabBarScreen extends StatefulWidget {
-  const TabBarScreen({Key? key}) : super(key: key);
+  final List assets;
+
+  const TabBarScreen({Key? key, required this.assets}) : super(key: key);
 
   @override
   State<TabBarScreen> createState() => _TabBarScreenState();
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
-  image(int index) => "assets/portfolio/otdelka/$index.jpg";
+
+  Future<Widget> futureListView() async{
+    return const CircularProgressIndicator();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
+    return RepaintBoundary(
+      child: ListView(
+        shrinkWrap: true,
         children: [
           Padding(
             padding: const EdgeInsets.all(10),
             child: GridView.custom(
+              primary: false,
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               gridDelegate: SliverQuiltedGridDelegate(
                 crossAxisCount: 4,
@@ -172,28 +180,24 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 ],
               ),
               childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                return TransitionAnimation(
-                  offset: -0.4,
-                  direct: Direct.horizontal,
-                  animTime: const Duration(milliseconds: 400),
-                  child: InkWell(
-                    onTap: () {
-                      UpdateImageIndexWidget.of(context)
-                          .model
-                          .result(image(index + 1), true, context);
-                    },
-                    child: ClipRRect(
-                      borderRadius: SizeWidget.isSmallScreen(context)
-                          ? BorderRadius.circular(10)
-                          : BorderRadius.circular(20),
+                return InkWell(
+                  onTap: () {
+                    UpdateImageIndexWidget.read(context)
+                        ?.result(index, context, widget.assets);
+                  },
+                  child: ClipRRect(
+                    borderRadius: SizeWidget.isSmallScreen(context)
+                        ? BorderRadius.circular(10)
+                        : BorderRadius.circular(20),
+                    child: RepaintBoundary(
                       child: Image.asset(
-                        image(index + 1),
+                        widget.assets[index],
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 );
-              }, childCount: 19),
+              }, childCount: widget.assets.length),
             ),
           ),
           const BottomBar()
@@ -203,86 +207,4 @@ class _TabBarScreenState extends State<TabBarScreen> {
   }
 }
 
-class ImageDialog extends StatefulWidget {
-  final String asset;
 
-  const ImageDialog({
-    Key? key,
-    required this.asset,
-  }) : super(key: key);
-
-  @override
-  State<ImageDialog> createState() => _ImageDialogState();
-}
-
-class _ImageDialogState extends State<ImageDialog> {
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Stack(
-          children: [
-            Image.asset(
-              widget.asset,
-              fit: BoxFit.contain,
-            ),
-            Positioned(
-              right: 25,
-              child: IconButton(
-                icon: const Icon(
-                  Icons.close,
-                  size: 50,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class UpdateImageIndexWidget extends InheritedWidget {
-  final ImageModel model;
-
-  const UpdateImageIndexWidget({
-    required this.model,
-    Key? key,
-    required Widget child,
-  }) : super(key: key, child: child);
-
-  static UpdateImageIndexWidget of(BuildContext context) {
-    final UpdateImageIndexWidget? result =
-        context.dependOnInheritedWidgetOfExactType<UpdateImageIndexWidget>();
-    assert(result != null, 'No UpdateImageIndex found in context');
-    return result!;
-  }
-
-  @override
-  bool updateShouldNotify(UpdateImageIndexWidget oldWidget) {
-    return model != oldWidget.model;
-  }
-}
-
-class ImageModel extends ChangeNotifier {
-  String asset = '';
-
-  void result(String asset, bool show, BuildContext context) {
-    this.asset = asset;
-    showDialog(
-      barrierDismissible: true ,
-        context: context,
-        builder: (BuildContext context) {
-          return ImageDialog(
-            asset: asset,
-          );
-        });
-    notifyListeners();
-  }
-}

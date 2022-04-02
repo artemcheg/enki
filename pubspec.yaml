@@ -76,7 +76,10 @@ flutter:
     - assets/services/
     - assets/interactive/
     - assets/about/
-    - assets/portfolio/otdelka/
+    - assets/otdelka/
+    - assets/stroika/
+    - assets/dizain/
+    - assets/landshaft/
 
   fonts:
     - family: Comfortaa

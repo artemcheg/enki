@@ -239,9 +239,15 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                       highlightColor: const Color.fromRGBO(0, 0, 0, 0),
                       splashColor: const Color.fromRGBO(0, 0, 0, 0),
                       onTap: () {
-                        _controller.previousPage(
-                            duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeIn);
+                        if (_controller.page! > 0) {
+                          _controller.previousPage(
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeIn);
+                        } else {
+                          _controller.animateToPage(3,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeIn);
+                        }
                       },
                       onHover: (value) {
                         setState(() {
@@ -271,7 +277,6 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                     ),
                   )
                 : const SizedBox.shrink(),
-
             SizeWidget.isLargeScreen(context)
                 ? Positioned(
                     top: width * 0.45 / 2,
@@ -281,9 +286,15 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                       highlightColor: const Color.fromRGBO(0, 0, 0, 0),
                       splashColor: const Color.fromRGBO(0, 0, 0, 0),
                       onTap: () {
+                        if(_controller.page!<3){
                         _controller.nextPage(
                             duration: const Duration(milliseconds: 400),
-                            curve: Curves.easeIn);
+                            curve: Curves.easeIn);}
+                        else{
+                          _controller.animateToPage(0,
+                              duration: const Duration(milliseconds: 400),
+                              curve: Curves.easeIn);
+                        }
                       },
                       onHover: (value) {
                         setState(() {
@@ -293,8 +304,9 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                       child: Container(
                         decoration: BoxDecoration(
                             border: Border.all(
-                              color:
-                                  next ? const Color(0XFF52B060) : const Color.fromRGBO(0, 0, 0, 1),
+                              color: next
+                                  ? const Color(0XFF52B060)
+                                  : const Color.fromRGBO(0, 0, 0, 1),
                             ),
                             borderRadius: BorderRadius.circular(50)),
                         child: Padding(
@@ -303,8 +315,9 @@ class _InteractiveWidgetState extends State<InteractiveWidget> {
                           child: Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 70,
-                            color:
-                                next ? const Color(0XFF52B060) : const Color.fromRGBO(0, 0, 0, 1),
+                            color: next
+                                ? const Color(0XFF52B060)
+                                : const Color.fromRGBO(0, 0, 0, 1),
                           ),
                         ),
                       ),
