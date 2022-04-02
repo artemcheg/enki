@@ -17,14 +17,7 @@ class PortfolioMain extends StatefulWidget {
 
 class _PortfolioMainState extends State<PortfolioMain>
     with SingleTickerProviderStateMixin {
-  int page = 0;
   final _model = ImageModel();
-
-  void setPage(int index) {
-    setState(() {
-      page = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +26,7 @@ class _PortfolioMainState extends State<PortfolioMain>
       child: Scaffold(
         drawer: const MyDrawer(),
         body: NestedScrollView(
-        controller: ScrollController(),
+          controller: ScrollController(),
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverToBoxAdapter(
@@ -82,21 +75,21 @@ class _PortfolioMainState extends State<PortfolioMain>
             child: ScrollConfiguration(
               behavior:
                   ScrollConfiguration.of(context).copyWith(scrollbars: false),
-              child:const RepaintBoundary(
-                child:  TabBarView(
+              child: const RepaintBoundary(
+                child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
                       TabBarScreen(
-                        assets: ImageRes.stroika,
+                        assets: ImageRes.stroikaURL,
                       ),
                       TabBarScreen(
-                        assets: ImageRes.otdelka,
+                        assets: ImageRes.otdelkaURL,
                       ),
                       TabBarScreen(
-                        assets: ImageRes.dizain,
+                        assets: ImageRes.dizainURL,
                       ),
                       TabBarScreen(
-                        assets: ImageRes.landshaft,
+                        assets: ImageRes.landshaftURL,
                       ),
                     ]),
               ),
@@ -134,7 +127,7 @@ class _TabBarItemState extends State<TabBarItem> {
         style: TextStyle(
             color: Colors.white,
             fontSize: sizeParam(width, 0.01, 8),
-            fontWeight: FontWeight.w600),
+            fontWeight: FontWeight.w300),
       ),
     );
   }
@@ -150,61 +143,80 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
-
-  Future<Widget> futureListView() async{
+  Future<Widget> futureListView() async {
     return const CircularProgressIndicator();
   }
 
   @override
   Widget build(BuildContext context) {
-    return RepaintBoundary(
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: GridView.custom(
-              primary: false,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: SliverQuiltedGridDelegate(
-                crossAxisCount: 4,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                repeatPattern: QuiltedGridRepeatPattern.inverted,
-                pattern: [
-                  const QuiltedGridTile(2, 2),
-                  const QuiltedGridTile(1, 1),
-                  const QuiltedGridTile(1, 1),
-                  const QuiltedGridTile(1, 2),
-                ],
-              ),
-              childrenDelegate: SliverChildBuilderDelegate((context, index) {
-                return InkWell(
-                  onTap: () {
-                    UpdateImageIndexWidget.read(context)
-                        ?.result(index, context, widget.assets);
-                  },
-                  child: ClipRRect(
-                    borderRadius: SizeWidget.isSmallScreen(context)
-                        ? BorderRadius.circular(10)
-                        : BorderRadius.circular(20),
-                    child: RepaintBoundary(
-                      child: Image.asset(
+    return ListView(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10),
+          child: GridView.custom(
+            primary: false,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverQuiltedGridDelegate(
+              crossAxisCount: 4,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              repeatPattern: QuiltedGridRepeatPattern.inverted,
+              pattern: [
+                const QuiltedGridTile(2, 2),
+                const QuiltedGridTile(1, 1),
+                const QuiltedGridTile(1, 1),
+                const QuiltedGridTile(1, 2),
+              ],
+            ),
+            childrenDelegate: SliverChildBuilderDelegate((context, index) {
+              return InkWell(
+                onTap: () {
+                  UpdateImageIndexWidget.read(context)
+                      ?.result(index, context, widget.assets);
+                },
+                child: ClipRRect(
+                  borderRadius: SizeWidget.isSmallScreen(context)
+                      ? BorderRadius.circular(10)
+                      : BorderRadius.circular(20),
+                  child: RepaintBoundary(
+                    child: ProgressIndicator(
+                      child: Image.network(
                         widget.assets[index],
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                );
-              }, childCount: widget.assets.length),
-            ),
+                ),
+              );
+            }, childCount: widget.assets.length),
           ),
-          const BottomBar()
-        ],
-      ),
+        ),
+        const BottomBar()
+      ],
     );
   }
 }
 
+class ProgressIndicator extends StatelessWidget {
+  final Widget child;
 
+  const ProgressIndicator({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        const Center(
+            child: RepaintBoundary(
+              child: CircularProgressIndicator(
+          backgroundColor: Color(0XFF52B060),
+          color: Color(0xffEFF4F7),
+        ),
+            )),
+        child
+      ],
+    );
+  }
+}

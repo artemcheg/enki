@@ -60,7 +60,68 @@ class ImageRes {
     'assets/landshaft/5.jpg',
     'assets/landshaft/6.jpg',
     'assets/landshaft/7.jpg',
-
   ];
 
+  static const List<String> stroikaURL = [
+    'https://719827.selcdn.ru/Enki/стройка/1.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/2.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/3.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/4.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/5.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/6.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/7.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/8.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/9.jpg',
+    'https://719827.selcdn.ru/Enki/стройка/10.jpg',
+  ];
+
+  static const List<String> otdelkaURL = [
+    'https://719827.selcdn.ru/Enki/otdelka/1.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/2.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/3.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/4.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/5.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/6.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/7.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/8.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/9.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/10.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/11.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/12.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/13.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/14.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/15.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/16.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/17.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/18.jpg',
+    'https://719827.selcdn.ru/Enki/otdelka/19.jpg',
+  ];
+
+  static const List<String> dizainURL = [
+    'https://719827.selcdn.ru/Enki/dizain/1.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/2.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/3.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/4.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/5.png',
+    'https://719827.selcdn.ru/Enki/dizain/6.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/7.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/8.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/9.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/10.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/11.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/12.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/13.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/14.jpg',
+    'https://719827.selcdn.ru/Enki/dizain/15.jpg',
+  ];
+
+  static const List<String> landshaftURL = [
+    'https://719827.selcdn.ru/Enki/landshft/1.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/2.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/3.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/4.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/5.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/6.jpg',
+    'https://719827.selcdn.ru/Enki/landshft/7.jpg',
+  ];
 }

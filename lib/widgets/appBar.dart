@@ -194,12 +194,14 @@ class _LargeAppBarRow extends StatelessWidget {
                     const SizedBox(
                       width: 5,
                     ),
-                    MyRichText(
-                      colorText: colorText,
-                      text: StringRes.phone,
-                      sizeParam: 15,
-                      what: 'tel:${StringRes.phone}',
-                      shadow: shadow,
+                    RepaintBoundary(
+                      child: MyRichText(
+                        colorText: colorText,
+                        text: StringRes.phone,
+                        sizeParam: 15,
+                        what: 'tel:${StringRes.phone}',
+                        shadow: shadow,
+                      ),
                     )
                   ],
                 ),

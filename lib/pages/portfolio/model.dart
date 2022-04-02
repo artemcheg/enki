@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ImageDialog extends StatefulWidget {
@@ -32,12 +31,12 @@ class ImageDialogState extends State<ImageDialog> {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return RepaintBoundary(
-      child: InteractiveViewer(
-        child: Material(
-          color: Colors.transparent,
-          child: Stack(
-            children: [
-              Dialog(
+      child: Material(
+        color: Colors.transparent,
+        child: Stack(
+          children: [
+            InteractiveViewer(
+              child: Dialog(
                 backgroundColor: Colors.black.withOpacity(0),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -49,10 +48,10 @@ class ImageDialogState extends State<ImageDialog> {
                       return FadeTransition(
                           opacity: animation,
                           child:
-                          ScaleTransition(scale: animation, child: child));
+                              ScaleTransition(scale: animation, child: child));
                     },
                     duration: const Duration(milliseconds: 500),
-                    child: Image.asset(
+                    child: Image.network(
                       widget.assets[indexMy],
                       key: ValueKey(indexMy),
                       fit: BoxFit.contain,
@@ -60,120 +59,121 @@ class ImageDialogState extends State<ImageDialog> {
                   ),
                 ),
               ),
-              Positioned(
-                right: 25,
-                top: 20,
-                child: InkWell(
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  onHover: (value) {
-                    setState(() {
-                      close = value;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: close ? const Color(0XFF52B060) : Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Padding(
-                     padding: const EdgeInsets.only(
-                          left: 8, right: 8, top: 8, bottom: 8),
-                      child: Icon(
-                        Icons.close_rounded,
-                        size: width*0.03,
+            ),
+            Positioned(
+              right: 25,
+              top: 20,
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                onHover: (value) {
+                  setState(() {
+                    close = value;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
                         color: close ? const Color(0XFF52B060) : Colors.white,
                       ),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, right: 8, top: 8, bottom: 8),
+                    child: Icon(
+                      Icons.close_rounded,
+                      size: width * 0.03,
+                      color: close ? const Color(0XFF52B060) : Colors.white,
                     ),
                   ),
                 ),
               ),
-              Positioned(
-                bottom: 50,
-                right: 100,
-                child: InkWell(
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    setState(() {
-                      if (indexMy < widget.assets.length - 1) {
-                        indexMy++;
-                      } else {
-                        indexMy = 0;
-                      }
-                    });
-                  },
-                  onHover: (value) {
-                    setState(() {
-                      next = value;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: next ? const Color(0XFF52B060) : Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8, right: 8, top: 8, bottom: 8),
-                      child: Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: width*0.03,
+            ),
+            Positioned(
+              bottom: 50,
+              right: 100,
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () {
+                  setState(() {
+                    if (indexMy < widget.assets.length - 1) {
+                      indexMy++;
+                    } else {
+                      indexMy = 0;
+                    }
+                  });
+                },
+                onHover: (value) {
+                  setState(() {
+                    next = value;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
                         color: next ? const Color(0XFF52B060) : Colors.white,
                       ),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, right: 8, top: 8, bottom: 8),
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: width * 0.03,
+                      color: next ? const Color(0XFF52B060) : Colors.white,
                     ),
                   ),
                 ),
               ),
-              Positioned(
-                left: 100,
-                bottom: 50,
-                child: InkWell(
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () {
-                    setState(() {
-                      if (indexMy > 0) {
-                        indexMy--;
-                      } else {
-                        indexMy = widget.assets.length - 1;
-                      }
-                    });
-                  },
-                  onHover: (value) {
-                    setState(() {
-                      previous = value;
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color:
-                          previous ? const Color(0XFF52B060) : Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8, right: 8, top: 8, bottom: 8),
-                      child: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: width*0.03,
-                        color: previous ? const Color(0XFF52B060) : Colors.white,
+            ),
+            Positioned(
+              left: 100,
+              bottom: 50,
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () {
+                  setState(() {
+                    if (indexMy > 0) {
+                      indexMy--;
+                    } else {
+                      indexMy = widget.assets.length - 1;
+                    }
+                  });
+                },
+                onHover: (value) {
+                  setState(() {
+                    previous = value;
+                  });
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color:
+                            previous ? const Color(0XFF52B060) : Colors.white,
                       ),
+                      borderRadius: BorderRadius.circular(50)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 8, right: 8, top: 8, bottom: 8),
+                    child: Icon(
+                      Icons.arrow_back_ios_rounded,
+                      size: width * 0.03,
+                      color:
+                          previous ? const Color(0XFF52B060) : Colors.white,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -187,16 +187,19 @@ class UpdateImageIndexWidget extends InheritedNotifier<ImageModel> {
     required this.model,
     Key? key,
     required Widget child,
-  }) : super(key: key,notifier: model, child: child);
+  }) : super(key: key, notifier: model, child: child);
 
   static ImageModel? of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<UpdateImageIndexWidget>()?.notifier;
+    return context
+        .dependOnInheritedWidgetOfExactType<UpdateImageIndexWidget>()
+        ?.notifier;
   }
 
   static ImageModel? read(BuildContext context) {
-
-    final widget = context.getElementForInheritedWidgetOfExactType<UpdateImageIndexWidget>()?.widget;
-    return widget is UpdateImageIndexWidget ? widget.notifier:null;
+    final widget = context
+        .getElementForInheritedWidgetOfExactType<UpdateImageIndexWidget>()
+        ?.widget;
+    return widget is UpdateImageIndexWidget ? widget.notifier : null;
   }
 
   @override
@@ -225,5 +228,4 @@ class ImageModel extends ChangeNotifier {
         });
     notifyListeners();
   }
-
 }

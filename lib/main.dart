@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Comfortaa',
-          scaffoldBackgroundColor: const Color(0xffEFF4F7),dialogTheme:DialogTheme(backgroundColor: Colors.black,elevation: 50000)  ),
+          scaffoldBackgroundColor: const Color(0xffEFF4F7),),
     );
   }
 }
